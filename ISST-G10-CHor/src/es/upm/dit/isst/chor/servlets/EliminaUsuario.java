@@ -1,6 +1,8 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,8 +40,11 @@ public class EliminaUsuario extends HttpServlet {
  		empleado.setEmail(email);
  		empleado.setPassword(password);
  		empleado.setNombre(name);
- 		
- 		EmpleadoDAOImplementation.getInstance().delete(empleado);
+ 		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(empleado)) {
+ 	     	EmpleadoDAOImplementation.getInstance().delete(empleado);
+ 		} else {
+ 			log("El usuario no existe");
+ 		}
  		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
  	}
 	/**
