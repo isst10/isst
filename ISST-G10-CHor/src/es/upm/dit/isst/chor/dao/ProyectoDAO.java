@@ -10,5 +10,5 @@ public interface ProyectoDAO {
 	public void update(Proyecto proyecto);
 	public void delete(Proyecto proyecto);
 	public Collection<Proyecto> readAll();
-	public Proyecto login(String email, String psd);
+	public Proyecto login(String name);
 }

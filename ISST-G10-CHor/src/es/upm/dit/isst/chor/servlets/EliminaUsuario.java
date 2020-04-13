@@ -1,31 +1,26 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
-import es.upm.dit.isst.chor.model.Jefe;
-
-
+import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
+import es.upm.dit.isst.chor.model.Empleado;
 
 /**
- * Servlet implementation class CreaJefe
+ * Servlet implementation class EliminaUsuario
  */
-@WebServlet("/CreaJefe")
-public class CreaJefe extends HttpServlet {
+@WebServlet("/EliminaUsuario")
+public class EliminaUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreaJefe() {
+    public EliminaUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,27 +28,20 @@ public class CreaJefe extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
  		
- 		Jefe jefe = new Jefe();
- 		jefe.setEmail(email);
- 		jefe.setPassword(password);
- 		jefe.setNombre(name);
- 		jefe.setEsJefe(true);
+ 		Empleado empleado = new Empleado();
+ 		empleado.setEmail(email);
+ 		empleado.setPassword(password);
+ 		empleado.setNombre(name);
  		
- 		JefeDAOImplementation.getInstance().create(jefe);
- 		List<Jefe> lp = new ArrayList<Jefe>();
- 		lp.addAll((List<Jefe>)         
-           req.getSession().getAttribute("jefes"));
- 		lp.add (jefe);
- 		req.getSession().setAttribute("jefes", lp);
+ 		EmpleadoDAOImplementation.getInstance().delete(empleado);
  		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
  	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

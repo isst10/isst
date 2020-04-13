@@ -6,30 +6,28 @@ import java.util.List;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
+import es.upm.dit.isst.chor.model.Proyecto;
 
-import es.upm.dit.isst.chor.model.Empleado;
+public class ProyectoDAOImplementation implements ProyectoDAO {
 
-
-public class EmpleadoDAOImplementation implements EmpleadoDAO {
-
-	private static EmpleadoDAOImplementation instancia = null;
-	private EmpleadoDAOImplementation() {
+	private static ProyectoDAOImplementation instancia = null;
+	private ProyectoDAOImplementation() {
 	}
 
-	public static EmpleadoDAOImplementation getInstance() {
+	public static ProyectoDAOImplementation getInstance() {
 		if( null == instancia ) 
-			instancia = new EmpleadoDAOImplementation();
+			instancia = new ProyectoDAOImplementation();
 		return instancia;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void create(Empleado empleado) {
+	public void create(Proyecto proyecto) {
 		// TODO Auto-generated method stub
 		Session session = SessionFactoryService.get().openSession();
 		session.beginTransaction();
 		// operaciones
-		session.save(empleado);
+		session.save(proyecto);
 		session.getTransaction().commit();
 		session.close();
 
@@ -38,71 +36,69 @@ public class EmpleadoDAOImplementation implements EmpleadoDAO {
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public Empleado read(String email) {
+	public Proyecto read(String name) {
 		// TODO Auto-generated method stub
 		Session session = SessionFactoryService.get().openSession();
 		session.beginTransaction();
 		// operaciones
 		
-		Empleado e = session.get(Empleado.class, email);
+		Proyecto p = session.get(Proyecto.class, name);
 		session.getTransaction().commit();
 		session.close();
-		return e;
+		return p;
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public void update(Empleado empleado) {
+	public void update(Proyecto proyecto) {
 		// TODO Auto-generated method stub
 		Session session = SessionFactoryService.get().openSession();
 		session.beginTransaction();
 		// operaciones
-		session.saveOrUpdate(empleado);
+		session.saveOrUpdate(proyecto);
 		session.getTransaction().commit();
 		session.close();
 
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public void delete(Empleado empleado) {
+	public void delete(Proyecto proyecto) {
 		// TODO Auto-generated method stub
 		Session session = SessionFactoryService.get().openSession();
 		session.beginTransaction();
 		// operaciones
-		session.delete(empleado);
+		session.delete(proyecto);
 		session.getTransaction().commit();
 		session.close();
 
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Empleado> readAll() {
+	public Collection<Proyecto> readAll() {
 		// TODO Auto-generated method stub
 		Session session = SessionFactoryService.get().openSession();
 		session.beginTransaction();
 		// operaciones
-		List<Empleado> empleados = session.createQuery("from Empleado").list();
+		List<Proyecto> proyectos = session.createQuery("from Proyecto").list();
 		session.getTransaction().commit();
 		session.close();
-		return empleados;
-	}
-	@SuppressWarnings("unchecked")
+		return proyectos;
+	}@SuppressWarnings("unchecked")
 	@Override
-	public Empleado login(String email, String psd) {
+	public Proyecto login(String name) {
 		// TODO Auto-generated method stub
 		Session session = SessionFactoryService.get().openSession();
 		session.beginTransaction();
 		// operaciones
-		Empleado e = null;
-		Query q = session.createQuery("select p from Empleado p where p.email = :email and p.password = :password");
-		q.setParameter("email", email);
-		q.setParameter("password", psd);
-		List<Empleado> empleados = q.getResultList();
-		if (empleados.size() > 0)
-			e = (Empleado) (q.getResultList().get(0));
+		Proyecto p = null;
+		Query q = session.createQuery("select p from Proyecto p where p.name = :name");
+		q.setParameter("name", name);
+		List<Proyecto> proyectos = q.getResultList();
+		if (proyectos.size() > 0)
+			p = (Proyecto) (q.getResultList().get(0));
 
 		session.getTransaction().commit();
 		session.close();
-		return e;
+		return p;
 	}
 
 }

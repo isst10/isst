@@ -21,8 +21,10 @@ public class Empleado implements Serializable{
 	private long nProyectos;
 	private boolean esJefe;
 	
+	
+	//(mappedBy = "empleados", fetch = FetchType.EAGER)
 	@ManyToMany(mappedBy = "empleados", fetch = FetchType.EAGER)
-	private Collection<Empleado> proyectos;
+	private Collection<Proyecto> proyectos;
 
 	public Empleado() {
 		super();
@@ -76,15 +78,45 @@ public class Empleado implements Serializable{
 		this.esJefe = esJefe;
 	}
 
-	public Collection<Empleado> getProyectos() {
-		return proyectos;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		return result;
 	}
 
-	public void setProyectos(Collection<Empleado> proyectos) {
-		this.proyectos = proyectos;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Empleado other = (Empleado) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		return true;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}	
+	@Override
+	public String toString() {
+		return "Empleado [email=" + email + ", password=" + password + ", nombre=" + nombre + ", sueldo=" + sueldo
+				+ ", nProyectos=" + nProyectos + ", esJefe=" + esJefe + ", proyectos=" + proyectos + "]";
+	}
+
+	/*
+	 * public Collection<Empleado> getProyectos() { return proyectos; }
+	 * 
+	 * public void setProyectos(Collection<Empleado> proyectos) { this.proyectos =
+	 * proyectos; }
+	 */
+
+	
+	
+	
 }
