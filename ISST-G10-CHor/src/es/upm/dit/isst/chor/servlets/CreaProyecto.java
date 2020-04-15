@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
 import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Jefe;
@@ -36,17 +37,20 @@ public class CreaProyecto extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+    @SuppressWarnings("unchecked")
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
     	Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
  		String name = req.getParameter("name");
- 		String jefe = empleado.getNombre();
+ 		Jefe jefe =(Jefe) req.getSession().getAttribute("jefe");
+ 		
  		java.util.Date fecha = new Date();
  		
  		Proyecto proyecto = new Proyecto();
  		
  		proyecto.setName(name);
- 		proyecto.setChief(jefe);
+
+ 		proyecto.setJefe(jefe);
  		proyecto.setFechaInicio(fecha);
  		
  		ProyectoDAOImplementation.getInstance().create(proyecto);

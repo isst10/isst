@@ -41,7 +41,6 @@ public class RegistrarHorasServlet extends HttpServlet {
  		String h = req.getParameter("horas");
  		java.util.Date fecha = new Date();
 
- 		
  		Horas hora = new Horas();
  		hora.setEmpleado(empleado.getNombre());
  		hora.setProyecto(proyecto);
@@ -54,12 +53,17 @@ public class RegistrarHorasServlet extends HttpServlet {
  		lp = (List<Horas>) HorasDAOImplementation.getInstance().readAllEmpleado(empleado.getNombre());
  		lp.add(hora);
  		req.getSession().setAttribute("horas", lp);
+
  		if(empleado.isEsJefe()) {
  			getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,response);
  		}else {
  			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
  		}
- 		
+// 		if(empleado.isEsJefe()) {
+// 			getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,response);
+// 		}else {
+ 			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
+// 		}
  	}
 
 	/**

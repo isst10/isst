@@ -9,6 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Horas implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -17,8 +18,6 @@ public class Horas implements Serializable {
 	private String empresa;
 	private String proyecto;
 	private String empleado;
-	
-	
 	
 
 
@@ -44,6 +43,7 @@ public class Horas implements Serializable {
 	public void setHoras(String horas) {
 		this.horas = horas;
 	}
+
 	public String  getProyecto() {
 		return proyecto;
 	}
@@ -85,6 +85,7 @@ public class Horas implements Serializable {
 				+ "]";
 	}
 	
-	
-
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }
