@@ -1,6 +1,8 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
+import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
+import es.upm.dit.isst.chor.model.Jefe;
 
 /**
  * Servlet implementation class EliminaUsuario
@@ -34,12 +38,21 @@ public class EliminaUsuario extends HttpServlet {
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
  		
- 		Empleado empleado = new Empleado();
- 		empleado.setEmail(email);
- 		empleado.setPassword(password);
- 		empleado.setNombre(name);
- 		
- 		EmpleadoDAOImplementation.getInstance().delete(empleado);
+ 		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email)) {
+ 	 		Empleado empleado = new Empleado();
+ 	 		empleado.setEmail(email);
+ 	 		empleado.setPassword(password);
+ 	 		empleado.setNombre(name);
+ 	     	EmpleadoDAOImplementation.getInstance().delete(empleado);
+ 		} else if (JefeDAOImplementation.getInstance().buscarJefe(email)) {
+ 	 		Jefe jefe = new Jefe();
+ 	 		jefe.setEmail(email);
+ 	 		jefe.setPassword(password);
+ 	 		jefe.setNombre(name);
+ 	     	JefeDAOImplementation.getInstance().delete(jefe);
+ 		} else {
+ 			log("El usuario no existe");
+ 		}
  		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
  	}
 	/**

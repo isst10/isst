@@ -7,8 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Empleado")
 public class Empleado implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -18,13 +22,13 @@ public class Empleado implements Serializable{
 	private String password;
 	private String nombre;
 	private double sueldo;
-	private long nProyectos;
-	private boolean esJefe;
+	//private long nProyectos;
+	//private boolean esJefe;
 	
 	
 	//(mappedBy = "empleados", fetch = FetchType.EAGER)
-	@ManyToMany(mappedBy = "empleados", fetch = FetchType.EAGER)
-	private Collection<Proyecto> proyectos;
+	@ManyToOne
+	private Proyecto proyecto;
 
 	public Empleado() {
 		super();
@@ -62,21 +66,21 @@ public class Empleado implements Serializable{
 		this.sueldo = sueldo;
 	}
 
-	public long getnProyectos() {
-		return nProyectos;
-	}
-
-	public void setnProyectos(long nProyectos) {
-		this.nProyectos = nProyectos;
-	}
-
-	public boolean isEsJefe() {
-		return esJefe;
-	}
-
-	public void setEsJefe(boolean esJefe) {
-		this.esJefe = esJefe;
-	}
+//	public long getnProyectos() {
+//		return nProyectos;
+//	}
+//
+//	public void setnProyectos(long nProyectos) {
+//		this.nProyectos = nProyectos;
+//	}
+//
+//	public boolean isEsJefe() {
+//		return esJefe;
+//	}
+//
+//	public void setEsJefe(boolean esJefe) {
+//		this.esJefe = esJefe;
+//	}
 
 	@Override
 	public int hashCode() {
@@ -106,15 +110,22 @@ public class Empleado implements Serializable{
 	@Override
 	public String toString() {
 		return "Empleado [email=" + email + ", password=" + password + ", nombre=" + nombre + ", sueldo=" + sueldo
-				+ ", nProyectos=" + nProyectos + ", esJefe=" + esJefe + ", proyectos=" + proyectos + "]";
+				+ ", proyecto=" + proyecto + "]";
 	}
 
-	/*
-	 * public Collection<Empleado> getProyectos() { return proyectos; }
-	 * 
-	 * public void setProyectos(Collection<Empleado> proyectos) { this.proyectos =
-	 * proyectos; }
-	 */
+	public Proyecto getProyecto() {
+		return proyecto;
+	}
+
+	public void setProyectos(Proyecto proyecto) {
+		this.proyecto = proyecto;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
 
 	
 	

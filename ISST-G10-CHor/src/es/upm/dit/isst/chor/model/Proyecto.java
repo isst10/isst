@@ -4,32 +4,35 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Proyecto")
 public class Proyecto {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String name;
 	private long nEmpleados;
 	private Date fechaInicio;
 	private Date fechaFin;
-	private String chief;
-
-	public String getChief() {
-		return chief;
-	}
-
-	public void setChief(String chief) {
-		this.chief = chief;
-	}
-
-	//(mappedBy = "proyectos", fetch = FetchType.EAGER)
-	@ManyToMany
+//	private String chief;
+//
+//	public String getChief() {
+//		return chief;
+//	}
+//
+//	public void setChief(String chief) {
+//		this.chief = chief;
+//	}
+	
+	@OneToMany(mappedBy = "proyecto", fetch = FetchType.EAGER)
 	private Collection<Empleado> empleados;	
 	
 	@ManyToOne 
@@ -119,5 +122,8 @@ public class Proyecto {
 		this.jefe = jefe; 
 	}
 	 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }
