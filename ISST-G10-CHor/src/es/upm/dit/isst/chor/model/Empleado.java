@@ -7,8 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Empleado")
 public class Empleado implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -23,8 +27,8 @@ public class Empleado implements Serializable{
 	
 	
 	//(mappedBy = "empleados", fetch = FetchType.EAGER)
-	@ManyToMany(mappedBy = "empleados", fetch = FetchType.EAGER)
-	private Collection<Proyecto> proyectos;
+	@ManyToOne
+	private Collection<Asignacion> proyectos;
 
 	public Empleado() {
 		super();
@@ -109,12 +113,19 @@ public class Empleado implements Serializable{
 				+ ", nProyectos=" + nProyectos + ", esJefe=" + esJefe + ", proyectos=" + proyectos + "]";
 	}
 
-	/*
-	 * public Collection<Empleado> getProyectos() { return proyectos; }
-	 * 
-	 * public void setProyectos(Collection<Empleado> proyectos) { this.proyectos =
-	 * proyectos; }
-	 */
+	public Collection<Asignacion> getProyectos() {
+		return proyectos;
+	}
+
+	public void setProyectos(Collection<Asignacion> proyectos) {
+		this.proyectos = proyectos;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
 
 	
 	

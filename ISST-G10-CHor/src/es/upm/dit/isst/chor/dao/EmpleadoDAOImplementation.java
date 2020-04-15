@@ -105,10 +105,9 @@ public class EmpleadoDAOImplementation implements EmpleadoDAO {
 		return e;
 	}
 	
-	public boolean buscarEmpleado(Empleado e){
+	public boolean buscarEmpleado(String email){
     	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
-
-	    return empleados.stream().anyMatch(emp -> emp.equals(e));
+	    return empleados.stream().anyMatch(emp -> emp.getEmail().equals(email));
 	}
 
 }
