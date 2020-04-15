@@ -42,10 +42,12 @@ public class CreaProyecto extends HttpServlet {
  		String jefe = req.getParameter("jefe");
  		java.util.Date fecha = new Date();
  		
+ 		
+ 		
  		Proyecto proyecto = new Proyecto();
  		
  		proyecto.setName(name);
- 		proyecto.setChief(jefe);
+ 		//proyecto.setChief(jefe);
  		proyecto.setFechaFin(fecha);
  		
  		ProyectoDAOImplementation.getInstance().create(proyecto);

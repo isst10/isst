@@ -16,24 +16,24 @@ import javax.persistence.Table;
 public class Proyecto {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String name;
 	private long nEmpleados;
 	private Date fechaInicio;
 	private Date fechaFin;
-	private String chief;
-
-	public String getChief() {
-		return chief;
-	}
-
-	public void setChief(String chief) {
-		this.chief = chief;
-	}
+//	private String chief;
+//
+//	public String getChief() {
+//		return chief;
+//	}
+//
+//	public void setChief(String chief) {
+//		this.chief = chief;
+//	}
 	
-	@ManyToOne
-	private Collection<Asignacion> empleados;	
+	@OneToMany(mappedBy = "proyecto", fetch = FetchType.EAGER)
+	private Collection<Empleado> empleados;	
 	
 	@ManyToOne 
 	private Jefe jefe;
@@ -106,11 +106,11 @@ public class Proyecto {
 		this.fechaFin = fechaFin;
 	}
 
-	public Collection<Asignacion> getEmpleados() {
+	public Collection<Empleado> getEmpleados() {
 		return empleados;
 	}
 
-	public void setEmpleados(Collection<Asignacion> empleados) {
+	public void setEmpleados(Collection<Empleado> empleados) {
 		this.empleados = empleados;
 	}
 
@@ -122,5 +122,8 @@ public class Proyecto {
 		this.jefe = jefe; 
 	}
 	 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }
