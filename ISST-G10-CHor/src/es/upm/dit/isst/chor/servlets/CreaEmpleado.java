@@ -43,7 +43,8 @@ public class CreaEmpleado extends HttpServlet {
  		empleado.setPassword(password);
  		empleado.setNombre(name);
  		empleado.setEmpresa(empresa);
- 		
+ 		empleado.setEsJefe(false);
+ 		empleado.set
  		EmpleadoDAOImplementation.getInstance().create(empleado);
  		List<Empleado> lp = new ArrayList<Empleado>();
  		lp.addAll((List<Empleado>)         
