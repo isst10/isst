@@ -7,12 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="Empleado")
 public class Empleado implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -21,14 +17,14 @@ public class Empleado implements Serializable{
 	private String email;
 	private String password;
 	private String nombre;
-	private double sueldo;
-	//private long nProyectos;
-	//private boolean esJefe;
+	private String empresa;
+	private long nProyectos;
+	private boolean esJefe;
 	
 	
 	//(mappedBy = "empleados", fetch = FetchType.EAGER)
-	@ManyToOne
-	private Proyecto proyecto;
+	@ManyToMany(mappedBy = "empleados", fetch = FetchType.EAGER)
+	private Collection<Proyecto> proyectos;
 
 	public Empleado() {
 		super();
@@ -58,29 +54,29 @@ public class Empleado implements Serializable{
 		this.nombre = nombre;
 	}
 
-	public double getSueldo() {
-		return sueldo;
+	public String getEmpresa() {
+		return empresa;
 	}
 
-	public void setSueldo(double sueldo) {
-		this.sueldo = sueldo;
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
 	}
 
-//	public long getnProyectos() {
-//		return nProyectos;
-//	}
-//
-//	public void setnProyectos(long nProyectos) {
-//		this.nProyectos = nProyectos;
-//	}
-//
-//	public boolean isEsJefe() {
-//		return esJefe;
-//	}
-//
-//	public void setEsJefe(boolean esJefe) {
-//		this.esJefe = esJefe;
-//	}
+	public long getnProyectos() {
+		return nProyectos;
+	}
+
+	public void setnProyectos(long nProyectos) {
+		this.nProyectos = nProyectos;
+	}
+
+	public boolean isEsJefe() {
+		return esJefe;
+	}
+
+	public void setEsJefe(boolean esJefe) {
+		this.esJefe = esJefe;
+	}
 
 	@Override
 	public int hashCode() {
@@ -109,23 +105,16 @@ public class Empleado implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Empleado [email=" + email + ", password=" + password + ", nombre=" + nombre + ", sueldo=" + sueldo
-				+ ", proyecto=" + proyecto + "]";
+		return "Empleado [email=" + email + ", password=" + password + ", nombre=" + nombre + ", empresa=" + empresa
+				+ ", nProyectos=" + nProyectos + ", esJefe=" + esJefe + ", proyectos=" + proyectos + "]";
 	}
 
-	public Proyecto getProyecto() {
-		return proyecto;
-	}
-
-	public void setProyectos(Proyecto proyecto) {
-		this.proyecto = proyecto;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-
+	/*
+	 * public Collection<Empleado> getProyectos() { return proyectos; }
+	 * 
+	 * public void setProyectos(Collection<Empleado> proyectos) { this.proyectos =
+	 * proyectos; }
+	 */
 
 	
 	

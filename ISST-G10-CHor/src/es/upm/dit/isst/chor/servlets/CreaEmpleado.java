@@ -36,11 +36,13 @@ public class CreaEmpleado extends HttpServlet {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
+ 		String empresa = req.getParameter("empresa");
  		
  		Empleado empleado = new Empleado();
  		empleado.setEmail(email);
  		empleado.setPassword(password);
  		empleado.setNombre(name);
+ 		empleado.setEmpresa(empresa);
  		
  		EmpleadoDAOImplementation.getInstance().create(empleado);
  		List<Empleado> lp = new ArrayList<Empleado>();
@@ -48,7 +50,7 @@ public class CreaEmpleado extends HttpServlet {
            req.getSession().getAttribute("empleados"));
  		lp.add(empleado);
  		req.getSession().setAttribute("empleados", lp);
- 		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+ 		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
  	}
 
 	/**

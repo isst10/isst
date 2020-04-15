@@ -11,5 +11,5 @@ public interface EmpleadoDAO {
 	public void delete(Empleado empleado);
 	public Collection<Empleado> readAll();
 	public Empleado login(String email, String psd);
-	public boolean buscarEmpleado(String email);
+
 }

@@ -33,17 +33,19 @@ public class CreaJefe extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    @SuppressWarnings("unchecked")
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
+ 		String empresa = req.getParameter("empresa");
  		
  		Jefe jefe = new Jefe();
  		jefe.setEmail(email);
  		jefe.setPassword(password);
  		jefe.setNombre(name);
+ 		jefe.setEmpresa(empresa);
+ 		jefe.setEsJefe(true);
  		
  		JefeDAOImplementation.getInstance().create(jefe);
  		List<Jefe> lp = new ArrayList<Jefe>();
@@ -51,7 +53,7 @@ public class CreaJefe extends HttpServlet {
            req.getSession().getAttribute("jefes"));
  		lp.add (jefe);
  		req.getSession().setAttribute("jefes", lp);
- 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+ 		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
  	}
 
 	/**

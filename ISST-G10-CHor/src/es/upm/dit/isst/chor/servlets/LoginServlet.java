@@ -40,24 +40,28 @@ public class LoginServlet extends HttpServlet {
     	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
     	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
     	Empleado empleado = EmpleadoDAOImplementation.getInstance().login(email, password);
-    	Jefe jefe = JefeDAOImplementation.getInstance().login(email, password);
+    	//Jefe jefe = JefeDAOImplementation.getInstance().login(email, password);
     	if( ADMIN_EMAIL.equals(email) && ADMIN_PASSWORD.equals(password) ) {
     		req.getSession().setAttribute("admin", true);
     		req.getSession().setAttribute("jefes", jefes);
     		req.getSession().setAttribute("empleados", empleados);
     		req.getSession().setAttribute("proyectos", proyectos);
     		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
-    	} else if (empleado != null && empleado.getEmail().equals(email) && empleado.getPassword().equals(password) ) {
-			req.getSession().setAttribute("empleado", empleado);
-    		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
-    	} else if (jefe != null && jefe.getEmail().equals(email) && jefe.getPassword().equals(password)){
-    		req.getSession().setAttribute("proyectos", proyectos);
-    		req.getSession().setAttribute("jefe", empleado);
-    		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+    	}else if (empleado != null && empleado.getEmail().equals(email) && empleado.getPassword().equals(password) ) {
+    		if(empleado.isEsJefe()) {
+        		req.getSession().setAttribute("proyectos", proyectos);
+        		req.getSession().setAttribute("jefe", empleado);
+        		req.getSession().setAttribute("empleado", empleado);
+        		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+    		}else {
+    			req.getSession().setAttribute("empleado", empleado);
+        		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+    		}	
     	} else {
     		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
     	}
     }
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

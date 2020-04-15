@@ -17,7 +17,7 @@
 <h2>Registrar un nuevo empleado</h2>
 <%@ include file = "FormCreaEmpleado.jsp" %>
 
-<h2>Volver a inicio</h2>
+<h2>Volver</h2>
 <%@ include file = "Logout.jsp" %>
 
 </body>

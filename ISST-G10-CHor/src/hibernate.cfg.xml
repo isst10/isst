@@ -5,7 +5,7 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="connection.driver_class">org.h2.Driver</property>
-		<property name="connection.url">jdbc:h2:tcp://localhost/~/isst-g10-1</property>
+		<property name="connection.url">jdbc:h2:tcp://localhost/~/isst-g10</property>
 		<property name="connection.username">sa</property>
 		<property name="connection.password">sa</property>
 		<property name="connection.pool_size">5</property>
@@ -17,5 +17,6 @@
 		<mapping class="es.upm.dit.isst.chor.model.Empleado" />
 		<mapping class="es.upm.dit.isst.chor.model.Jefe" />
 		<mapping class="es.upm.dit.isst.chor.model.Proyecto" />
+		<mapping class="es.upm.dit.isst.chor.model.Horas" />
 	</session-factory>
 </hibernate-configuration>

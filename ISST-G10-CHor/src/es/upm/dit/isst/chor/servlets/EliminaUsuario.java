@@ -34,24 +34,20 @@ public class EliminaUsuario extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
- 		String email = req.getParameter("email");
- 		String password = req.getParameter("password");
- 		String name = req.getParameter("name");
+ 		String email = req.getParameter("email");	
+ 		Empleado empleado = EmpleadoDAOImplementation.getInstance().read(email);
  		
- 		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email)) {
- 	 		Empleado empleado = new Empleado();
- 	 		empleado.setEmail(email);
- 	 		empleado.setPassword(password);
- 	 		empleado.setNombre(name);
- 	     	EmpleadoDAOImplementation.getInstance().delete(empleado);
- 		} else if (JefeDAOImplementation.getInstance().buscarJefe(email)) {
- 	 		Jefe jefe = new Jefe();
- 	 		jefe.setEmail(email);
- 	 		jefe.setPassword(password);
- 	 		jefe.setNombre(name);
- 	     	JefeDAOImplementation.getInstance().delete(jefe);
- 		} else {
- 			log("El usuario no existe");
+ 		if (empleado != null) {
+ 			if(empleado.isEsJefe()) {
+ 				EmpleadoDAOImplementation.getInstance().delete(empleado);
+ 	 	 		List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
+ 	 	     	req.getSession().setAttribute("jefes", jefes);
+ 			}else {
+ 				EmpleadoDAOImplementation.getInstance().delete(empleado);
+ 	 	     	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
+ 	    		req.getSession().setAttribute("empleados", empleados);
+ 			}
+ 	     	
  		}
  		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
  	}
