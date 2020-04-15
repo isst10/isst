@@ -12,6 +12,9 @@
 
 <h1>Bienvenido, ${empleado.nombre}</h1>
 
+<h2>Registrar Horas</h2>
+<%@ include file = "FormRegistraHoras.jsp" %>
+
 <h2>Salir de la aplicación</h2>
 <%@ include file = "Logout.jsp" %>
 

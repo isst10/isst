@@ -17,6 +17,15 @@ public class Jefe {
 	private String email;
 	private String password;
 	private String nombre;
+	private String empresa;
+	public String getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
+
 	private double sueldo;
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -63,8 +72,8 @@ public class Jefe {
 
 	@Override
 	public String toString() {
-		return "Jefe [email=" + email + ", password=" + password + ", nombre=" + nombre + ", sueldo=" + sueldo
-				+ ", proyectosJefe=" + proyectosJefe + "]";
+		return "Jefe [email=" + email + ", password=" + password + ", nombre=" + nombre + ", empresa=" + empresa
+				+ ", sueldo=" + sueldo + ", proyectosJefe=" + proyectosJefe + "]";
 	}
 
 	@Override
@@ -72,6 +81,7 @@ public class Jefe {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((proyectosJefe == null) ? 0 : proyectosJefe.hashCode());
@@ -94,6 +104,11 @@ public class Jefe {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
+			return false;
+		if (empresa == null) {
+			if (other.empresa != null)
+				return false;
+		} else if (!empresa.equals(other.empresa))
 			return false;
 		if (nombre == null) {
 			if (other.nombre != null)
