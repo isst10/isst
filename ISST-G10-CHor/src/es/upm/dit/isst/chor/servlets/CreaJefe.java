@@ -2,6 +2,7 @@ package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
 import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
+import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Jefe;
+import es.upm.dit.isst.chor.model.Proyecto;
 
 
 
@@ -39,12 +43,21 @@ public class CreaJefe extends HttpServlet {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
- 		
+ 		Collection<Proyecto> proyectos = null;
+    	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
+		req.getSession().setAttribute("jefes", jefes);
+		req.getSession().setAttribute("proyecto", proyectos);
+		
  		Jefe jefe = new Jefe();
  		jefe.setEmail(email);
  		jefe.setPassword(password);
  		jefe.setNombre(name);
+ 		jefe.setProyectosJefe(proyectos);
  		
+ 		JefeDAOImplementation.getInstance().create(jefe);
+    	JefeDAOImplementation.getInstance().login(email, password);
+		req.getSession().setAttribute("jefe", jefe);
+
  		JefeDAOImplementation.getInstance().create(jefe);
  		List<Jefe> lp = new ArrayList<Jefe>();
  		lp.addAll((List<Jefe>)         
