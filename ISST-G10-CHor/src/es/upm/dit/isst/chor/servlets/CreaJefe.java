@@ -53,18 +53,22 @@ public class CreaJefe extends HttpServlet {
  		jefe.setPassword(password);
  		jefe.setNombre(name);
  		jefe.setProyectosJefe(proyectos);
- 		
- 		JefeDAOImplementation.getInstance().create(jefe);
-    	JefeDAOImplementation.getInstance().login(email, password);
-		req.getSession().setAttribute("jefe", jefe);
+ 		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
+ 			log("Usuario ya existente");
+ 	 		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
+ 		}else {
+ 			JefeDAOImplementation.getInstance().create(jefe);
+ 	    	JefeDAOImplementation.getInstance().login(email, password);
+ 			req.getSession().setAttribute("jefe", jefe);
 
- 		JefeDAOImplementation.getInstance().create(jefe);
- 		List<Jefe> lp = new ArrayList<Jefe>();
- 		lp.addAll((List<Jefe>)         
-           req.getSession().getAttribute("jefes"));
- 		lp.add (jefe);
- 		req.getSession().setAttribute("jefes", lp);
- 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+ 	 		JefeDAOImplementation.getInstance().create(jefe);
+ 	 		List<Jefe> lp = new ArrayList<Jefe>();
+ 	 		lp.addAll((List<Jefe>)         
+ 	           req.getSession().getAttribute("jefes"));
+ 	 		lp.add (jefe);
+ 	 		req.getSession().setAttribute("jefes", lp);
+ 	 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+ 		}
  	}
 
 	/**
