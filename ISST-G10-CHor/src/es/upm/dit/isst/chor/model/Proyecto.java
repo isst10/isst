@@ -16,10 +16,9 @@ public class Proyecto implements Serializable{
 	
 	@Id
 	private String name;
-	private long nEmpleados;
+	private int nEmpleados;
 	private Date fechaInicio;
 	private Date fechaFin;
-	private String chief;
 
 	
 
@@ -82,11 +81,11 @@ public class Proyecto implements Serializable{
 		this.name = name;
 	}
 
-	public long getnEmpleados() {
+	public int getnEmpleados() {
 		return nEmpleados;
 	}
 
-	public void setnEmpleados(long nEmpleados) {
+	public void setnEmpleados(int nEmpleados) {
 		this.nEmpleados = nEmpleados;
 	}
 

@@ -21,6 +21,13 @@ public class Empleado implements Serializable{
 	private String empresa;
 
 	
+	//(mappedBy = "empleados", fetch = FetchType.EAGER)
+	@ManyToOne
+	private Proyecto proyecto;
+
+	public Empleado() {
+		super();
+	}
 	
 	public String getEmpresa() {
 		return empresa;
@@ -43,14 +50,6 @@ public class Empleado implements Serializable{
 		this.proyecto = proyecto;
 	}
 	
-
-	//(mappedBy = "empleados", fetch = FetchType.EAGER)
-	@ManyToMany(mappedBy = "empleados", fetch = FetchType.EAGER)
-	private Collection<Proyecto> proyectos;
-
-	public Empleado() {
-		super();
-	}
 
 	public String getEmail() {
 		return email;

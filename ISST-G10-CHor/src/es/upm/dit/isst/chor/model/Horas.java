@@ -18,13 +18,13 @@ public class Horas implements Serializable {
 	private String empresa;
 	private String proyecto;
 	private String empleado;
-	
+
 
 
 	public Horas() {
 		super();
 	}
-	
+
 	public Date getDate() {
 		return date;
 	}
@@ -84,7 +84,7 @@ public class Horas implements Serializable {
 		return "Horas [empleado=" + empleado + ", horas=" + horas + ", proyecto=" + proyecto + ", empresa=" + empresa
 				+ "]";
 	}
-	
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

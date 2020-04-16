@@ -19,6 +19,15 @@ public class Jefe{
 	private String nombre;
 	private String empresa;
 	
+	private double sueldo;
+	
+	@OneToMany(mappedBy = "jefe", fetch = FetchType.EAGER)
+	private Collection<Proyecto> proyectosJefe;
+	
+	public Jefe() {
+		super();
+	}
+
 	public String getEmpresa() {
 		return empresa;
 	}
@@ -27,33 +36,11 @@ public class Jefe{
 		this.empresa = empresa;
 	}
 
-	private double sueldo;
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	
-	@OneToMany(mappedBy = "jefe", fetch = FetchType.EAGER)
-	private Collection<Proyecto> proyectosJefe;
-
-	
-	//(mappedBy = "jefe", fetch = FetchType.EAGER)
-	/*
-	 * @OneToMany private Collection<Proyecto> proyectosJefe;
-	 */
-
-	public Jefe() {
-		super();
-	}
-
-
-	/*
-	 * public Collection<Proyecto> getProyectosJefe() { return proyectosJefe; }
-	 * 
-	 * 
-	 * public void setProyectosJefe(Collection<Proyecto> proyectosJefe) {
-	 * this.proyectosJefe = proyectosJefe; }
-	 */
-
 	public String getEmail() {
 		return email;
 	}
