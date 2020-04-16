@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Empleado")
 public class Empleado implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -22,9 +21,10 @@ public class Empleado implements Serializable{
 	private String password;
 	private String nombre;
 	private double sueldo;
+	private String empresa;
+
 	//private long nProyectos;
 	//private boolean esJefe;
-	
 	
 	//(mappedBy = "empleados", fetch = FetchType.EAGER)
 	@ManyToOne
@@ -33,6 +33,19 @@ public class Empleado implements Serializable{
 	public Empleado() {
 		super();
 	}
+	
+	public String getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
+
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
+	}
+
 
 	public String getEmail() {
 		return email;
@@ -87,6 +100,13 @@ public class Empleado implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((proyecto == null) ? 0 : proyecto.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(sueldo);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -103,6 +123,28 @@ public class Empleado implements Serializable{
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
+			return false;
+		if (empresa == null) {
+			if (other.empresa != null)
+				return false;
+		} else if (!empresa.equals(other.empresa))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (proyecto == null) {
+			if (other.proyecto != null)
+				return false;
+		} else if (!proyecto.equals(other.proyecto))
+			return false;
+		if (Double.doubleToLongBits(sueldo) != Double.doubleToLongBits(other.sueldo))
 			return false;
 		return true;
 	}

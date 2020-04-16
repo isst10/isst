@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
 import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
+import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Jefe;
 import es.upm.dit.isst.chor.model.Proyecto;
 
@@ -35,28 +37,27 @@ public class CreaProyecto extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+    @SuppressWarnings("unchecked")
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
- 		
+		Jefe jefe = (Jefe) req.getSession().getAttribute("jefe");
+
  		String name = req.getParameter("name");
- 		String jefe = req.getParameter("jefe");
+ 		
  		java.util.Date fecha = new Date();
- 		
- 		
  		
  		Proyecto proyecto = new Proyecto();
  		
  		proyecto.setName(name);
- 		//proyecto.setChief(jefe);
- 		proyecto.setFechaFin(fecha);
+ 		proyecto.setJefe(jefe);
+ 		proyecto.setFechaInicio(fecha);
  		
- 		ProyectoDAOImplementation.getInstance().create(proyecto);
- 		List<Proyecto> lp = new ArrayList<Proyecto>();
- 		lp.addAll((List<Proyecto>)         
-                           req.getSession().getAttribute("proyectos"));
- 		lp.add (proyecto);
- 		req.getSession().setAttribute("proyectos", lp);
- 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+ 	 		ProyectoDAOImplementation.getInstance().create(proyecto);
+ 	 		List<Proyecto> lp = new ArrayList<Proyecto>();
+ 	 		lp.addAll((List<Proyecto>)req.getSession().getAttribute("proyectos"));
+ 	 		lp.add (proyecto);
+ 	 		req.getSession().setAttribute("proyectos", lp);
+ 	 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
  	}
 
 	/**
