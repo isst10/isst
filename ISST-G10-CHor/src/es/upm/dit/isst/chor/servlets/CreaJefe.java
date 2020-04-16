@@ -43,31 +43,17 @@ public class CreaJefe extends HttpServlet {
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
 
- 		
-
  		Collection<Proyecto> proyectos = null;
     	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
 		req.getSession().setAttribute("jefes", jefes);
 		req.getSession().setAttribute("proyecto", proyectos);
 		
-
  		Jefe jefe = new Jefe();
  		jefe.setEmail(email);
  		jefe.setPassword(password);
  		jefe.setNombre(name);
-/*<<<<<<< HEAD
- 		jefe.setEmpresa(empresa);
- 		
- 		
- 		JefeDAOImplementation.getInstance().create(jefe);
- 		List<Jefe> lp = new ArrayList<Jefe>();
- 		lp.addAll((List<Jefe>)         
-           req.getSession().getAttribute("jefes"));
- 		lp.add (jefe);
- 		req.getSession().setAttribute("jefes", lp);
- 		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
-=======*/
  		jefe.setProyectosJefe(proyectos);
+ 		
  		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
  			log("Usuario ya existente");
  	 		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
@@ -75,7 +61,6 @@ public class CreaJefe extends HttpServlet {
  			JefeDAOImplementation.getInstance().create(jefe);
  	    	JefeDAOImplementation.getInstance().login(email, password);
  			req.getSession().setAttribute("jefe", jefe);
-
  	 		JefeDAOImplementation.getInstance().create(jefe);
  	 		List<Jefe> lp = new ArrayList<Jefe>();
  	 		lp.addAll((List<Jefe>)         

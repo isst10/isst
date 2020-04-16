@@ -50,6 +50,9 @@ public class CreaEmpleado extends HttpServlet {
  		
 /*<<<<<<< HEAD
  		EmpleadoDAOImplementation.getInstance().create(empleado);
+    	EmpleadoDAOImplementation.getInstance().login(email, password);
+		req.getSession().setAttribute("empleado", empleado);
+
  		List<Empleado> lp = new ArrayList<Empleado>();
  		lp.addAll((List<Empleado>)         
            req.getSession().getAttribute("empleados"));
