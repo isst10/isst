@@ -21,8 +21,6 @@ public class Empleado implements Serializable{
 	private long nProyectos;
 	private double sueldo;
 
-	
-	//(mappedBy = "empleados", fetch = FetchType.EAGER)
 	@ManyToOne
 	private Proyecto proyecto;
 

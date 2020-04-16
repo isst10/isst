@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
+import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
 
 
@@ -36,15 +37,18 @@ public class CreaEmpleado extends HttpServlet {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
- 		String empresa = req.getParameter("empresa");
- 		
+
+    	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
+		req.getSession().setAttribute("empleados", empleados);
+
+
  		Empleado empleado = new Empleado();
  		empleado.setEmail(email);
  		empleado.setPassword(password);
  		empleado.setNombre(name);
- 		empleado.setEmpresa(empresa);
  		empleado.setEsJefe(false);
  		
+/*<<<<<<< HEAD
  		EmpleadoDAOImplementation.getInstance().create(empleado);
  		List<Empleado> lp = new ArrayList<Empleado>();
  		lp.addAll((List<Empleado>)         
@@ -52,6 +56,22 @@ public class CreaEmpleado extends HttpServlet {
  		lp.add(empleado);
  		req.getSession().setAttribute("empleados", lp);
  		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
+=======*/
+ 		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
+ 			log("Usuario ya existente");
+ 			getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
+ 		}else {
+ 			EmpleadoDAOImplementation.getInstance().create(empleado);
+ 	    	EmpleadoDAOImplementation.getInstance().login(email, password);
+ 			req.getSession().setAttribute("empleado", empleado);
+
+ 	 		List<Empleado> lp = new ArrayList<Empleado>();
+ 	 		lp.addAll((List<Empleado>)         
+ 	           req.getSession().getAttribute("empleados"));
+ 	 		lp.add(empleado);
+ 	 		req.getSession().setAttribute("empleados", lp);
+ 	 		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+ 		}
  	}
 
 	/**
