@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Proyecto {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	private String name;
 	private int nEmpleados;

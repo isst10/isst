@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
 import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
 import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
@@ -46,18 +47,22 @@ public class CreaProyecto extends HttpServlet {
  		
  		java.util.Date fecha = new Date();
  		
+    	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
+		req.getSession().setAttribute("proyectos", proyectos);
+		
  		Proyecto proyecto = new Proyecto();
  		
  		proyecto.setName(name);
  		proyecto.setJefe(jefe);
  		proyecto.setFechaInicio(fecha);
- 		
+ 		if (!ProyectoDAOImplementation.getInstance().buscarProyecto(name)) {
  	 		ProyectoDAOImplementation.getInstance().create(proyecto);
  	 		List<Proyecto> lp = new ArrayList<Proyecto>();
  	 		lp.addAll((List<Proyecto>)req.getSession().getAttribute("proyectos"));
  	 		lp.add (proyecto);
  	 		req.getSession().setAttribute("proyectos", lp);
  	 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+ 		}
  	}
 
 	/**
