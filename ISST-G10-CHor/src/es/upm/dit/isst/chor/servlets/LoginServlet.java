@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
     	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
     	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
     	Empleado empleado = EmpleadoDAOImplementation.getInstance().login(email, password);
-    	//Jefe jefe = JefeDAOImplementation.getInstance().login(email, password);
+    	Jefe jefe = JefeDAOImplementation.getInstance().login(email, password);
     	if( ADMIN_EMAIL.equals(email) && ADMIN_PASSWORD.equals(password) ) {
     		req.getSession().setAttribute("admin", true);
     		req.getSession().setAttribute("jefes", jefes);

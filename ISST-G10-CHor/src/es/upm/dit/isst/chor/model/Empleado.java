@@ -1,12 +1,10 @@
 package es.upm.dit.isst.chor.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Empleado implements Serializable{
@@ -19,6 +17,9 @@ public class Empleado implements Serializable{
 	private String nombre;
 	private boolean esJefe;
 	private String empresa;
+	
+	private long nProyectos;
+	private double sueldo;
 
 	
 	//(mappedBy = "empleados", fetch = FetchType.EAGER)
@@ -41,9 +42,7 @@ public class Empleado implements Serializable{
 		return serialVersionUID;
 	}
 	
-	private long nProyectos;
-	private double sueldo;
-	private Proyecto proyecto;
+
 
 
 	public void setProyecto(Proyecto proyecto) {
@@ -149,7 +148,7 @@ public class Empleado implements Serializable{
 	@Override
 	public String toString() {
 		return "Empleado [email=" + email + ", password=" + password + ", nombre=" + nombre + ", empresa=" + empresa
-				+ ", nProyectos=" + nProyectos + ", esJefe=" + esJefe + ", proyectos=" + proyectos + "]";
+				+ ", nProyectos=" + nProyectos + ", esJefe=" + esJefe + ", proyectos=" + proyecto + "]";
 	}
 
 	/*

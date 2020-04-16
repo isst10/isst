@@ -65,13 +65,6 @@ public class Proyecto implements Serializable{
 				+ fechaFin + ", empleados=" + empleados + "]";
 	}
 	
-	public String getChief() {
-		return chief;
-	}
-
-	public void setChief(String chief) {
-		this.chief = chief;
-	}
 
 	public String getName() {
 		return name;
