@@ -30,7 +30,7 @@ public class CreaEmpleado extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    @SuppressWarnings("unchecked")
+
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
  		String email = req.getParameter("email");

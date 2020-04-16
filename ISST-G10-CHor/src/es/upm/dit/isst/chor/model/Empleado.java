@@ -17,12 +17,8 @@ public class Empleado implements Serializable{
 	private String email;
 	private String password;
 	private String nombre;
-	private long nProyectos;
 	private boolean esJefe;
-	private double sueldo;
 	private String empresa;
-	private Proyecto proyecto;
-
 
 	
 	
@@ -33,10 +29,20 @@ public class Empleado implements Serializable{
 	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	private long nProyectos;
+	private double sueldo;
+	private Proyecto proyecto;
+
 
 	public void setProyecto(Proyecto proyecto) {
 		this.proyecto = proyecto;
 	}
+	
 
 	//(mappedBy = "empleados", fetch = FetchType.EAGER)
 	@ManyToMany(mappedBy = "empleados", fetch = FetchType.EAGER)

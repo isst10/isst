@@ -40,7 +40,6 @@ public class CreaProyecto extends HttpServlet {
     @SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
-    	Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
  		String name = req.getParameter("name");
  		Jefe jefe =(Jefe) req.getSession().getAttribute("jefe");
  		

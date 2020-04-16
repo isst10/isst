@@ -1,5 +1,6 @@
 package es.upm.dit.isst.chor.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Proyecto {
+public class Proyecto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	

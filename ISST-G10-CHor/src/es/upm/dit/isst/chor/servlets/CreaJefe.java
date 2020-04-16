@@ -45,7 +45,7 @@ public class CreaJefe extends HttpServlet {
  		jefe.setPassword(password);
  		jefe.setNombre(name);
  		jefe.setEmpresa(empresa);
- 		jefe.setEsJefe(true);
+ 		
  		
  		JefeDAOImplementation.getInstance().create(jefe);
  		List<Jefe> lp = new ArrayList<Jefe>();
