@@ -36,13 +36,18 @@ public class CreaEmpleado extends HttpServlet {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
- 		
+    	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
+		req.getSession().setAttribute("empleados", empleados);
+
  		Empleado empleado = new Empleado();
  		empleado.setEmail(email);
  		empleado.setPassword(password);
  		empleado.setNombre(name);
  		
  		EmpleadoDAOImplementation.getInstance().create(empleado);
+    	EmpleadoDAOImplementation.getInstance().login(email, password);
+		req.getSession().setAttribute("empleado", empleado);
+
  		List<Empleado> lp = new ArrayList<Empleado>();
  		lp.addAll((List<Empleado>)         
            req.getSession().getAttribute("empleados"));
