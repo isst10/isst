@@ -60,8 +60,6 @@ public class CreaJefe extends HttpServlet {
  			JefeDAOImplementation.getInstance().create(jefe);
  	    	JefeDAOImplementation.getInstance().login(email, password);
  			req.getSession().setAttribute("jefe", jefe);
-
- 	 		JefeDAOImplementation.getInstance().create(jefe);
  	 		List<Jefe> lp = new ArrayList<Jefe>();
  	 		lp.addAll((List<Jefe>)         
  	           req.getSession().getAttribute("jefes"));
