@@ -53,11 +53,12 @@ public class CreaProyecto extends HttpServlet {
  		proyecto.setFechaInicio(fecha);
  		
  	 		ProyectoDAOImplementation.getInstance().create(proyecto);
+ 	 		req.getSession().setAttribute("proyecto", proyecto);
  	 		List<Proyecto> lp = new ArrayList<Proyecto>();
  	 		lp.addAll((List<Proyecto>)req.getSession().getAttribute("proyectos"));
  	 		lp.add (proyecto);
  	 		req.getSession().setAttribute("proyectos", lp);
- 	 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+ 	 		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
  	}
 
 	/**

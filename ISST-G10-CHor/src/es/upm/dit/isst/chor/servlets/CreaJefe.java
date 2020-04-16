@@ -43,27 +43,35 @@ public class CreaJefe extends HttpServlet {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
+
+ 		Collection<Proyecto> proyectos = null;
     	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
 		req.getSession().setAttribute("jefes", jefes);
+		req.getSession().setAttribute("proyecto", proyectos);
+
 		
  		Jefe jefe = new Jefe();
  		jefe.setEmail(email);
  		jefe.setPassword(password);
  		jefe.setNombre(name);
- 		Collection<Proyecto> proyectos = jefe.getProyectosJefe();
-		req.getSession().setAttribute("proyecto", proyectos);
- 		jefe.setProyectosJefe(proyectos);
- 		
- 		JefeDAOImplementation.getInstance().create(jefe);
-    	JefeDAOImplementation.getInstance().login(email, password);
-		req.getSession().setAttribute("jefe", jefe);
 
- 		List<Jefe> lp = new ArrayList<Jefe>();
- 		lp.addAll((List<Jefe>)         
-           req.getSession().getAttribute("jefes"));
- 		lp.add (jefe);
- 		req.getSession().setAttribute("jefes", lp);
- 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+ 		
+ 	
+ 		jefe.setProyectosJefe(proyectos);
+ 		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
+ 			log("Usuario ya existente");
+ 	 		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
+ 		}else {
+ 			JefeDAOImplementation.getInstance().create(jefe);
+ 	    	JefeDAOImplementation.getInstance().login(email, password);
+ 			req.getSession().setAttribute("jefe", jefe);
+ 	 		List<Jefe> lp = new ArrayList<Jefe>();
+ 	 		lp.addAll((List<Jefe>)         
+ 	           req.getSession().getAttribute("jefes"));
+ 	 		lp.add (jefe);
+ 	 		req.getSession().setAttribute("jefes", lp);
+ 	 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+ 		}
  	}
 
 	/**

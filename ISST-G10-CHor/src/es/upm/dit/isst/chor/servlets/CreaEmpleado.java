@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
+import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
 
 
@@ -44,16 +45,22 @@ public class CreaEmpleado extends HttpServlet {
  		empleado.setPassword(password);
  		empleado.setNombre(name);
  		
- 		EmpleadoDAOImplementation.getInstance().create(empleado);
-    	EmpleadoDAOImplementation.getInstance().login(email, password);
-		req.getSession().setAttribute("empleado", empleado);
 
- 		List<Empleado> lp = new ArrayList<Empleado>();
- 		lp.addAll((List<Empleado>)         
-           req.getSession().getAttribute("empleados"));
- 		lp.add(empleado);
- 		req.getSession().setAttribute("empleados", lp);
- 		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+ 		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
+ 			log("Usuario ya existente");
+ 			getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
+ 		}else {
+ 			EmpleadoDAOImplementation.getInstance().create(empleado);
+ 	    	EmpleadoDAOImplementation.getInstance().login(email, password);
+ 			req.getSession().setAttribute("empleado", empleado);
+
+ 	 		List<Empleado> lp = new ArrayList<Empleado>();
+ 	 		lp.addAll((List<Empleado>)         
+ 	           req.getSession().getAttribute("empleados"));
+ 	 		lp.add(empleado);
+ 	 		req.getSession().setAttribute("empleados", lp);
+ 	 		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+ 		}
  	}
 
 	/**
