@@ -43,22 +43,21 @@ public class CreaJefe extends HttpServlet {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
- 		Collection<Proyecto> proyectos = null;
     	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
 		req.getSession().setAttribute("jefes", jefes);
-		req.getSession().setAttribute("proyecto", proyectos);
 		
  		Jefe jefe = new Jefe();
  		jefe.setEmail(email);
  		jefe.setPassword(password);
  		jefe.setNombre(name);
+ 		Collection<Proyecto> proyectos = jefe.getProyectosJefe();
+		req.getSession().setAttribute("proyecto", proyectos);
  		jefe.setProyectosJefe(proyectos);
  		
  		JefeDAOImplementation.getInstance().create(jefe);
     	JefeDAOImplementation.getInstance().login(email, password);
 		req.getSession().setAttribute("jefe", jefe);
 
- 		JefeDAOImplementation.getInstance().create(jefe);
  		List<Jefe> lp = new ArrayList<Jefe>();
  		lp.addAll((List<Jefe>)         
            req.getSession().getAttribute("jefes"));
