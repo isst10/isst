@@ -9,23 +9,21 @@ import javax.persistence.Id;
 
 @Entity
 public class Horas implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private Date date;
 	private String horas;
-
-
 	private String empresa;
 	private String proyecto;
 	private String empleado;
-	
+
 
 	public Horas() {
 		super();
 	}
-	
+
 	public Date getDate() {
 		return date;
 	}
@@ -87,7 +85,7 @@ public class Horas implements Serializable {
 		return "Horas [empleado=" + empleado + ", horas=" + horas + ", proyecto=" + proyecto + ", empresa=" + empresa
 				+ "]";
 	}
-	
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

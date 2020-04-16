@@ -18,18 +18,9 @@ public class Proyecto {
 
 	@Id
 	private String name;
-	private long nEmpleados;
+	private int nEmpleados;
 	private Date fechaInicio;
 	private Date fechaFin;
-//	private String chief;
-//
-//	public String getChief() {
-//		return chief;
-//	}
-//
-//	public void setChief(String chief) {
-//		this.chief = chief;
-//	}
 	
 	@OneToMany(mappedBy = "proyecto", fetch = FetchType.EAGER)
 	private Collection<Empleado> empleados;	
@@ -81,11 +72,11 @@ public class Proyecto {
 		this.name = name;
 	}
 
-	public long getnEmpleados() {
+	public int getnEmpleados() {
 		return nEmpleados;
 	}
 
-	public void setnEmpleados(long nEmpleados) {
+	public void setnEmpleados(int nEmpleados) {
 		this.nEmpleados = nEmpleados;
 	}
 
