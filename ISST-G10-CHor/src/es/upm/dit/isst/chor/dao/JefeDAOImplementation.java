@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import org.hibernate.Session;
 
+import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Jefe;
 
 
@@ -105,6 +106,10 @@ public class JefeDAOImplementation implements JefeDAO {
 		session.getTransaction().commit();
 		session.close();
 		return j;
+	}
+	public boolean buscarJefe(String email){
+    	List<Jefe> empleados = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
+	    return empleados.stream().anyMatch(emp -> emp.getEmail().equals(email));
 	}
 
 }
