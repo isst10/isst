@@ -52,13 +52,12 @@ public class CreaProyecto extends HttpServlet {
  		proyecto.setJefe(jefe);
  		proyecto.setFechaInicio(fecha);
  		
- 		ProyectoDAOImplementation.getInstance().create(proyecto);
- 		List<Proyecto> lp = new ArrayList<Proyecto>();
- 		lp.addAll((List<Proyecto>)         
-                           req.getSession().getAttribute("proyectos"));
- 		lp.add (proyecto);
- 		req.getSession().setAttribute("proyectos", lp);
- 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+ 	 		ProyectoDAOImplementation.getInstance().create(proyecto);
+ 	 		List<Proyecto> lp = new ArrayList<Proyecto>();
+ 	 		lp.addAll((List<Proyecto>)req.getSession().getAttribute("proyectos"));
+ 	 		lp.add (proyecto);
+ 	 		req.getSession().setAttribute("proyectos", lp);
+ 	 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
  	}
 
 	/**

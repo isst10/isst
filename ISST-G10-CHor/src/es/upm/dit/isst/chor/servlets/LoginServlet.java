@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
     		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
     	} else if (jefe != null && jefe.getEmail().equals(email) && jefe.getPassword().equals(password)){
     		req.getSession().setAttribute("proyectos", proyectos);
-    		req.getSession().setAttribute("jefe", empleado);
+    		req.getSession().setAttribute("jefe", jefe);
     		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
     	} else {
     		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
