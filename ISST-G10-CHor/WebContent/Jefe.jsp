@@ -13,11 +13,11 @@
 <body>
 <h1>Bienvenido, ${jefe.nombre}</h1>
 
-<p><b>Número de proyectos activos: </b>${fn:length(proyectos)}</p>
+<p><b>Número de proyectos activos: </b>${fn:length(jefe.proyectosJefe)}</p>
 
 <h2>Proyectos</h2>
 <table border="1">
-<c:forEach items="${proyectos}" var="proyectoi">
+<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
 <tr>
 <td>${proyectoi.name}</td>
 </tr>

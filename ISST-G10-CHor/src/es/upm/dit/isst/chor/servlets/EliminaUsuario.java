@@ -44,12 +44,17 @@ public class EliminaUsuario extends HttpServlet {
  	 		empleado.setPassword(password);
  	 		empleado.setNombre(name);
  	     	EmpleadoDAOImplementation.getInstance().delete(empleado);
+ 	    	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
+ 			req.getSession().setAttribute("empleados", empleados);
+
  		} else if (JefeDAOImplementation.getInstance().buscarJefe(email)) {
  	 		Jefe jefe = new Jefe();
  	 		jefe.setEmail(email);
  	 		jefe.setPassword(password);
  	 		jefe.setNombre(name);
  	     	JefeDAOImplementation.getInstance().delete(jefe);
+ 	    	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
+ 			req.getSession().setAttribute("jefes", jefes);
  		} else {
  			log("El usuario no existe");
  		}
