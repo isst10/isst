@@ -44,6 +44,9 @@ public class CreaProyecto extends HttpServlet {
     	Jefe jefe =(Jefe) req.getSession().getAttribute("jefe");
     	String name = req.getParameter("name");
  		java.util.Date fecha = new Date();
+ 		
+ 		List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
+ 		req.getSession().setAttribute("proyectos", proyectos);
 
  		Proyecto proyecto = new Proyecto();
  		proyecto.setName(name);
