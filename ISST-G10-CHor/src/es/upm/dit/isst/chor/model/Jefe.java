@@ -17,8 +17,6 @@ public class Jefe{
 	private String email;
 	private String password;
 	private String nombre;
-	private String empresa;
-	
 	private double sueldo;
 	
 	@OneToMany(mappedBy = "jefe", fetch = FetchType.EAGER)
@@ -27,15 +25,6 @@ public class Jefe{
 	public Jefe() {
 		super();
 	}
-
-	public String getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(String empresa) {
-		this.empresa = empresa;
-	}
-
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -73,24 +62,12 @@ public class Jefe{
 		this.sueldo = sueldo;
 	}
 
-	@Override
-	public String toString() {
-		return "Jefe [email=" + email + ", password=" + password + ", nombre=" + nombre + ", empresa=" + empresa
-				+ ", sueldo=" + sueldo + ", proyectosJefe=" + proyectosJefe + "]";
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((proyectosJefe == null) ? 0 : proyectosJefe.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(sueldo);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -108,29 +85,13 @@ public class Jefe{
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (empresa == null) {
-			if (other.empresa != null)
-				return false;
-		} else if (!empresa.equals(other.empresa))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (proyectosJefe == null) {
-			if (other.proyectosJefe != null)
-				return false;
-		} else if (!proyectosJefe.equals(other.proyectosJefe))
-			return false;
-		if (Double.doubleToLongBits(sueldo) != Double.doubleToLongBits(other.sueldo))
-			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Jefe [email=" + email + ", password=" + password + ", nombre=" + nombre + ", sueldo=" + sueldo
+				+ ", proyectosJefe=" + proyectosJefe + "]";
 	}
 
 	public Collection<Proyecto> getProyectosJefe() {

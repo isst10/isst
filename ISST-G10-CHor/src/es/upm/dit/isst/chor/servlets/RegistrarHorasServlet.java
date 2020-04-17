@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import es.upm.dit.isst.chor.dao.HorasDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Horas;
+import es.upm.dit.isst.chor.model.Jefe;
 
 /**
  * Servlet implementation class RegistrarHorasServlet
@@ -37,14 +38,15 @@ public class RegistrarHorasServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
- 		String proyecto = req.getParameter("proyecto");
+		Jefe jefe = (Jefe) req.getSession().getAttribute("jefe");
+ 		
+		String proyecto = req.getParameter("proyecto");
  		String h = req.getParameter("horas");
  		java.util.Date fecha = new Date();
 
  		Horas hora = new Horas();
  		hora.setEmpleado(empleado.getNombre());
  		hora.setProyecto(proyecto);
- 		hora.setEmpresa(empleado.getEmpresa());
  		hora.setHoras(h);
  		hora.setDate(fecha);
  		
@@ -53,17 +55,8 @@ public class RegistrarHorasServlet extends HttpServlet {
  		lp = (List<Horas>) HorasDAOImplementation.getInstance().readAllEmpleado(empleado.getNombre());
  		lp.add(hora);
  		req.getSession().setAttribute("horas", lp);
-
- 		if(empleado.isEsJefe()) {
- 			getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,response);
- 		}else {
- 			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
- 		}
-// 		if(empleado.isEsJefe()) {
-// 			getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,response);
-// 		}else {
- 			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
-// 		}
+ 		
+ 		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
  	}
 
 	/**
