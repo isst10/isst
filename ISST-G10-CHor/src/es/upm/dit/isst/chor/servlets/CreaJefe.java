@@ -49,16 +49,17 @@ public class CreaJefe extends HttpServlet {
 		//req.getSession().setAttribute("proyecto", proyectos);
 
 		
- 		Jefe jefe = new Jefe();
- 		jefe.setEmail(email);
- 		jefe.setPassword(password);
- 		jefe.setNombre(name); 	
- 		jefe.setProyectosJefe(proyectos);
+
 
  		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
  			log("Usuario ya existente");
  	 		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
  		}else {
+ 	 		Jefe jefe = new Jefe();
+ 	 		jefe.setEmail(email);
+ 	 		jefe.setPassword(password);
+ 	 		jefe.setNombre(name); 	
+ 	 		jefe.setProyectosJefe(proyectos);
  			JefeDAOImplementation.getInstance().create(jefe);
  	    	JefeDAOImplementation.getInstance().login(email, password);
  			req.getSession().setAttribute("jefe", jefe);
