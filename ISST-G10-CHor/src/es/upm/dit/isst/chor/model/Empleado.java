@@ -15,9 +15,7 @@ public class Empleado implements Serializable{
 	private String email;
 	private String password;
 	private String nombre;
-	private double sueldo;	
-	private long nProyectos;
-	
+	private double sueldo;		
 
 	@ManyToOne
 	private Proyecto proyecto;
@@ -55,15 +53,6 @@ public class Empleado implements Serializable{
 		this.nombre = nombre;
 	}
 
-
-	public long getnProyectos() {
-		return nProyectos;
-	}
-
-	public void setnProyectos(long nProyectos) {
-		this.nProyectos = nProyectos;
-	}
-
 	public double getSueldo() {
 		return sueldo;
 	}
@@ -76,10 +65,12 @@ public class Empleado implements Serializable{
 		return proyecto;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Empleado [email=" + email + ", password=" + password + ", nombre=" + nombre + ", sueldo=" + sueldo
-				+ ", nProyectos=" + nProyectos + ", proyecto=" + proyecto + "]";
+				+ ", proyecto=" + proyecto + "]";
 	}
 
 	@Override
