@@ -57,7 +57,7 @@ public class CreaJefe extends HttpServlet {
 
  		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
  			log("Usuario ya existente");
- 	 		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
+ 	 		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
  		}else {
  			JefeDAOImplementation.getInstance().create(jefe);
  	    	JefeDAOImplementation.getInstance().login(email, password);

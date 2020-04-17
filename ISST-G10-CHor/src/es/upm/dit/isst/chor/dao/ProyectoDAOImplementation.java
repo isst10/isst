@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
+
+import es.upm.dit.isst.chor.model.Jefe;
 import es.upm.dit.isst.chor.model.Proyecto;
 
 public class ProyectoDAOImplementation implements ProyectoDAO {
@@ -100,5 +102,8 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 		session.close();
 		return p;
 	}
-
+	public boolean buscarProyecto(String email){
+    	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
+	    return proyectos.stream().anyMatch(pro -> pro.getName().equals(email));
+	}
 }

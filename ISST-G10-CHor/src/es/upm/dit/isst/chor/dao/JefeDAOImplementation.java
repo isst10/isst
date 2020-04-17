@@ -108,8 +108,8 @@ public class JefeDAOImplementation implements JefeDAO {
 		return j;
 	}
 	public boolean buscarJefe(String email){
-    	List<Jefe> empleados = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
-	    return empleados.stream().anyMatch(emp -> emp.getEmail().equals(email));
+    	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
+	    return jefes.stream().anyMatch(jef -> jef.getEmail().equals(email));
 	}
 
 }

@@ -44,19 +44,29 @@ public class CreaProyecto extends HttpServlet {
     	Jefe jefe =(Jefe) req.getSession().getAttribute("jefe");
     	String name = req.getParameter("name");
  		java.util.Date fecha = new Date();
+ 		
+    	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
+		req.getSession().setAttribute("proyectos", proyectos);
+
 
  		Proyecto proyecto = new Proyecto();
  		proyecto.setName(name);
  		proyecto.setJefe(jefe);
  		proyecto.setFechaInicio(fecha);
+ 		if (!ProyectoDAOImplementation.getInstance().buscarProyecto(name)) {
+ 	 		ProyectoDAOImplementation.getInstance().create(proyecto);
+ 	 		req.getSession().setAttribute("proyecto", proyecto);
+ 	 		List<Proyecto> lp = new ArrayList<Proyecto>();
+ 	 		lp.addAll((List<Proyecto>)req.getSession().getAttribute("proyectos"));
+ 	 		lp.add(proyecto);
+ 	 		req.getSession().setAttribute("proyectos", lp);
+ 	 		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
+ 		}else {
+ 			log("El proyecto ya existe");
+ 	 		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
 
- 		ProyectoDAOImplementation.getInstance().create(proyecto);
- 		req.getSession().setAttribute("proyecto", proyecto);
- 		List<Proyecto> lp = new ArrayList<Proyecto>();
- 		lp.addAll((List<Proyecto>)req.getSession().getAttribute("proyectos"));
- 		lp.add(proyecto);
- 		req.getSession().setAttribute("proyectos", lp);
- 		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
+ 		}
+
     }
 
 	/**

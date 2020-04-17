@@ -5,9 +5,11 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Proyecto implements Serializable{
@@ -21,7 +23,7 @@ public class Proyecto implements Serializable{
 	private Date fechaFin;
 	private String cliente;
 	
-	@ManyToMany
+	@OneToMany(mappedBy = "proyecto", fetch = FetchType.EAGER)
 	private Collection<Empleado> empleados;	
 	
 	@ManyToOne 
