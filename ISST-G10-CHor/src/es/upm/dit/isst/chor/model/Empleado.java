@@ -9,7 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+<<<<<<< Updated upstream
 import javax.persistence.Table;
+=======
+>>>>>>> Stashed changes
 
 @Entity
 public class Empleado implements Serializable{
@@ -28,6 +31,14 @@ public class Empleado implements Serializable{
 	//private boolean esJefe;
 	
 	//(mappedBy = "empleados", fetch = FetchType.EAGER)
+=======
+	private double sueldo;	
+	private long nProyectos;
+	
+	@OneToMany(mappedBy = "hEmpleado", fetch = FetchType.EAGER)
+	private Collection<Horas> horas;
+	
+>>>>>>> Stashed changes
 	@ManyToOne
 	private Proyecto proyecto;
 
@@ -42,6 +53,20 @@ public class Empleado implements Serializable{
 	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
+
+
+
+	public Collection<Horas> getHoras() {
+		return horas;
+	}
+
+
+
+	public void setHoras(Collection<Horas> horas) {
+		this.horas = horas;
+	}
+
+
 
 	public void setProyecto(Proyecto proyecto) {
 		this.proyecto = proyecto;

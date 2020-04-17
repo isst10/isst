@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import es.upm.dit.isst.chor.dao.HorasDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Horas;
+<<<<<<< Updated upstream
+=======
+import es.upm.dit.isst.chor.model.Jefe;
+import es.upm.dit.isst.chor.model.Proyecto;
+>>>>>>> Stashed changes
 
 /**
  * Servlet implementation class RegistrarHorasServlet
@@ -33,6 +38,7 @@ public class RegistrarHorasServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
@@ -40,18 +46,30 @@ public class RegistrarHorasServlet extends HttpServlet {
 <<<<<<< Updated upstream
  		String proyecto = req.getParameter("proyecto");
  		String h = req.getParameter("horas");
+=======
+//		Jefe jefe = (Jefe) req.getSession().getAttribute("jefe");
+ 		
+		String proyecto = req.getParameter("proyecto");
+ 		String h = req.getParameter("h");
+>>>>>>> Stashed changes
  		java.util.Date fecha = new Date();
+ 		List<Horas> horas = (List<Horas>)HorasDAOImplementation.getInstance().readAllEmpleado(empleado);
+ 		req.getSession().setAttribute("horas", horas);
 
  		Horas hora = new Horas();
- 		hora.setEmpleado(empleado.getNombre());
+ 		hora.sethEmpleado(empleado);
  		hora.setProyecto(proyecto);
  		hora.setEmpresa(empleado.getEmpresa());
  		hora.setHoras(h);
  		hora.setDate(fecha);
  		
  		HorasDAOImplementation.getInstance().create(hora);
+		req.getSession().setAttribute("hora", hora);
+
  		List<Horas> lp = new ArrayList<Horas>();
- 		lp = (List<Horas>) HorasDAOImplementation.getInstance().readAllEmpleado(empleado.getNombre());
+	 	lp.addAll((List<Horas>)req.getSession().getAttribute("horas"));
+
+// 		lp = (List<Horas>) HorasDAOImplementation.getInstance().readAllEmpleado(empleado.getNombre());
  		lp.add(hora);
 <<<<<<< Updated upstream
  		req.getSession().setAttribute("horas", lp);
@@ -60,6 +78,9 @@ public class RegistrarHorasServlet extends HttpServlet {
 // 		}else {
  			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
 // 		}
+=======
+ 		req.getSession().setAttribute("h", lp);
+>>>>>>> Stashed changes
  		
  	}
 
