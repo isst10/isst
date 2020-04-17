@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -17,8 +18,9 @@ public class Horas implements Serializable {
 	private String horas;
 	private String empresa;
 	private String proyecto;
-	private String empleado;
-
+	
+	@ManyToOne
+	private Empleado hEmpleado;
 
 	public Horas() {
 		super();
@@ -30,11 +32,13 @@ public class Horas implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getEmpleado() {
-		return empleado;
+
+	public Empleado gethEmpleado() {
+		return hEmpleado;
 	}
-	public void setEmpleado(String empleado) {
-		this.empleado = empleado;
+
+	public void sethEmpleado(Empleado hEmpleado) {
+		this.hEmpleado = hEmpleado;
 	}
 
 	public String getHoras() {
@@ -61,9 +65,14 @@ public class Horas implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((empleado == null) ? 0 : empleado.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
+		result = prime * result + ((hEmpleado == null) ? 0 : hEmpleado.hashCode());
+		result = prime * result + ((horas == null) ? 0 : horas.hashCode());
+		result = prime * result + ((proyecto == null) ? 0 : proyecto.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -73,17 +82,39 @@ public class Horas implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Horas other = (Horas) obj;
-		if (empleado == null) {
-			if (other.empleado != null)
+		if (date == null) {
+			if (other.date != null)
 				return false;
-		} else if (!empleado.equals(other.empleado))
+		} else if (!date.equals(other.date))
+			return false;
+		if (empresa == null) {
+			if (other.empresa != null)
+				return false;
+		} else if (!empresa.equals(other.empresa))
+			return false;
+		if (hEmpleado == null) {
+			if (other.hEmpleado != null)
+				return false;
+		} else if (!hEmpleado.equals(other.hEmpleado))
+			return false;
+		if (horas == null) {
+			if (other.horas != null)
+				return false;
+		} else if (!horas.equals(other.horas))
+			return false;
+		if (proyecto == null) {
+			if (other.proyecto != null)
+				return false;
+		} else if (!proyecto.equals(other.proyecto))
 			return false;
 		return true;
 	}
+
+
 	@Override
 	public String toString() {
-		return "Horas [empleado=" + empleado + ", horas=" + horas + ", proyecto=" + proyecto + ", empresa=" + empresa
-				+ "]";
+		return "Horas [date=" + date + ", horas=" + horas + ", empresa=" + empresa + ", proyecto=" + proyecto
+				+ ", hEmpleado=" + hEmpleado + "]";
 	}
 
 	public static long getSerialversionuid() {

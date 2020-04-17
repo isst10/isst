@@ -20,6 +20,7 @@ public class Empleado implements Serializable{
 	private String email;
 	private String password;
 	private String nombre;
+<<<<<<< Updated upstream
 	private double sueldo;
 	private String empresa;
 

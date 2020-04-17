@@ -12,6 +12,17 @@
 
 <h1>Bienvenido, ${empleado.nombre}</h1>
 
+<h2>Horas</h2>
+<table border="1">
+<c:forEach items="${empleado.horas}" var="horasi">
+<tr>
+<td>${horasi.date}</td>
+<td>${horasi.horas}</td>
+<td>${horasi.proyecto}</td>
+</tr>
+</c:forEach>
+</table>
+
 <h2>Registrar Horas</h2>
 <%@ include file = "FormRegistraHoras.jsp" %>
 

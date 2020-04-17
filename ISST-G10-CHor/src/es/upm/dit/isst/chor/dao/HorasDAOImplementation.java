@@ -75,7 +75,7 @@ public class HorasDAOImplementation implements HorasDAO {
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Horas> readAllEmpleado(String empleado) {
+	public Collection<Horas> readAllEmpleado(Empleado empleado) {
 		// TODO Auto-generated method stub
 		Session session = SessionFactoryService.get().openSession();
 		session.beginTransaction();

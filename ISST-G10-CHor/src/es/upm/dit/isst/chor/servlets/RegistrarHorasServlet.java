@@ -37,6 +37,7 @@ public class RegistrarHorasServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
+<<<<<<< Updated upstream
  		String proyecto = req.getParameter("proyecto");
  		String h = req.getParameter("horas");
  		java.util.Date fecha = new Date();
@@ -52,6 +53,7 @@ public class RegistrarHorasServlet extends HttpServlet {
  		List<Horas> lp = new ArrayList<Horas>();
  		lp = (List<Horas>) HorasDAOImplementation.getInstance().readAllEmpleado(empleado.getNombre());
  		lp.add(hora);
+<<<<<<< Updated upstream
  		req.getSession().setAttribute("horas", lp);
 // 		if(empleado.isEsJefe()) {
 // 			getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,response);
