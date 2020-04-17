@@ -62,6 +62,8 @@ public class CreaProyecto extends HttpServlet {
  	 		lp.add (proyecto);
  	 		req.getSession().setAttribute("proyectos", lp);
  	 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+ 		} else {
+ 			log("El proyecto ya existe");
  		}
  	}
 

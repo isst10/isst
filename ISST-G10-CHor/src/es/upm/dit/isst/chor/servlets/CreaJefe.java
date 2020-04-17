@@ -50,9 +50,9 @@ public class CreaJefe extends HttpServlet {
  		jefe.setEmail(email);
  		jefe.setPassword(password);
  		jefe.setNombre(name);
- 		Collection<Proyecto> proyectos = jefe.getProyectosJefe();
-		req.getSession().setAttribute("proyecto", proyectos);
- 		jefe.setProyectosJefe(proyectos);
+// 		Collection<Proyecto> proyectos = jefe.getProyectosJefe();
+//		req.getSession().setAttribute("proyecto", proyectos);
+// 		jefe.setProyectosJefe(proyectos);
  		
  		JefeDAOImplementation.getInstance().create(jefe);
     	JefeDAOImplementation.getInstance().login(email, password);
@@ -64,6 +64,7 @@ public class CreaJefe extends HttpServlet {
  		lp.add (jefe);
  		req.getSession().setAttribute("jefes", lp);
  		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+
  	}
 
 	/**

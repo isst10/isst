@@ -107,6 +107,4 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 
 	    return proyectos.stream().anyMatch(proyecto -> proyecto.getName().equals(p));
 	}
-
-
 }
