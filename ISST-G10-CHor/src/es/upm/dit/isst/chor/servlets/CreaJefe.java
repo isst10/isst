@@ -37,8 +37,7 @@ public class CreaJefe extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    @SuppressWarnings("unchecked")
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
@@ -47,17 +46,15 @@ public class CreaJefe extends HttpServlet {
  		Collection<Proyecto> proyectos = null;
     	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
 		req.getSession().setAttribute("jefes", jefes);
-		req.getSession().setAttribute("proyecto", proyectos);
+		//req.getSession().setAttribute("proyecto", proyectos);
 
 		
  		Jefe jefe = new Jefe();
  		jefe.setEmail(email);
  		jefe.setPassword(password);
- 		jefe.setNombre(name);
-
- 		
- 	
+ 		jefe.setNombre(name); 	
  		jefe.setProyectosJefe(proyectos);
+
  		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
  			log("Usuario ya existente");
  	 		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);

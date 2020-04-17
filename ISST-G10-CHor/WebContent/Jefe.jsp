@@ -27,6 +27,9 @@
 <h2>Registrar un nuevo proyecto</h2>
 <%@ include file = "FormCreaProyecto.jsp" %>
 
+<h2>Registrar Horas</h2>
+<%@ include file = "FormRegistraHoras.jsp" %>
+
 <h2>Salir de la aplicación</h2>
 <%@ include file = "Logout.jsp" %>
 

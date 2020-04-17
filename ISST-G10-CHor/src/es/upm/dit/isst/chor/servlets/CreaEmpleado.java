@@ -31,20 +31,21 @@ public class CreaEmpleado extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    @SuppressWarnings("unchecked")
+
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
+
     	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
 		req.getSession().setAttribute("empleados", empleados);
+
 
  		Empleado empleado = new Empleado();
  		empleado.setEmail(email);
  		empleado.setPassword(password);
  		empleado.setNombre(name);
- 		
 
  		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
  			log("Usuario ya existente");
