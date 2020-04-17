@@ -80,7 +80,7 @@ public class EmpleadoDAOImplementation implements EmpleadoDAO {
 		Session session = SessionFactoryService.get().openSession();
 		session.beginTransaction();
 		// operaciones
-		List<Empleado> empleados = session.createQuery("from Empleado where esJefe=\'false\' ").list();
+		List<Empleado> empleados = session.createQuery("from Empleado").list();
 		session.getTransaction().commit();
 		session.close();
 		return empleados;
