@@ -46,7 +46,7 @@ public class CreaJefe extends HttpServlet {
  		Collection<Proyecto> proyectos = null;
     	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
 		req.getSession().setAttribute("jefes", jefes);
-		req.getSession().setAttribute("proyecto", proyectos);
+		//req.getSession().setAttribute("proyecto", proyectos);
 
 		
  		Jefe jefe = new Jefe();

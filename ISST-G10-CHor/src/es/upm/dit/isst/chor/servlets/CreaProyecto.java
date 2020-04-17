@@ -25,7 +25,7 @@ import es.upm.dit.isst.chor.model.Proyecto;
 @WebServlet("/CreaProyecto")
 public class CreaProyecto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,16 +38,15 @@ public class CreaProyecto extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     @SuppressWarnings("unchecked")
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
- 		
+
     	Jefe jefe =(Jefe) req.getSession().getAttribute("jefe");
     	String name = req.getParameter("name");
  		java.util.Date fecha = new Date();
- 		
-    	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
-		req.getSession().setAttribute("proyectos", proyectos);
 
+ 		List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
+ 		req.getSession().setAttribute("proyectos", proyectos);
 
  		Proyecto proyecto = new Proyecto();
  		proyecto.setName(name);
