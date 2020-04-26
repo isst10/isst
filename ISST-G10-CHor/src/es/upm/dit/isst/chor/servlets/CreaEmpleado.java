@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
 import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
@@ -48,6 +49,7 @@ public class CreaEmpleado extends HttpServlet {
  		empleado.setNombre(name);
 
  		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
+ 		
  			log("Usuario ya existente");
  			getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
  		}else {

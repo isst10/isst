@@ -9,6 +9,8 @@
 
 
 <title>Bienvenido, ${jefe.nombre}</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>  
 </head>
 <body>
 <h1>Bienvenido, ${jefe.nombre}</h1>
@@ -19,7 +21,12 @@
 <table border="1">
 <c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
 <tr>
-<td>${proyectoi.name}</td>
+<td>
+<button>${proyectoi.name}</button>
+</td>
+<td>
+<button ><span class="glyphicon glyphicon-remove-circle"></span></button>
+</td>
 </tr>
 </c:forEach>
 </table>
