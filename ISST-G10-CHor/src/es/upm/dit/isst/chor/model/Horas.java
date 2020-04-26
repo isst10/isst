@@ -20,6 +20,7 @@ public class Horas implements Serializable {
 	private String empleado;
 
 
+
 	public Horas() {
 		super();
 	}
@@ -36,11 +37,9 @@ public class Horas implements Serializable {
 	public void setEmpleado(String empleado) {
 		this.empleado = empleado;
 	}
-
 	public String getHoras() {
 		return horas;
 	}
-
 	public void setHoras(String horas) {
 		this.horas = horas;
 	}
@@ -89,5 +88,4 @@ public class Horas implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 }

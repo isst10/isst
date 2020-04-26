@@ -51,8 +51,9 @@
 <h2>Registrar un nuevo empleado</h2>
 <%@ include file = "FormCreaEmpleado.jsp" %>
 
-<h2>Eliminar un usuario</h2>
+<h2>Eliminar usuario</h2>
 <%@ include file = "FormEliminaUsuario.jsp" %>
+
 
 <h2>Salir de la aplicacion</h2>
 <%@ include file = "Logout.jsp" %>
