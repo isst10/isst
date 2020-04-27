@@ -20,12 +20,39 @@
 <c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
 <tr>
 <td>${proyectoi.name}</td>
+<td>${proyectoi.fechaInicio}</td>
+<td>${proyectoi.fechaFin}</td>
 </tr>
 </c:forEach>
 </table>
 
+
 <h2>Registrar un nuevo proyecto</h2>
 <%@ include file = "FormCreaProyecto.jsp" %>
+
+<h2>Finalizar proyecto</h2>
+<form action="FinalizarProyecto">
+	<!-- <input type="text" name="name" placeholder="Nombre proyecto"> -->
+	
+	<select class="form-control" name="name">
+  		<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
+  			<option>${proyectoi.name}</option>
+  		</c:forEach>	
+	</select>
+	<button type="submit">Finalizar proyecto</button>
+</form>
+
+<h2>Borrar proyecto</h2>
+<form action="EliminarProyecto">
+	<!-- <input type="text" name="name" placeholder="Nombre proyecto"> -->
+	
+	<select class="form-control" name="name">
+  		<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
+  			<option>${proyectoi.name}</option>
+  		</c:forEach>	
+	</select>
+	<button type="submit">Borrar proyecto</button>
+</form>
 
 <!-- <h2>Registrar Horas</h2> -->
 <%-- <%@ include file = "FormRegistraHoras.jsp" %> --%>
