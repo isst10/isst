@@ -1,10 +1,13 @@
 package es.upm.dit.isst.chor.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Empleado implements Serializable{
@@ -19,6 +22,17 @@ public class Empleado implements Serializable{
 
 	@ManyToOne
 	private Proyecto proyecto;
+	
+	@OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER)
+	private Collection<Horas> horas;
+
+	public Collection<Horas> getHoras() {
+		return horas;
+	}
+
+	public void setHoras(Collection<Horas> horas) {
+		this.horas = horas;
+	}
 
 	public Empleado() {
 		super();
@@ -65,12 +79,10 @@ public class Empleado implements Serializable{
 		return proyecto;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Empleado [email=" + email + ", password=" + password + ", nombre=" + nombre + ", sueldo=" + sueldo
-				+ ", proyecto=" + proyecto + "]";
+				+ ", proyecto=" + proyecto + ", horas=" + horas + "]";
 	}
 
 	@Override
@@ -98,6 +110,9 @@ public class Empleado implements Serializable{
 		return true;
 	}
 
+
+
+	
 
 	
 	

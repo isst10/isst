@@ -48,9 +48,11 @@ public class LoginServlet extends HttpServlet {
     		req.getSession().setAttribute("proyectos", proyectos);
     		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
     	} else if (empleado != null && empleado.getEmail().equals(email) && empleado.getPassword().equals(password) ) {
-			req.getSession().setAttribute("empleado", empleado);
+    		req.getSession().setAttribute("proyectos", proyectos);
+    		req.getSession().setAttribute("empleado", empleado);
     		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
     	} else if (jefe != null && jefe.getEmail().equals(email) && jefe.getPassword().equals(password)){
+    		req.getSession().setAttribute("empleados", empleados);
     		req.getSession().setAttribute("proyectos", proyectos);
     		req.getSession().setAttribute("jefe", jefe);
     		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);

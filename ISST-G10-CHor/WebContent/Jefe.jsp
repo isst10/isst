@@ -13,15 +13,42 @@
 <body>
 <h1>Bienvenido, ${jefe.nombre}</h1>
 
-<p><b>Número de proyectos activos: </b>${fn:length(jefe.proyectosJefe)}</p>
+<p><b>Número de proyectos: </b>${fn:length(jefe.proyectosJefe)}</p>
 
-<h2>Proyectos</h2>
+<h2>Proyectos Activos</h2>
 <table border="1">
 <c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
 <tr>
-<td>${proyectoi.name}</td>
-<td>${proyectoi.fechaInicio}</td>
-<td>${proyectoi.fechaFin}</td>
+<c:if test="${proyectoi.fechaFin == null}">
+	<td>${proyectoi.name}</td>
+	<td>${proyectoi.fechaInicio}</td>
+	<td>
+		<form action="VerProyecto">
+			<input type="hidden" name="name" value='${proyectoi.name}'>
+			<button type="submit">Ver</button>
+		</form>
+	</td>
+</c:if>
+</tr>
+</c:forEach>
+</table>
+
+
+<h2>Proyectos Terminados</h2>
+<table border="1">
+<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
+<tr>
+<c:if test="${proyectoi.fechaFin != null}">
+	<td>${proyectoi.name}</td>
+	<td>${proyectoi.fechaInicio}</td>
+	<td>${proyectoi.fechaFin}</td>
+	<td>
+		<form action="VerProyecto">
+			<input type="hidden" name="name" value='${proyectoi.name}'>
+			<button type="submit">Ver</button>
+		</form>
+	</td>
+</c:if>
 </tr>
 </c:forEach>
 </table>
@@ -32,11 +59,11 @@
 
 <h2>Finalizar proyecto</h2>
 <form action="FinalizarProyecto">
-	<!-- <input type="text" name="name" placeholder="Nombre proyecto"> -->
-	
 	<select class="form-control" name="name">
   		<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
-  			<option>${proyectoi.name}</option>
+  			<c:if test="${proyectoi.fechaFin == null}">
+  				<option>${proyectoi.name}</option>
+  			</c:if>	
   		</c:forEach>	
 	</select>
 	<button type="submit">Finalizar proyecto</button>
@@ -44,8 +71,6 @@
 
 <h2>Borrar proyecto</h2>
 <form action="EliminarProyecto">
-	<!-- <input type="text" name="name" placeholder="Nombre proyecto"> -->
-	
 	<select class="form-control" name="name">
   		<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
   			<option>${proyectoi.name}</option>

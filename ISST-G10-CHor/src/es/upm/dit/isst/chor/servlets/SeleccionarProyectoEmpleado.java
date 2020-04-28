@@ -1,8 +1,6 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,22 +8,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
+import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
 import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
-import es.upm.dit.isst.chor.model.Jefe;
+import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Proyecto;
 
 /**
- * Servlet implementation class FinalizarProyecto
+ * Servlet implementation class SeleccionarProyectoEmpleado
  */
-@WebServlet("/FinalizarProyecto")
-public class FinalizarProyecto extends HttpServlet {
+@WebServlet("/SeleccionarProyectoEmpleado")
+public class SeleccionarProyectoEmpleado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FinalizarProyecto() {
+    public SeleccionarProyectoEmpleado() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,24 +32,14 @@ public class FinalizarProyecto extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
 		String name = req.getParameter("name");
  		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
- 		
-		java.util.Date fecha = new Date();
-		
-		if (ProyectoDAOImplementation.getInstance().read(name) != null && ProyectoDAOImplementation.getInstance().read(name).getFechaFin() == null) {
-			proyecto.setFechaFin(fecha);
-			ProyectoDAOImplementation.getInstance().update(proyecto);
- 	    	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
- 			req.getSession().setAttribute("proyectos", proyectos);
- 			Jefe jefe = proyecto.getJefe();
- 			JefeDAOImplementation.getInstance().update(jefe);
- 			req.getSession().setAttribute("jefe", jefe);
- 		} else {
- 			log("El proyecto ya está finalizado");
- 		}
-		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+		empleado.setProyecto(proyecto);
+		EmpleadoDAOImplementation.getInstance().update(empleado); 
+		req.getSession().setAttribute("empleado", empleado);
+		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
 		
 	}
 

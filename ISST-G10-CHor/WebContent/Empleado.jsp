@@ -7,10 +7,27 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Bienvenido, ${empleado.nombre}</title>
+<h1>Tienes como proyecto seleccionado:
+	<c:if test="${empleado.proyecto == null}">
+ 		Ningún proyecto seleccionado
+ 	</c:if>
+ 	${empleado.proyecto}
+</h1>
+
 </head>
 <body>
 
 <h1>Bienvenido, ${empleado.nombre}</h1>
+
+<h2>Cambiar/Seleccionar proyecto</h2>
+<form action="SeleccionarProyectoEmpleado">
+	<select class="form-control" name="name">
+  		<c:forEach items="${proyectos}" var="proyectoi">
+  				<option>${proyectoi.name}</option>
+  		</c:forEach>	
+	</select>
+	<button type="submit">Asigna proyecto</button>
+</form>
 
 <h2>Registrar Horas</h2>
 <%@ include file = "FormRegistraHoras.jsp" %>
