@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
 import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
@@ -43,16 +42,16 @@ public class CreaEmpleado extends HttpServlet {
 		req.getSession().setAttribute("empleados", empleados);
 
 
- 		Empleado empleado = new Empleado();
- 		empleado.setEmail(email);
- 		empleado.setPassword(password);
- 		empleado.setNombre(name);
+
 
  		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
- 		
  			log("Usuario ya existente");
- 			getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
+ 			getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
  		}else {
+ 	 		Empleado empleado = new Empleado();
+ 	 		empleado.setEmail(email);
+ 	 		empleado.setPassword(password);
+ 	 		empleado.setNombre(name);
  			EmpleadoDAOImplementation.getInstance().create(empleado);
  	    	EmpleadoDAOImplementation.getInstance().login(email, password);
  			req.getSession().setAttribute("empleado", empleado);

@@ -2,5 +2,5 @@
     pageEncoding="ISO-8859-1"%>
 <form action="EliminaUsuario">
 	<input type="text" name="email" placeholder="Email">
-	<button type="submit">Eliminar empleado</button>
+	<button type="submit">Eliminar usuario</button>
 </form>

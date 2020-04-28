@@ -9,6 +9,7 @@ import org.hibernate.Session;
 
 import es.upm.dit.isst.chor.model.Jefe;
 import es.upm.dit.isst.chor.model.Proyecto;
+import es.upm.dit.isst.chor.dao.SessionFactoryService;
 
 public class ProyectoDAOImplementation implements ProyectoDAO {
 
@@ -62,15 +63,20 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 
 	}
 	@SuppressWarnings("unchecked")
-	@Override
-	public void delete(Proyecto proyecto) {
-		// TODO Auto-generated method stub
+	public void borrar(String proyecto) {
 		Session session = SessionFactoryService.get().openSession();
-		session.beginTransaction();
-		// operaciones
-		session.delete(proyecto);
-		session.getTransaction().commit();
-		session.close();
+		try {
+			session.beginTransaction();
+			String query = "delete Proyecto WHERE name = '" + proyecto+"'";
+			Query q = session.createQuery(query);
+			q.executeUpdate();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+
+		} finally {
+			session.close();
+		}		
+		return ;
 
 	}
 	@SuppressWarnings("unchecked")
@@ -102,9 +108,14 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 		session.close();
 		return p;
 	}
-	public boolean buscarProyecto(String name){
+	public boolean buscarProyecto(String email){
     	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
-	    return proyectos.stream().anyMatch(emp -> emp.getName().equals(name));
+	    return proyectos.stream().anyMatch(pro -> pro.getName().equals(email));
 	}
 
+	@Override
+	public void delete(Proyecto proyecto) {
+		// TODO Auto-generated method stub
+		
+	}
 }

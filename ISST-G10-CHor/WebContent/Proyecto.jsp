@@ -10,9 +10,12 @@
 <title>Proyecto</title>
 </head>
 <body>
+
 <h1>${proyecto.name}</h1>
 
 <p><b>Fecha de inicio: </b>${proyecto.fechaInicio}</p>
+
+
 
 
 <input type="button"
