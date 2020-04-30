@@ -20,10 +20,6 @@ public class Empleado implements Serializable{
 	private String password;
 	private String nombre;
 	private double sueldo;
-	private String empresa;
-
-
-	private double sueldo;
 
 	@ManyToOne
 	private Proyecto proyecto;
@@ -31,36 +27,21 @@ public class Empleado implements Serializable{
 	@OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER)
 	private Collection<Horas> horas;
 
-	public Collection<Horas> getHoras() {
-		return horas;
-	}
-
-	public void setHoras(Collection<Horas> horas) {
-		this.horas = horas;
-	}
-
 	public Empleado() {
 		super();
 	}
 
-
-
 	public Collection<Horas> getHoras() {
 		return horas;
 	}
 
-
-
 	public void setHoras(Collection<Horas> horas) {
 		this.horas = horas;
 	}
-
-
-
+	
 	public void setProyecto(Proyecto proyecto) {
 		this.proyecto = proyecto;
 	}
-
 
 	public String getEmail() {
 		return email;

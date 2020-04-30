@@ -43,7 +43,6 @@ public class CreaJefe extends HttpServlet {
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
 
- 		Collection<Proyecto> proyectos = null;
     	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
 		req.getSession().setAttribute("jefes", jefes);
 		List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
@@ -54,6 +53,7 @@ public class CreaJefe extends HttpServlet {
  	 		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
  		} else {
  	 		Jefe jefe = new Jefe();
+ 	 		Collection<Proyecto> proyectos = null;
  	 		jefe.setEmail(email);
  	 		jefe.setPassword(password);
  	 		jefe.setNombre(name);

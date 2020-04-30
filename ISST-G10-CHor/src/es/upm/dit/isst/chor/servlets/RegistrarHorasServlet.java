@@ -47,12 +47,9 @@ public class RegistrarHorasServlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
  		}else {
  		String h = req.getParameter("horas");
-=======
 //		Jefe jefe = (Jefe) req.getSession().getAttribute("jefe");
 
 		String proyecto = req.getParameter("proyecto");
- 		String h = req.getParameter("h");
->>>>>>> Stashed changes
  		java.util.Date fecha = new Date();
  		List<Horas> horas = (List<Horas>)HorasDAOImplementation.getInstance().readAllEmpleado(empleado);
  		req.getSession().setAttribute("horas", horas);

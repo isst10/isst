@@ -2,6 +2,7 @@ package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
 import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
 import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
+import es.upm.dit.isst.chor.model.Horas;
 import es.upm.dit.isst.chor.model.Proyecto;
 
 
@@ -52,9 +54,11 @@ public class CreaEmpleado extends HttpServlet {
  			getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
  		}else {
  	 		Empleado empleado = new Empleado();
+ 	 		Collection<Horas> horas = null;
  	 		empleado.setEmail(email);
  	 		empleado.setPassword(password);
  	 		empleado.setNombre(name);
+ 	 		empleado.setHoras(horas);
  			EmpleadoDAOImplementation.getInstance().create(empleado);
  	    	EmpleadoDAOImplementation.getInstance().login(email, password);
  			req.getSession().setAttribute("empleado", empleado);
