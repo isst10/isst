@@ -18,6 +18,5 @@
 		<mapping class="es.upm.dit.isst.chor.model.Jefe" />
 		<mapping class="es.upm.dit.isst.chor.model.Proyecto" />
 		<mapping class="es.upm.dit.isst.chor.model.Horas" />
-
 	</session-factory>
 </hibernate-configuration>

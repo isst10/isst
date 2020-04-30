@@ -11,5 +11,5 @@ public interface JefeDAO {
 	public void delete(Jefe jefe);
 	public Collection<Jefe> readAll();
 	public Jefe login(String email, String psd);
-	public boolean buscarJefe(String j);
+	public boolean buscarJefe(String email);
 }

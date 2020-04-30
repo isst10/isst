@@ -9,22 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
 import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
-import es.upm.dit.isst.chor.model.Empleado;
+import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Jefe;
+import es.upm.dit.isst.chor.model.Proyecto;
 
 /**
- * Servlet implementation class RegistroServlet
+ * Servlet implementation class EliminarProyecto
  */
-@WebServlet("/RegistroServlet")
-public class RegistroServlet extends HttpServlet {
+@WebServlet("/EliminarProyecto")
+public class EliminarProyecto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistroServlet() {
+    public EliminarProyecto() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,13 +33,22 @@ public class RegistroServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
-    	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
-    	req.getSession().setAttribute("jefes", jefes);
-		req.getSession().setAttribute("empleados", empleados);
-		getServletContext().getRequestDispatcher("/Registro.jsp").forward(req,resp);
-	}
-
+		// TODO Auto-generated method stub
+		String name = req.getParameter("name");
+ 		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
+ 		
+ 		if (ProyectoDAOImplementation.getInstance().read(name) != null) {
+ 			Jefe jefe = proyecto.getJefe();
+ 			ProyectoDAOImplementation.getInstance().delete(proyecto);
+ 	    	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
+ 			req.getSession().setAttribute("proyectos", proyectos);
+ 			Jefe jefeActualizado = JefeDAOImplementation.getInstance().read(jefe.getEmail());
+ 			req.getSession().setAttribute("jefe", jefeActualizado);
+ 		} else {
+ 			log("El proyecto no existe");
+ 		}
+ 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+ 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

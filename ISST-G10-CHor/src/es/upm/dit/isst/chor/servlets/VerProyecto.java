@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
+import es.upm.dit.isst.chor.model.Proyecto;
+
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class VerProyecto
  */
-@WebServlet("/LogoutServlet")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/VerProyecto")
+public class VerProyecto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public VerProyecto() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -25,17 +28,12 @@ public class LogoutServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    @Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getSession().removeAttribute("admin");
-		req.getSession().removeAttribute("empleados");
-		req.getSession().removeAttribute("empleado");
-		req.getSession().removeAttribute("jefe");
-		req.getSession().removeAttribute("jefes");
-		req.getSession().removeAttribute("proyectos");
-		req.getSession().removeAttribute("proyecto");
-              req.getSession().invalidate();
-		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
+		// TODO Auto-generated method stub
+		String name = req.getParameter("name");
+		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
+		req.getSession().setAttribute("proyecto", proyecto);
+		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
 	}
 
 	/**

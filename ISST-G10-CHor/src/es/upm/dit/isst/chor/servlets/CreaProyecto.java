@@ -26,7 +26,7 @@ import es.upm.dit.isst.chor.model.Proyecto;
 @WebServlet("/CreaProyecto")
 public class CreaProyecto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,33 +39,41 @@ public class CreaProyecto extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     @SuppressWarnings("unchecked")
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-		Jefe jefe = (Jefe) req.getSession().getAttribute("jefe");
 
- 		String name = req.getParameter("name");
- 		
+    	Jefe jefe =(Jefe) req.getSession().getAttribute("jefe");
+    	String name = req.getParameter("name");
+    	//String employees[] = req.getParameterValues("employees[]");
  		java.util.Date fecha = new Date();
- 		
-    	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
-		req.getSession().setAttribute("proyectos", proyectos);
-		
- 		Proyecto proyecto = new Proyecto();
- 		
- 		proyecto.setName(name);
- 		proyecto.setJefe(jefe);
- 		proyecto.setFechaInicio(fecha);
+
+ 		List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
+ 		req.getSession().setAttribute("proyectos", proyectos);
+
  		if (!ProyectoDAOImplementation.getInstance().buscarProyecto(name)) {
+ 			Proyecto proyecto = new Proyecto();
+ 	 		proyecto.setName(name);
+ 	 		proyecto.setJefe(jefe);
+ 	 		proyecto.setFechaInicio(fecha);
  	 		ProyectoDAOImplementation.getInstance().create(proyecto);
+ 	 		req.getSession().setAttribute("proyecto", proyecto);
  	 		List<Proyecto> lp = new ArrayList<Proyecto>();
  	 		lp.addAll((List<Proyecto>)req.getSession().getAttribute("proyectos"));
- 	 		lp.add (proyecto);
+ 	 		lp.add(proyecto);
  	 		req.getSession().setAttribute("proyectos", lp);
- 	 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
- 		} else {
+			/*
+			 * for(int i=0; i<employees.length; i++) { Empleado
+			 * empleado=EmpleadoDAOImplementation.getInstance().read(employees[i]);
+			 * empleado.setProyecto(proyecto);
+			 * EmpleadoDAOImplementation.getInstance().update(empleado); }
+			 */
+
+ 		}else {
  			log("El proyecto ya existe");
  		}
- 	}
+ 		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
+
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

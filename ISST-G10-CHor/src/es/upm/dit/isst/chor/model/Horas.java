@@ -17,10 +17,12 @@ public class Horas implements Serializable {
 	private Date date;
 	private String horas;
 	private String empresa;
-	private String proyecto;
-	
+	private Proyecto proyecto;
 	@ManyToOne
-	private Empleado hEmpleado;
+	private Empleado empleado;
+
+
+
 
 	public Horas() {
 		super();
@@ -33,43 +35,44 @@ public class Horas implements Serializable {
 		this.date = date;
 	}
 
-	public Empleado gethEmpleado() {
-		return hEmpleado;
-	}
-
-	public void sethEmpleado(Empleado hEmpleado) {
-		this.hEmpleado = hEmpleado;
-	}
-
 	public String getHoras() {
 		return horas;
 	}
-
 	public void setHoras(String horas) {
 		this.horas = horas;
 	}
 
-	public String  getProyecto() {
-		return proyecto;
-	}
-	public void setProyecto(String  proyecto) {
-		this.proyecto = proyecto;
-	}
+
 	public String getEmpresa() {
 		return empresa;
 	}
 	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
+
+	public Proyecto getProyecto() {
+		return proyecto;
+	}
+
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
+	}
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
-		result = prime * result + ((hEmpleado == null) ? 0 : hEmpleado.hashCode());
-		result = prime * result + ((horas == null) ? 0 : horas.hashCode());
-		result = prime * result + ((proyecto == null) ? 0 : proyecto.hashCode());
 		return result;
 	}
 
@@ -87,38 +90,13 @@ public class Horas implements Serializable {
 				return false;
 		} else if (!date.equals(other.date))
 			return false;
-		if (empresa == null) {
-			if (other.empresa != null)
-				return false;
-		} else if (!empresa.equals(other.empresa))
-			return false;
-		if (hEmpleado == null) {
-			if (other.hEmpleado != null)
-				return false;
-		} else if (!hEmpleado.equals(other.hEmpleado))
-			return false;
-		if (horas == null) {
-			if (other.horas != null)
-				return false;
-		} else if (!horas.equals(other.horas))
-			return false;
-		if (proyecto == null) {
-			if (other.proyecto != null)
-				return false;
-		} else if (!proyecto.equals(other.proyecto))
-			return false;
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Horas [date=" + date + ", horas=" + horas + ", empresa=" + empresa + ", proyecto=" + proyecto
-				+ ", hEmpleado=" + hEmpleado + "]";
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+		return "Horas [date=" + date + ", horas=" + horas + ", empresa=" + empresa + ", empleado=" + empleado
+				+ ", proyecto=" + proyecto + "]";
 	}
 
 }

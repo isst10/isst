@@ -107,9 +107,9 @@ public class JefeDAOImplementation implements JefeDAO {
 		session.close();
 		return j;
 	}
-	public boolean buscarJefe(String j){
+	public boolean buscarJefe(String email){
     	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
-
-	    return jefes.stream().anyMatch(jefe -> jefe.getEmail().equals(j));
+	    return jefes.stream().anyMatch(jef -> jef.getEmail().equals(email));
 	}
+
 }

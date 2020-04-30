@@ -1,23 +1,29 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
+import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
+import es.upm.dit.isst.chor.model.Empleado;
+import es.upm.dit.isst.chor.model.Proyecto;
+
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class SeleccionarProyectoEmpleado
  */
-@WebServlet("/LogoutServlet")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/SeleccionarProyectoEmpleado")
+public class SeleccionarProyectoEmpleado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public SeleccionarProyectoEmpleado() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -25,17 +31,16 @@ public class LogoutServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    @Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getSession().removeAttribute("admin");
-		req.getSession().removeAttribute("empleados");
-		req.getSession().removeAttribute("empleado");
-		req.getSession().removeAttribute("jefe");
-		req.getSession().removeAttribute("jefes");
-		req.getSession().removeAttribute("proyectos");
-		req.getSession().removeAttribute("proyecto");
-              req.getSession().invalidate();
-		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
+		
+		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
+		String name = req.getParameter("name");
+ 		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
+		empleado.setProyecto(proyecto);
+		EmpleadoDAOImplementation.getInstance().update(empleado); 
+		req.getSession().setAttribute("empleado", empleado);
+		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+		
 	}
 
 	/**

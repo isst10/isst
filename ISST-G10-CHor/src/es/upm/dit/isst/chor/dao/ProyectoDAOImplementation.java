@@ -17,7 +17,7 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 	}
 
 	public static ProyectoDAOImplementation getInstance() {
-		if( null == instancia ) 
+		if( null == instancia )
 			instancia = new ProyectoDAOImplementation();
 		return instancia;
 	}
@@ -43,7 +43,7 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 		Session session = SessionFactoryService.get().openSession();
 		session.beginTransaction();
 		// operaciones
-		
+
 		Proyecto p = session.get(Proyecto.class, name);
 		session.getTransaction().commit();
 		session.close();

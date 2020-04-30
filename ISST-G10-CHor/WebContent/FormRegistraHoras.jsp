@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <form action="RegistrarHorasServlet">
-	<input type="text" name="proyecto" placeholder="Proyecto">
+	<!-- <input type="text" name="proyecto" placeholder="Proyecto"> -->
 	<h3>Horas trabajadas</h3>
 	<select class="form-control" name="h">
   		<option>1</option>

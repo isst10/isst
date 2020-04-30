@@ -104,7 +104,6 @@ public class EmpleadoDAOImplementation implements EmpleadoDAO {
 		session.close();
 		return e;
 	}
-	
 	public boolean buscarEmpleado(String email){
     	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
 	    return empleados.stream().anyMatch(emp -> emp.getEmail().equals(email));

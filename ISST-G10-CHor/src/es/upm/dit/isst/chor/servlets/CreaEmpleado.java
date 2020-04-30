@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
+import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
+import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
+import es.upm.dit.isst.chor.model.Proyecto;
 
 
 
@@ -30,30 +33,39 @@ public class CreaEmpleado extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    @SuppressWarnings("unchecked")
+
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
+
     	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
 		req.getSession().setAttribute("empleados", empleados);
+		List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
+		req.getSession().setAttribute("proyectos", proyectos);
 
- 		Empleado empleado = new Empleado();
- 		empleado.setEmail(email);
- 		empleado.setPassword(password);
- 		empleado.setNombre(name);
- 		
- 		EmpleadoDAOImplementation.getInstance().create(empleado);
-    	EmpleadoDAOImplementation.getInstance().login(email, password);
-		req.getSession().setAttribute("empleado", empleado);
 
- 		List<Empleado> lp = new ArrayList<Empleado>();
- 		lp.addAll((List<Empleado>)         
-           req.getSession().getAttribute("empleados"));
- 		lp.add(empleado);
- 		req.getSession().setAttribute("empleados", lp);
- 		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+
+ 		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
+ 			log("Usuario ya existente");
+ 			getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
+ 		}else {
+ 	 		Empleado empleado = new Empleado();
+ 	 		empleado.setEmail(email);
+ 	 		empleado.setPassword(password);
+ 	 		empleado.setNombre(name);
+ 			EmpleadoDAOImplementation.getInstance().create(empleado);
+ 	    	EmpleadoDAOImplementation.getInstance().login(email, password);
+ 			req.getSession().setAttribute("empleado", empleado);
+
+ 	 		List<Empleado> lp = new ArrayList<Empleado>();
+ 	 		lp.addAll((List<Empleado>)         
+ 	           req.getSession().getAttribute("empleados"));
+ 	 		lp.add(empleado);
+ 	 		req.getSession().setAttribute("empleados", lp);
+ 	 		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+ 		}
  	}
 
 	/**
