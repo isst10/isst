@@ -26,7 +26,7 @@ import es.upm.dit.isst.chor.model.Proyecto;
 @WebServlet("/CreaEmpleado")
 public class CreaEmpleado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,7 +36,7 @@ public class CreaEmpleado extends HttpServlet {
     }
 
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
@@ -64,7 +64,7 @@ public class CreaEmpleado extends HttpServlet {
  			req.getSession().setAttribute("empleado", empleado);
 
  	 		List<Empleado> lp = new ArrayList<Empleado>();
- 	 		lp.addAll((List<Empleado>)         
+ 	 		lp.addAll((List<Empleado>)
  	           req.getSession().getAttribute("empleados"));
  	 		lp.add(empleado);
  	 		req.getSession().setAttribute("empleados", lp);

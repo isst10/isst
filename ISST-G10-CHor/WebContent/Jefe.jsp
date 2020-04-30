@@ -2,18 +2,19 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/general.css">
 
 <title>Bienvenido, ${jefe.nombre}</title>
 </head>
 <body>
-<h1>Bienvenido, ${jefe.nombre}</h1>
 
-<p><b>Número de proyectos: </b>${fn:length(jefe.proyectosJefe)}</p>
+<p><b>Nï¿½mero de proyectos: </b>${fn:length(jefe.proyectosJefe)}</p>
 
 <h2>Proyectos Activos</h2>
 <table border="1">
@@ -63,8 +64,8 @@
   		<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
   			<c:if test="${proyectoi.fechaFin == null}">
   				<option>${proyectoi.name}</option>
-  			</c:if>	
-  		</c:forEach>	
+  			</c:if>
+  		</c:forEach>
 	</select>
 	<button type="submit">Finalizar proyecto</button>
 </form>
@@ -74,7 +75,7 @@
 	<select class="form-control" name="name">
   		<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
   			<option>${proyectoi.name}</option>
-  		</c:forEach>	
+  		</c:forEach>
 	</select>
 	<button type="submit">Borrar proyecto</button>
 </form>
@@ -82,9 +83,14 @@
 <!-- <h2>Registrar Horas</h2> -->
 <%-- <%@ include file = "FormRegistraHoras.jsp" %> --%>
 
-<h2>Salir de la aplicación</h2>
+<h2>Salir de la aplicaciï¿½n</h2>
 <%@ include file = "Logout.jsp" %>
 
 
+</div>
+<div class="flex--center">
+<%@ include file = "Logout.jsp" %>
+</div>
+</div>
 </body>
 </html>

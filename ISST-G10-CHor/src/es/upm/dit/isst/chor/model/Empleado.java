@@ -38,7 +38,7 @@ public class Empleado implements Serializable{
 	public void setHoras(Collection<Horas> horas) {
 		this.horas = horas;
 	}
-	
+
 	public void setProyecto(Proyecto proyecto) {
 		this.proyecto = proyecto;
 	}

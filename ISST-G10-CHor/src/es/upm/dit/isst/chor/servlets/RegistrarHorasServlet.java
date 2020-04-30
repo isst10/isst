@@ -15,6 +15,7 @@ import es.upm.dit.isst.chor.dao.HorasDAOImplementation;
 import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Horas;
+import es.upm.dit.isst.chor.model.Jefe;
 
 import es.upm.dit.isst.chor.model.Jefe;
 import es.upm.dit.isst.chor.model.Proyecto;
@@ -68,11 +69,10 @@ public class RegistrarHorasServlet extends HttpServlet {
 
 // 		lp = (List<Horas>) HorasDAOImplementation.getInstance().readAllEmpleado(empleado.getNombre());
  		lp.add(hora);
- 		req.getSession().setAttribute("h", lp);
+ 		req.getSession().setAttribute("horas", lp);
 
  		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
- 		}
-	}
+ 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -21,6 +21,7 @@ public class Horas implements Serializable {
 	private Empleado empleado;
 
 
+
 	public Horas() {
 		super();
 	}
