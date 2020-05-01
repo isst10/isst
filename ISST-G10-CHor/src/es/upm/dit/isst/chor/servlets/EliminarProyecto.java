@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
 import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Jefe;
 import es.upm.dit.isst.chor.model.Proyecto;
@@ -35,13 +36,19 @@ public class EliminarProyecto extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name = req.getParameter("name");
- 		ProyectoDAOImplementation proyecto = ProyectoDAOImplementation.getInstance();
+
+ 		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
  		
- 		proyecto.borrar(name);
-
-		proyecto.readAll().forEach(Proyecto ->  System.out.println(Proyecto.getName()));
-
-		req.getSession().setAttribute("formacionacademica", proyecto.read(name));
+ 		if (ProyectoDAOImplementation.getInstance().read(name) != null) {
+ 			Jefe jefe = proyecto.getJefe();
+ 			ProyectoDAOImplementation.getInstance().delete(proyecto);
+ 	    	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
+ 			req.getSession().setAttribute("proyectos", proyectos);
+ 			Jefe jefeActualizado = JefeDAOImplementation.getInstance().read(jefe.getEmail());
+ 			req.getSession().setAttribute("jefe", jefeActualizado);
+ 		} else {
+ 			log("El proyecto no existe");
+ 		}
  		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
  	}
 	/**

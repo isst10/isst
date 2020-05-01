@@ -13,7 +13,6 @@
 <title>Bienvenido, ${jefe.nombre}</title>
 </head>
 <body>
-
 	<div class="card container container--md cd-tabs js-cd-tabs ">
 		<div class="cd-tabs__panel text-component cd-tabs__panel--selected">
 			<div class="container flex--center-x"><div><h1 class="text--xxl">Bienvenido, ${jefe.nombre}</h1></div>
@@ -71,6 +70,7 @@
 
 <!-- <h2>Registrar Horas</h2> -->
 <%-- <%@ include file = "FormRegistraHoras.jsp" %> --%>
+
 
 
 

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
 import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
 import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
@@ -76,7 +77,6 @@ public class CreaProyecto extends HttpServlet {
  	 		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
 
  		}
-
     }
 
 	/**

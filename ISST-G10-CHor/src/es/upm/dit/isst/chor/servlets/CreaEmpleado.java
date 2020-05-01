@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
 import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
+import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
+import es.upm.dit.isst.chor.model.Proyecto;
 
 
 
@@ -40,7 +42,8 @@ public class CreaEmpleado extends HttpServlet {
 
     	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
 		req.getSession().setAttribute("empleados", empleados);
-
+		List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
+		req.getSession().setAttribute("proyectos", proyectos);
 
 
 
