@@ -1,6 +1,8 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,6 +46,14 @@ public class CreaProyecto extends HttpServlet {
     	Jefe jefe =(Jefe) req.getSession().getAttribute("jefe");
     	String name = req.getParameter("name");
  		java.util.Date fecha = new Date();
+ 		String finalizacionstr = req.getParameter("Finalizacion");
+		SimpleDateFormat sdff = new SimpleDateFormat("yyyy-MM-dd");
+		Date finalizacion = null;
+		try {
+			finalizacion = sdff.parse(finalizacionstr);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
  		List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
  		req.getSession().setAttribute("proyectos", proyectos);
@@ -52,6 +62,7 @@ public class CreaProyecto extends HttpServlet {
  		proyecto.setName(name);
  		proyecto.setJefe(jefe);
  		proyecto.setFechaInicio(fecha);
+ 		proyecto.setFechaFin(finalizacion);
  		if (!ProyectoDAOImplementation.getInstance().buscarProyecto(name)) {
  	 		ProyectoDAOImplementation.getInstance().create(proyecto);
  	 		req.getSession().setAttribute("proyecto", proyecto);

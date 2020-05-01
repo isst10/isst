@@ -14,10 +14,11 @@
 </head>
 <body>
 
-	<div class="card container container--md cd-tabs js-cd-tabs div-global">
+	<div class="card container container--md cd-tabs js-cd-tabs ">
 		<div class="cd-tabs__panel text-component cd-tabs__panel--selected">
+			<div class="container flex--center-x"><div><h1 class="text--xxl">Bienvenido, ${jefe.nombre}</h1></div>
+			<div><%@ include file = "Logout.jsp" %></div>
 			
-			<h1 class="text--xxl">Bienvenido, ${jefe.nombre}</h1>
 			<p><b>Número de proyectos activos: </b>${fn:length(jefe.proyectosJefe)}</p>
 			
 			
@@ -73,9 +74,6 @@
 
 
 
-</div>
-<div class="flex--center">
-<%@ include file = "Logout.jsp" %>
 </div>
 </div>
 </body>
