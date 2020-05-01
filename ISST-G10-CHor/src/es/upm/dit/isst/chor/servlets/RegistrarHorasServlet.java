@@ -72,6 +72,7 @@ public class RegistrarHorasServlet extends HttpServlet {
  		req.getSession().setAttribute("horas", lp);
 
  		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
+ 		}
  	}
 
 	/**
