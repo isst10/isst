@@ -20,7 +20,8 @@ import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Jefe;
 import es.upm.dit.isst.chor.model.Proyecto;
 
-
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 /**
  * Servlet implementation class CreaProyecto
@@ -37,6 +38,26 @@ public class CreaProyecto extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
+    /**
+     * Permite convertir un String en fecha (Date).
+     * @param fecha Cadena de fecha dd/MM/yyyy
+     * @return Objeto Date
+     */
+    public static Date ParseFecha(String fecha) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
+    
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -46,37 +67,42 @@ public class CreaProyecto extends HttpServlet {
 
     	Jefe jefe =(Jefe) req.getSession().getAttribute("jefe");
     	String name = req.getParameter("name");
+
+    	String cliente = req.getParameter("cliente");
+ 		String fechaFin = req.getParameter("fechaFin");
+ 		java.util.Date fechaFinal = ParseFecha(fechaFin);
+    	//String employees[] = req.getParameterValues("employees[]");
  		java.util.Date fecha = new Date();
- 		String finalizacionstr = req.getParameter("Finalizacion");
-		SimpleDateFormat sdff = new SimpleDateFormat("yyyy-MM-dd");
-		Date finalizacion = null;
-		try {
-			finalizacion = sdff.parse(finalizacionstr);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 
  		List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
  		req.getSession().setAttribute("proyectos", proyectos);
 
- 		Proyecto proyecto = new Proyecto();
- 		proyecto.setName(name);
- 		proyecto.setJefe(jefe);
- 		proyecto.setFechaInicio(fecha);
- 		proyecto.setFechaFin(finalizacion);
+
  		if (!ProyectoDAOImplementation.getInstance().buscarProyecto(name)) {
+ 			Proyecto proyecto = new Proyecto();
+ 	 		proyecto.setName(name);
+ 	 		proyecto.setJefe(jefe);
+ 	 		proyecto.setCliente(cliente);
+ 	 		proyecto.setFechaInicio(fecha);
+ 	 		proyecto.setFechaFin(fechaFinal);
+ 	 		proyecto.setTerminado(false);
  	 		ProyectoDAOImplementation.getInstance().create(proyecto);
  	 		req.getSession().setAttribute("proyecto", proyecto);
  	 		List<Proyecto> lp = new ArrayList<Proyecto>();
  	 		lp.addAll((List<Proyecto>)req.getSession().getAttribute("proyectos"));
  	 		lp.add(proyecto);
  	 		req.getSession().setAttribute("proyectos", lp);
- 	 		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
+			/*
+			 * for(int i=0; i<employees.length; i++) { Empleado
+			 * empleado=EmpleadoDAOImplementation.getInstance().read(employees[i]);
+			 * empleado.setProyecto(proyecto);
+			 * EmpleadoDAOImplementation.getInstance().update(empleado); }
+			 */
+
  		}else {
  			log("El proyecto ya existe");
- 	 		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
-
  		}
+ 		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
     }
 
 	/**

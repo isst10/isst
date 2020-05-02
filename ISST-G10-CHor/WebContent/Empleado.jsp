@@ -9,7 +9,7 @@
 <title>Bienvenido, ${empleado.nombre}</title>
 <h1>Tienes como proyecto seleccionado:
 	<c:if test="${empleado.proyecto == null}">
- 		Ningún proyecto seleccionado
+ 		Ningï¿½n proyecto seleccionado
  	</c:if>
  	${empleado.proyecto}
 </h1>
@@ -24,7 +24,7 @@
 	<select class="form-control" name="name">
   		<c:forEach items="${proyectos}" var="proyectoi">
   				<option>${proyectoi.name}</option>
-  		</c:forEach>	
+  		</c:forEach>
 	</select>
 	<button type="submit">Asigna proyecto</button>
 </form>
@@ -32,7 +32,7 @@
 <h2>Registrar Horas</h2>
 <%@ include file = "FormRegistraHoras.jsp" %>
 
-<h2>Salir de la aplicación</h2>
+<h2>Salir de la aplicaciï¿½n</h2>
 <%@ include file = "Logout.jsp" %>
 
 </body>

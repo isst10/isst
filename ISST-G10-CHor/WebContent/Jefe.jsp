@@ -30,10 +30,14 @@
 					<th style="width:5%"></th>
 				</tr>
 				<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
+				<c:if test="${proyectoi.terminado == false}">
 				<tr>
 				
 				<td>
-					<a href="/Proyecto.jsp">
+					<form action="VerProyecto">
+						<input type="hidden" name="name" value='${proyectoi.name}'>
+						<button type="submit">Ver</button>
+					</form>
 					<span>${proyectoi.name}
 					</span>
 					</a>
@@ -59,17 +63,62 @@
 					</form>	
 				</td>
 				</tr>
+				</c:if>
 				</c:forEach>
 				</table>
-			
+			<h2>Proyectos terminados</h2><table class="items-table">
+				<tr>
+					<th style="width:45%">Proyectos</th>
+					<th style="width:15%">Desde</th>
+					<th style="width:15%">Hasta</th>
+					<th style="width:20%">Finalizar</th>
+					<th style="width:5%"></th>
+				</tr>
+				<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
+				<c:if test="${proyectoi.terminado == true}">
+				<tr>
+				
+				<td>
+					<form action="VerProyecto">
+						<input type="hidden" name="name" value='${proyectoi.name}'>
+						<button type="submit">Ver</button>
+					</form>
+					<span>${proyectoi.name}
+					</span>
+					</a>
+				</td>
+				<td>				
+					<jsp:useBean id="formDateInicio" class="java.util.Date"/>
+					<fmt:formatDate value="${proyectoi.fechaInicio}" type="date" pattern="dd-MM-yyyy"/>
+				</td>
+				<td>
+					<jsp:useBean id="formDateFin" class="java.util.Date"/>
+							<fmt:formatDate value="${proyectoi.fechaFin}" type="date" pattern="dd-MM-yyyy"/>
+				</td>
+				<td>
+					<form action="FinalizarProyecto">
+						<input type=hidden name="name" value="${proyectoi.name}"  />
+						<button type="submit">Finalizar proyecto</button>
+					</form>
+				</td>
+				<td>
+					<form action="EliminarProyecto" method="post">
+			     		 <input type=hidden name="name" value="${proyectoi.name}"  />
+						 <input type="image" style="height:25px; width:25px;padding:0px;border:none;margin:0px;"  src="images/trash_icon.png" id="deleteproyecto"  />
+					</form>	
+				</td>
+				</tr>
+				</c:if>
+				</c:forEach>
+				</table>
 			
 			<h2>Registrar un nuevo proyecto</h2>
 			<%@ include file = "FormCreaProyecto.jsp" %>
 			
-			
 
 <!-- <h2>Registrar Horas</h2> -->
 <%-- <%@ include file = "FormRegistraHoras.jsp" %> --%>
+
 
 
 
