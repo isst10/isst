@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
     	String password = req.getParameter("password");
     	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
     	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
-    	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
+	    List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
     	Empleado empleado = EmpleadoDAOImplementation.getInstance().login(email, password);
     	Jefe jefe = JefeDAOImplementation.getInstance().login(email, password);
     	if( ADMIN_EMAIL.equals(email) && ADMIN_PASSWORD.equals(password) ) {
@@ -48,9 +48,11 @@ public class LoginServlet extends HttpServlet {
     		req.getSession().setAttribute("proyectos", proyectos);
     		getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
     	} else if (empleado != null && empleado.getEmail().equals(email) && empleado.getPassword().equals(password) ) {
-			req.getSession().setAttribute("empleado", empleado);
+    		req.getSession().setAttribute("proyectos", proyectos);
+    		req.getSession().setAttribute("empleado", empleado);
     		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
     	} else if (jefe != null && jefe.getEmail().equals(email) && jefe.getPassword().equals(password)){
+    		req.getSession().setAttribute("empleados", empleados);
     		req.getSession().setAttribute("proyectos", proyectos);
     		req.getSession().setAttribute("jefe", jefe);
     		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
+
 import es.upm.dit.isst.chor.model.Proyecto;
 
 public class ProyectoDAOImplementation implements ProyectoDAO {
@@ -15,7 +16,7 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 	}
 
 	public static ProyectoDAOImplementation getInstance() {
-		if( null == instancia ) 
+		if( null == instancia )
 			instancia = new ProyectoDAOImplementation();
 		return instancia;
 	}
@@ -41,7 +42,7 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 		Session session = SessionFactoryService.get().openSession();
 		session.beginTransaction();
 		// operaciones
-		
+
 		Proyecto p = session.get(Proyecto.class, name);
 		session.getTransaction().commit();
 		session.close();
@@ -59,18 +60,23 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 		session.close();
 
 	}
-	@SuppressWarnings("unchecked")
-	@Override
-	public void delete(Proyecto proyecto) {
-		// TODO Auto-generated method stub
-		Session session = SessionFactoryService.get().openSession();
-		session.beginTransaction();
-		// operaciones
-		session.delete(proyecto);
-		session.getTransaction().commit();
-		session.close();
-
-	}
+//	@SuppressWarnings("unchecked")
+//	public void delete(String proyecto) {
+//		Session session = SessionFactoryService.get().openSession();
+//		try {
+//			session.beginTransaction();
+//			String query = "delete Proyecto WHERE name = '" + proyecto+"'";
+//			Query q = session.createQuery(query);
+//			q.executeUpdate();
+//			session.getTransaction().commit();
+//		} catch (Exception e) {
+//
+//		} finally {
+//			session.close();
+//		}
+//		return ;
+//
+//	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Proyecto> readAll() {
@@ -100,5 +106,19 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 		session.close();
 		return p;
 	}
+	@Override
+	public boolean buscarProyecto(String p) {
+    	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
 
+	    return proyectos.stream().anyMatch(proyecto -> proyecto.getName().equals(p));
+	}
+
+	@Override
+	public void delete(Proyecto proyecto) {
+		Session session = SessionFactoryService.get().openSession();
+		session.beginTransaction();
+		session.delete(proyecto);
+		session.getTransaction().commit();
+		session.close();
+	}
 }

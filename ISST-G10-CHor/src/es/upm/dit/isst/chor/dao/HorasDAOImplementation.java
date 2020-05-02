@@ -9,7 +9,6 @@ import org.hibernate.Session;
 
 import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Horas;
-import es.upm.dit.isst.chor.model.Proyecto;
 
 public class HorasDAOImplementation implements HorasDAO {
 
@@ -75,7 +74,7 @@ public class HorasDAOImplementation implements HorasDAO {
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Horas> readAllEmpleado(String empleado) {
+	public Collection<Horas> readAllEmpleado(Empleado empleado) {
 		// TODO Auto-generated method stub
 		Session session = SessionFactoryService.get().openSession();
 		session.beginTransaction();

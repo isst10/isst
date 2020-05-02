@@ -1,3 +1,3 @@
 <form action="LogoutServlet">
-	<button type="submit">Logout</button>
+	<button type="submit">Cerrar sesion</button>
 </form>

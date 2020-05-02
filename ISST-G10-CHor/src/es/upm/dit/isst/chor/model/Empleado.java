@@ -1,35 +1,47 @@
 package es.upm.dit.isst.chor.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Empleado implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String email;
 	private String password;
 	private String nombre;
-	private double sueldo;	
-	private long nProyectos;
-	
+	private double sueldo;
 
 	@ManyToOne
 	private Proyecto proyecto;
+
+	@OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER)
+	private Collection<Horas> horas;
 
 	public Empleado() {
 		super();
 	}
 
+	public Collection<Horas> getHoras() {
+		return horas;
+	}
+
+	public void setHoras(Collection<Horas> horas) {
+		this.horas = horas;
+	}
+
 	public void setProyecto(Proyecto proyecto) {
 		this.proyecto = proyecto;
 	}
-	
 
 	public String getEmail() {
 		return email;
@@ -55,15 +67,6 @@ public class Empleado implements Serializable{
 		this.nombre = nombre;
 	}
 
-
-	public long getnProyectos() {
-		return nProyectos;
-	}
-
-	public void setnProyectos(long nProyectos) {
-		this.nProyectos = nProyectos;
-	}
-
 	public double getSueldo() {
 		return sueldo;
 	}
@@ -79,7 +82,7 @@ public class Empleado implements Serializable{
 	@Override
 	public String toString() {
 		return "Empleado [email=" + email + ", password=" + password + ", nombre=" + nombre + ", sueldo=" + sueldo
-				+ ", nProyectos=" + nProyectos + ", proyecto=" + proyecto + "]";
+				+ ", proyecto=" + proyecto + ", horas=" + horas + "]";
 	}
 
 	@Override
@@ -108,7 +111,10 @@ public class Empleado implements Serializable{
 	}
 
 
-	
-	
-	
+
+
+
+
+
+
 }
