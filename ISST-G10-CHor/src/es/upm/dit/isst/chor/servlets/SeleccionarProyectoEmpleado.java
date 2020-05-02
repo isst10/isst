@@ -39,15 +39,14 @@ public class SeleccionarProyectoEmpleado extends HttpServlet {
 		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
 		String name = req.getParameter("name");
 		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
- 		if (proyecto != null) {
- 			proyecto.nEmpleados++;
- 			empleado.setProyecto(proyecto);
- 			EmpleadoDAOImplementation.getInstance().update(empleado); 
- 			req.getSession().setAttribute("empleado", empleado);
-
- 		} else {
- 			log("El proyecto no existe");
- 		}
+		
+//		  if (proyecto != null) { proyecto.nEmpleados++;
+//		  empleado.setProyecto(proyecto);
+		  EmpleadoDAOImplementation.getInstance().update(empleado);
+//		  req.getSession().setAttribute("empleado", empleado);
+		  
+//		  } else { log("El proyecto no existe"); }
+		 
 			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
 	}
 
