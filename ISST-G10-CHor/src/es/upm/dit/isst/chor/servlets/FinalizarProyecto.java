@@ -21,7 +21,7 @@ import es.upm.dit.isst.chor.model.Proyecto;
 @WebServlet("/FinalizarProyecto")
 public class FinalizarProyecto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,11 +37,12 @@ public class FinalizarProyecto extends HttpServlet {
 		// TODO Auto-generated method stub
 		String name = req.getParameter("name");
  		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
- 		
+
 		java.util.Date fecha = new Date();
-		
-		if (ProyectoDAOImplementation.getInstance().read(name) != null && ProyectoDAOImplementation.getInstance().read(name).getFechaFin() == null) {
+
+		if (ProyectoDAOImplementation.getInstance().read(name) != null && ProyectoDAOImplementation.getInstance().read(name).getFechaFin() != null) {
 			proyecto.setFechaFin(fecha);
+			proyecto.setTerminado(true);
 			ProyectoDAOImplementation.getInstance().update(proyecto);
  	    	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
  			req.getSession().setAttribute("proyectos", proyectos);
@@ -49,10 +50,10 @@ public class FinalizarProyecto extends HttpServlet {
  			JefeDAOImplementation.getInstance().update(jefe);
  			req.getSession().setAttribute("jefe", jefe);
  		} else {
- 			log("El proyecto ya está finalizado");
+ 			log("El proyecto ya estï¿½ finalizado");
  		}
 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
-		
+
 	}
 
 	/**

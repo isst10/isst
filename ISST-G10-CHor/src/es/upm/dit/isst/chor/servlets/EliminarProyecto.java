@@ -1,6 +1,7 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,7 +21,7 @@ import es.upm.dit.isst.chor.model.Proyecto;
 @WebServlet("/EliminarProyecto")
 public class EliminarProyecto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,7 +37,7 @@ public class EliminarProyecto extends HttpServlet {
 		// TODO Auto-generated method stub
 		String name = req.getParameter("name");
  		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
- 		
+
  		if (ProyectoDAOImplementation.getInstance().read(name) != null) {
  			Jefe jefe = proyecto.getJefe();
  			ProyectoDAOImplementation.getInstance().delete(proyecto);

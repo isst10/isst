@@ -2,6 +2,7 @@ package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
 import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
 import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
+import es.upm.dit.isst.chor.model.Horas;
 import es.upm.dit.isst.chor.model.Proyecto;
 
 
@@ -24,7 +26,7 @@ import es.upm.dit.isst.chor.model.Proyecto;
 @WebServlet("/CreaEmpleado")
 public class CreaEmpleado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,7 +36,7 @@ public class CreaEmpleado extends HttpServlet {
     }
 
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
@@ -52,15 +54,17 @@ public class CreaEmpleado extends HttpServlet {
  			getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
  		}else {
  	 		Empleado empleado = new Empleado();
+ 	 		Collection<Horas> horas = null;
  	 		empleado.setEmail(email);
  	 		empleado.setPassword(password);
  	 		empleado.setNombre(name);
+ 	 		empleado.setHoras(horas);
  			EmpleadoDAOImplementation.getInstance().create(empleado);
  	    	EmpleadoDAOImplementation.getInstance().login(email, password);
  			req.getSession().setAttribute("empleado", empleado);
 
  	 		List<Empleado> lp = new ArrayList<Empleado>();
- 	 		lp.addAll((List<Empleado>)         
+ 	 		lp.addAll((List<Empleado>)
  	           req.getSession().getAttribute("empleados"));
  	 		lp.add(empleado);
  	 		req.getSession().setAttribute("empleados", lp);

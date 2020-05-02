@@ -25,7 +25,7 @@ import es.upm.dit.isst.chor.model.Proyecto;
 @WebServlet("/CreaJefe")
 public class CreaJefe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,13 +37,12 @@ public class CreaJefe extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
  		String email = req.getParameter("email");
  		String password = req.getParameter("password");
  		String name = req.getParameter("name");
 
- 		Collection<Proyecto> proyectos = null;
     	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
 		req.getSession().setAttribute("jefes", jefes);
 		List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
@@ -54,15 +53,16 @@ public class CreaJefe extends HttpServlet {
  	 		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
  		} else {
  	 		Jefe jefe = new Jefe();
+ 	 		Collection<Proyecto> proyectos = null;
  	 		jefe.setEmail(email);
  	 		jefe.setPassword(password);
- 	 		jefe.setNombre(name); 	
+ 	 		jefe.setNombre(name);
  	 		jefe.setProyectosJefe(proyectos);
  			JefeDAOImplementation.getInstance().create(jefe);
  	    	JefeDAOImplementation.getInstance().login(email, password);
  			req.getSession().setAttribute("jefe", jefe);
  	 		List<Jefe> lp = new ArrayList<Jefe>();
- 	 		lp.addAll((List<Jefe>)         
+ 	 		lp.addAll((List<Jefe>)
  	           req.getSession().getAttribute("jefes"));
  	 		lp.add (jefe);
  	 		req.getSession().setAttribute("jefes", lp);

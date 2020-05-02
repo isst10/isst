@@ -9,22 +9,27 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+
 @Entity
 public class Empleado implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String email;
 	private String password;
 	private String nombre;
-	private double sueldo;		
+	private double sueldo;
 
 	@ManyToOne
 	private Proyecto proyecto;
-	
+
 	@OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER)
 	private Collection<Horas> horas;
+
+	public Empleado() {
+		super();
+	}
 
 	public Collection<Horas> getHoras() {
 		return horas;
@@ -34,14 +39,9 @@ public class Empleado implements Serializable{
 		this.horas = horas;
 	}
 
-	public Empleado() {
-		super();
-	}
-
 	public void setProyecto(Proyecto proyecto) {
 		this.proyecto = proyecto;
 	}
-	
 
 	public String getEmail() {
 		return email;
@@ -112,9 +112,9 @@ public class Empleado implements Serializable{
 
 
 
-	
 
-	
-	
-	
+
+
+
+
 }

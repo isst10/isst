@@ -4,14 +4,13 @@ import java.util.Collection;
 
 import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Horas;
-import es.upm.dit.isst.chor.model.Proyecto;
 
 public interface HorasDAO {
 	public void create(Horas empleado);
 	public Horas read(String empleado);
 	public void update(Horas empleado);
 	public void delete(Horas empleado);
-	public Collection<Horas> readAllEmpleado(String empleado);
+	public Collection<Horas> readAllEmpleado(Empleado empleado);
 	public Collection<Horas> readAllProyecto(String proyecto);
 	public Collection<Horas> readAllEmpresa(String empresa);
 

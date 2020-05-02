@@ -1,6 +1,7 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
+import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
 import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
+import es.upm.dit.isst.chor.model.Jefe;
 import es.upm.dit.isst.chor.model.Proyecto;
 
 /**
@@ -35,12 +38,11 @@ public class SeleccionarProyectoEmpleado extends HttpServlet {
 		
 		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
 		String name = req.getParameter("name");
- 		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
+		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
 		empleado.setProyecto(proyecto);
-		EmpleadoDAOImplementation.getInstance().update(empleado); 
+		EmpleadoDAOImplementation.getInstance().update(empleado);
 		req.getSession().setAttribute("empleado", empleado);
 		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
-		
 	}
 
 	/**
