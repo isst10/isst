@@ -26,10 +26,22 @@ public class Proyecto implements Serializable{
 	@OneToMany(mappedBy = "proyecto", fetch = FetchType.EAGER)
 	private Collection<Empleado> empleados;	
 	
+	@OneToMany(mappedBy = "proyectoHoras", fetch = FetchType.EAGER)
+	private Collection<Horas> horas;
+	
+	public Collection<Horas> getHoras() {
+		return horas;
+	}
+
+	public void setHoras(Collection<Horas> horas) {
+		this.horas = horas;
+	}
+
+
+
 	@ManyToOne 
 	private Jefe jefe;
 	 
-	
 	public Proyecto() {
 		super();
 	}
@@ -102,7 +114,7 @@ public class Proyecto implements Serializable{
 	public String toString() {
 		return "Proyecto [name=" + name + ", nEmpleados=" + nEmpleados + ", fechaInicio=" + fechaInicio + ", fechaFin="
 				+ fechaFin + ", cliente=" + cliente + ", terminado=" + terminado + ", empleados=" + empleados
-				+ ", jefe=" + jefe + "]";
+				+ ", horas=" + horas + ", jefe=" + jefe + "]";
 	}
 
 	@Override
@@ -113,6 +125,7 @@ public class Proyecto implements Serializable{
 		result = prime * result + ((empleados == null) ? 0 : empleados.hashCode());
 		result = prime * result + ((fechaFin == null) ? 0 : fechaFin.hashCode());
 		result = prime * result + ((fechaInicio == null) ? 0 : fechaInicio.hashCode());
+		result = prime * result + ((horas == null) ? 0 : horas.hashCode());
 		result = prime * result + ((jefe == null) ? 0 : jefe.hashCode());
 		result = prime * result + nEmpleados;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -150,6 +163,11 @@ public class Proyecto implements Serializable{
 			if (other.fechaInicio != null)
 				return false;
 		} else if (!fechaInicio.equals(other.fechaInicio))
+			return false;
+		if (horas == null) {
+			if (other.horas != null)
+				return false;
+		} else if (!horas.equals(other.horas))
 			return false;
 		if (jefe == null) {
 			if (other.jefe != null)

@@ -16,7 +16,10 @@ public class Horas implements Serializable {
 	@Id
 	private Date date;
 	private String horas;
-	private Proyecto proyecto;
+	
+	
+	@ManyToOne
+	private Proyecto proyectoHoras;
 	@ManyToOne
 	private Empleado empleado;
 
@@ -48,12 +51,14 @@ public class Horas implements Serializable {
 		this.empleado = empleado;
 	}
 
-	public Proyecto getProyecto() {
-		return proyecto;
+
+
+	public Proyecto getProyectoHoras() {
+		return proyectoHoras;
 	}
 
-	public void setProyecto(Proyecto proyecto) {
-		this.proyecto = proyecto;
+	public void setProyectoHoras(Proyecto proyectoHoras) {
+		this.proyectoHoras = proyectoHoras;
 	}
 
 	@Override
@@ -63,7 +68,7 @@ public class Horas implements Serializable {
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((empleado == null) ? 0 : empleado.hashCode());
 		result = prime * result + ((horas == null) ? 0 : horas.hashCode());
-		result = prime * result + ((proyecto == null) ? 0 : proyecto.hashCode());
+		result = prime * result + ((proyectoHoras == null) ? 0 : proyectoHoras.hashCode());
 		return result;
 	}
 
@@ -91,17 +96,18 @@ public class Horas implements Serializable {
 				return false;
 		} else if (!horas.equals(other.horas))
 			return false;
-		if (proyecto == null) {
-			if (other.proyecto != null)
+		if (proyectoHoras == null) {
+			if (other.proyectoHoras != null)
 				return false;
-		} else if (!proyecto.equals(other.proyecto))
+		} else if (!proyectoHoras.equals(other.proyectoHoras))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Horas [date=" + date + ", horas=" + horas + ", proyecto=" + proyecto + ", empleado=" + empleado + "]";
+		return "Horas [date=" + date + ", horas=" + horas + ", proyectoHoras=" + proyectoHoras + ", empleado="
+				+ empleado + "]";
 	}
 
 

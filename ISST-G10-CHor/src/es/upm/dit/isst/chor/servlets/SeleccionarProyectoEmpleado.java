@@ -1,6 +1,7 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -34,19 +35,28 @@ public class SeleccionarProyectoEmpleado extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
+		Empleado empleadoA = (Empleado) req.getSession().getAttribute("empleado");
 		String name = req.getParameter("name");
 		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
-		
-//		  if (proyecto != null) { proyecto.nEmpleados++;
-//		  empleado.setProyecto(proyecto);
+ 		List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
+ 		req.getSession().setAttribute("empleados", empleados);
+ 		
+
+ 		Empleado empleado = EmpleadoDAOImplementation.getInstance().read(empleadoA.getEmail());
+
+//		  if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(empleado.getEmail())) {
+		  empleado.setProyecto(proyecto);
 		  EmpleadoDAOImplementation.getInstance().update(empleado);
-//		  req.getSession().setAttribute("empleado", empleado);
+		  req.getSession().setAttribute("empleado", empleado);
+	 		List<Empleado> le = new ArrayList<Empleado>();
+	 		le.addAll((List<Empleado>)req.getSession().getAttribute("empleados"));
+	 		le.add(empleado);
+	 		req.getSession().setAttribute("empleados", le);
 		  
-//		  } else { log("El proyecto no existe"); }
-		 
+//		 
 			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
 	}
 

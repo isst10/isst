@@ -57,7 +57,7 @@ public class RegistrarHorasServlet extends HttpServlet {
 
  		Horas hora = new Horas();
  		hora.setEmpleado(empleado);
- 		hora.setProyecto(empleado.getProyecto());
+ 		hora.setProyectoHoras(empleado.getProyecto());
  		hora.setHoras(h);
  		hora.setDate(fecha);
 
