@@ -3,7 +3,7 @@
 <form action="RegistrarHorasServlet">
 	<!-- <input type="text" name="proyecto" placeholder="Proyecto"> -->
 	<h3>Horas trabajadas</h3>
-	<select class="form-control" name="h">
+	<select class="form-control" name="horas">
   		<option>1</option>
   		<option>2</option>
   		<option>3</option>

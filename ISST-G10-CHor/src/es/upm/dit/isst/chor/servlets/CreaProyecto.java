@@ -18,7 +18,8 @@ import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Jefe;
 import es.upm.dit.isst.chor.model.Proyecto;
 
-
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 /**
  * Servlet implementation class CreaProyecto
@@ -35,6 +36,26 @@ public class CreaProyecto extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
+    /**
+     * Permite convertir un String en fecha (Date).
+     * @param fecha Cadena de fecha dd/MM/yyyy
+     * @return Objeto Date
+     */
+    public static Date ParseFecha(String fecha) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
+    
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -44,6 +65,9 @@ public class CreaProyecto extends HttpServlet {
 
     	Jefe jefe =(Jefe) req.getSession().getAttribute("jefe");
     	String name = req.getParameter("name");
+    	String cliente = req.getParameter("cliente");
+ 		String fechaFin = req.getParameter("fechaFin");
+ 		java.util.Date fechaFinal = ParseFecha(fechaFin);
     	//String employees[] = req.getParameterValues("employees[]");
  		java.util.Date fecha = new Date();
 
@@ -54,7 +78,10 @@ public class CreaProyecto extends HttpServlet {
  			Proyecto proyecto = new Proyecto();
  	 		proyecto.setName(name);
  	 		proyecto.setJefe(jefe);
+ 	 		proyecto.setCliente(cliente);
  	 		proyecto.setFechaInicio(fecha);
+ 	 		proyecto.setFechaFin(fechaFinal);
+ 	 		proyecto.setTerminado(false);
  	 		ProyectoDAOImplementation.getInstance().create(proyecto);
  	 		req.getSession().setAttribute("proyecto", proyecto);
  	 		List<Proyecto> lp = new ArrayList<Proyecto>();

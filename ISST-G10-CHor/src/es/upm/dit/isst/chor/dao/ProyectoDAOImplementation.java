@@ -7,9 +7,7 @@ import javax.persistence.Query;
 
 import org.hibernate.Session;
 
-import es.upm.dit.isst.chor.model.Jefe;
 import es.upm.dit.isst.chor.model.Proyecto;
-import es.upm.dit.isst.chor.dao.SessionFactoryService;
 
 public class ProyectoDAOImplementation implements ProyectoDAO {
 
@@ -108,6 +106,7 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 		session.close();
 		return p;
 	}
+	@Override
 	public boolean buscarProyecto(String p) {
     	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
 

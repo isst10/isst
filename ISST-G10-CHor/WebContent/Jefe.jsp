@@ -20,7 +20,7 @@
 <table border="1">
 <c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
 <tr>
-<c:if test="${proyectoi.fechaFin == null}">
+<c:if test="${proyectoi.terminado == false}">
 	<td>${proyectoi.name}</td>
 	<td>${proyectoi.fechaInicio}</td>
 	<td>
@@ -39,7 +39,7 @@
 <table border="1">
 <c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
 <tr>
-<c:if test="${proyectoi.fechaFin != null}">
+<c:if test="${proyectoi.terminado == true}">
 	<td>${proyectoi.name}</td>
 	<td>${proyectoi.fechaInicio}</td>
 	<td>${proyectoi.fechaFin}</td>
@@ -62,7 +62,7 @@
 <form action="FinalizarProyecto">
 	<select class="form-control" name="name">
   		<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
-  			<c:if test="${proyectoi.fechaFin == null}">
+  			<c:if test="${proyectoi.terminado == false}">
   				<option>${proyectoi.name}</option>
   			</c:if>
   		</c:forEach>

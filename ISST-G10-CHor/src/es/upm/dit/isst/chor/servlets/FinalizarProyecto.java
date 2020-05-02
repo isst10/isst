@@ -40,8 +40,9 @@ public class FinalizarProyecto extends HttpServlet {
 
 		java.util.Date fecha = new Date();
 
-		if (ProyectoDAOImplementation.getInstance().read(name) != null && ProyectoDAOImplementation.getInstance().read(name).getFechaFin() == null) {
+		if (ProyectoDAOImplementation.getInstance().read(name) != null && ProyectoDAOImplementation.getInstance().read(name).getFechaFin() != null) {
 			proyecto.setFechaFin(fecha);
+			proyecto.setTerminado(true);
 			ProyectoDAOImplementation.getInstance().update(proyecto);
  	    	List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
  			req.getSession().setAttribute("proyectos", proyectos);
