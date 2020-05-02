@@ -40,7 +40,6 @@ public class RegistrarHorasServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
-		Jefe jefe = (Jefe) req.getSession().getAttribute("jefe");
 		
 		if(empleado.getProyecto() == null) {
 			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
