@@ -1,6 +1,8 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -65,6 +67,7 @@ public class CreaProyecto extends HttpServlet {
 
     	Jefe jefe =(Jefe) req.getSession().getAttribute("jefe");
     	String name = req.getParameter("name");
+
     	String cliente = req.getParameter("cliente");
  		String fechaFin = req.getParameter("fechaFin");
  		java.util.Date fechaFinal = ParseFecha(fechaFin);
@@ -73,6 +76,7 @@ public class CreaProyecto extends HttpServlet {
 
  		List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
  		req.getSession().setAttribute("proyectos", proyectos);
+
 
  		if (!ProyectoDAOImplementation.getInstance().buscarProyecto(name)) {
  			Proyecto proyecto = new Proyecto();
@@ -99,7 +103,6 @@ public class CreaProyecto extends HttpServlet {
  			log("El proyecto ya existe");
  		}
  		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
-
     }
 
 	/**

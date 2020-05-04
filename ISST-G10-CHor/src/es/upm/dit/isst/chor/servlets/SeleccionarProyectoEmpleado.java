@@ -38,25 +38,14 @@ public class SeleccionarProyectoEmpleado extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Empleado empleadoA = (Empleado) req.getSession().getAttribute("empleado");
+		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
 		String name = req.getParameter("name");
 		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
- 		List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
- 		req.getSession().setAttribute("empleados", empleados);
- 		
-
- 		Empleado empleado = EmpleadoDAOImplementation.getInstance().read(empleadoA.getEmail());
-
-//		  if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(empleado.getEmail())) {
+		empleado.setEmail(empleado.getEmail());
 		  empleado.setProyecto(proyecto);
 		  EmpleadoDAOImplementation.getInstance().update(empleado);
 		  req.getSession().setAttribute("empleado", empleado);
-	 		List<Empleado> le = new ArrayList<Empleado>();
-	 		le.addAll((List<Empleado>)req.getSession().getAttribute("empleados"));
-	 		le.add(empleado);
-	 		req.getSession().setAttribute("empleados", le);
-		  
-//		 
+
 			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
 	}
 

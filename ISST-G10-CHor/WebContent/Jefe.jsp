@@ -13,83 +13,116 @@
 <title>Bienvenido, ${jefe.nombre}</title>
 </head>
 <body>
-
-<p><b>Nï¿½mero de proyectos: </b>${fn:length(jefe.proyectosJefe)}</p>
-
-<h2>Proyectos Activos</h2>
-<table border="1">
-<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
-<tr>
-<c:if test="${proyectoi.terminado == false}">
-	<td>${proyectoi.name}</td>
-	<td>${proyectoi.fechaInicio}</td>
-	<td>
-		<form action="VerProyecto">
-			<input type="hidden" name="name" value='${proyectoi.name}'>
-			<button type="submit">Ver</button>
-		</form>
-	</td>
-</c:if>
-</tr>
-</c:forEach>
-</table>
-
-
-<h2>Proyectos Terminados</h2>
-<table border="1">
-<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
-<tr>
-<c:if test="${proyectoi.terminado == true}">
-	<td>${proyectoi.name}</td>
-	<td>${proyectoi.fechaInicio}</td>
-	<td>${proyectoi.fechaFin}</td>
-	<td>
-		<form action="VerProyecto">
-			<input type="hidden" name="name" value='${proyectoi.name}'>
-			<button type="submit">Ver</button>
-		</form>
-	</td>
-</c:if>
-</tr>
-</c:forEach>
-</table>
-
-
-<h2>Registrar un nuevo proyecto</h2>
-<%@ include file = "FormCreaProyecto.jsp" %>
-
-<h2>Finalizar proyecto</h2>
-<form action="FinalizarProyecto">
-	<select class="form-control" name="name">
-  		<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
-  			<c:if test="${proyectoi.terminado == false}">
-  				<option>${proyectoi.name}</option>
-  			</c:if>
-  		</c:forEach>
-	</select>
-	<button type="submit">Finalizar proyecto</button>
-</form>
-
-<h2>Borrar proyecto</h2>
-<form action="EliminarProyecto">
-	<select class="form-control" name="name">
-  		<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
-  			<option>${proyectoi.name}</option>
-  		</c:forEach>
-	</select>
-	<button type="submit">Borrar proyecto</button>
-</form>
+	<div class="card container container--md cd-tabs js-cd-tabs ">
+		<div class="cd-tabs__panel text-component cd-tabs__panel--selected">
+			<div class="container flex--center-x"><div><h1 class="text--xxl">Bienvenido, ${jefe.nombre}</h1></div>
+			<div><%@ include file = "Logout.jsp" %></div>
+			
+			<p><b>Número de proyectos activos: </b>${fn:length(jefe.proyectosJefe)}</p>
+			
+			
+				<h2>Proyectos</h2><table class="items-table">
+				<tr>
+					<th style="width:45%">Titulación</th>
+					<th style="width:15%">Desde</th>
+					<th style="width:15%">Hasta</th>
+					<th style="width:20%">Finalizar</th>
+					<th style="width:5%"></th>
+				</tr>
+				<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
+				<c:if test="${proyectoi.terminado == false}">
+				<tr>
+				
+				<td>
+					<form action="VerProyecto">
+						<input type="hidden" name="name" value='${proyectoi.name}'>
+						<button type="submit">Ver</button>
+					</form>
+					<span>${proyectoi.name}
+					</span>
+					</a>
+				</td>
+				<td>				
+					<jsp:useBean id="formDateInicio" class="java.util.Date"/>
+					<fmt:formatDate value="${proyectoi.fechaInicio}" type="date" pattern="dd-MM-yyyy"/>
+				</td>
+				<td>
+					<jsp:useBean id="formDateFin" class="java.util.Date"/>
+							<fmt:formatDate value="${proyectoi.fechaFin}" type="date" pattern="dd-MM-yyyy"/>
+				</td>
+				<td>
+					<form action="FinalizarProyecto">
+						<input type=hidden name="name" value="${proyectoi.name}"  />
+						<button type="submit">Finalizar proyecto</button>
+					</form>
+				</td>
+				<td>
+					<form action="EliminarProyecto" method="post">
+			     		 <input type=hidden name="name" value="${proyectoi.name}"  />
+						 <input type="image" style="height:25px; width:25px;padding:0px;border:none;margin:0px;"  src="images/trash_icon.png" id="deleteproyecto"  />
+					</form>	
+				</td>
+				</tr>
+				</c:if>
+				</c:forEach>
+				</table>
+			<h2>Proyectos terminados</h2><table class="items-table">
+				<tr>
+					<th style="width:45%">Proyectos</th>
+					<th style="width:15%">Desde</th>
+					<th style="width:15%">Hasta</th>
+					<th style="width:20%">Finalizar</th>
+					<th style="width:5%"></th>
+				</tr>
+				<c:forEach items="${jefe.proyectosJefe}" var="proyectoi">
+				<c:if test="${proyectoi.terminado == true}">
+				<tr>
+				
+				<td>
+					<form action="VerProyecto">
+						<input type="hidden" name="name" value='${proyectoi.name}'>
+						<button type="submit">Ver</button>
+					</form>
+					<span>${proyectoi.name}
+					</span>
+					</a>
+				</td>
+				<td>				
+					<jsp:useBean id="formDateInicio2" class="java.util.Date"/>
+					<fmt:formatDate value="${proyectoi.fechaInicio}" type="date" pattern="dd-MM-yyyy"/>
+				</td>
+				<td>
+					<jsp:useBean id="formDateFin2" class="java.util.Date"/>
+							<fmt:formatDate value="${proyectoi.fechaFin}" type="date" pattern="dd-MM-yyyy"/>
+				</td>
+				<td>
+					<form action="FinalizarProyecto">
+						<input type=hidden name="name" value="${proyectoi.name}"  />
+						<button type="submit">Finalizar proyecto</button>
+					</form>
+				</td>
+				<td>
+					<form action="EliminarProyecto" method="post">
+			     		 <input type=hidden name="name" value="${proyectoi.name}"  />
+						 <input type="image" style="height:25px; width:25px;padding:0px;border:none;margin:0px;"  src="images/trash_icon.png" id="deleteproyecto"  />
+					</form>	
+				</td>
+				</tr>
+				</c:if>
+				</c:forEach>
+				</table>
+			
+			<h2>Registrar un nuevo proyecto</h2>
+			<%@ include file = "FormCreaProyecto.jsp" %>
+			
 
 <!-- <h2>Registrar Horas</h2> -->
 <%-- <%@ include file = "FormRegistraHoras.jsp" %> --%>
 
-<h2>Salir de la aplicaciï¿½n</h2>
-<%@ include file = "Logout.jsp" %>
 
 
-</div>
-<div class="flex--center">
-<%@ include file = "Logout.jsp" %>
+
+
 </div>
 </div>
 </body>

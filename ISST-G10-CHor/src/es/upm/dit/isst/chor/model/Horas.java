@@ -35,7 +35,6 @@ public class Horas implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
 	public String getHoras() {
 		return horas;
 	}
@@ -109,7 +108,4 @@ public class Horas implements Serializable {
 		return "Horas [date=" + date + ", horas=" + horas + ", proyectoHoras=" + proyectoHoras + ", empleado="
 				+ empleado + "]";
 	}
-
-
-
 }
