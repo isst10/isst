@@ -88,11 +88,11 @@
 					</a>
 				</td>
 				<td>				
-					<jsp:useBean id="formDateInicio" class="java.util.Date"/>
+					<jsp:useBean id="formDateInicio2" class="java.util.Date"/>
 					<fmt:formatDate value="${proyectoi.fechaInicio}" type="date" pattern="dd-MM-yyyy"/>
 				</td>
 				<td>
-					<jsp:useBean id="formDateFin" class="java.util.Date"/>
+					<jsp:useBean id="formDateFin2" class="java.util.Date"/>
 							<fmt:formatDate value="${proyectoi.fechaFin}" type="date" pattern="dd-MM-yyyy"/>
 				</td>
 				<td>
