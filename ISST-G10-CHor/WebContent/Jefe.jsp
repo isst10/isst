@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<p><b>Nï¿½mero de proyectos: </b>${fn:length(jefe.proyectosJefe)}</p>
+<p><b>Número de proyectos: </b>${fn:length(jefe.proyectosJefe)}</p>
 
 <h2>Proyectos Activos</h2>
 <table border="1">
@@ -80,17 +80,16 @@
 	<button type="submit">Borrar proyecto</button>
 </form>
 
-<!-- <h2>Registrar Horas</h2> -->
-<%-- <%@ include file = "FormRegistraHoras.jsp" %> --%>
 
-<h2>Salir de la aplicaciï¿½n</h2>
+<h2>Salir de la aplicación</h2>
 <%@ include file = "Logout.jsp" %>
 
 
-</div>
-<div class="flex--center">
+<%-- <div class="flex--center">
 <%@ include file = "Logout.jsp" %>
-</div>
-</div>
+</div> --%>
+
+
+
 </body>
 </html>

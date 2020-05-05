@@ -9,7 +9,7 @@
 <title>Bienvenido, ${empleado.nombre}</title>
 <h1>Tienes como proyecto seleccionado:
 	<c:if test="${empleado.proyecto == null}">
- 		Ningï¿½n proyecto seleccionado
+ 		Ningún proyecto seleccionado
  	</c:if>
  	${empleado.proyecto}
 </h1>

@@ -15,6 +15,10 @@
 
 <p><b>Fecha de inicio: </b>${proyecto.fechaInicio}</p>
 <p><b>Fecha de Finalización: </b>${proyecto.fechaFin}</p>
+<h2>Extraer horas trabajadas por los empleados</h2>
+<!-- <form action="ExtraerHorasProyecto">
+	<button type="submit">Ver horas dedicadas</button>
+</form> -->
 
 
 

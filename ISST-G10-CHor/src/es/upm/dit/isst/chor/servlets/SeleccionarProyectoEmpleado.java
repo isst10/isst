@@ -39,7 +39,7 @@ public class SeleccionarProyectoEmpleado extends HttpServlet {
 		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
 		String name = req.getParameter("name");
 		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
-		empleado.setProyecto(proyecto);
+		empleado.setProyecto(name);
 		EmpleadoDAOImplementation.getInstance().update(empleado);
 		req.getSession().setAttribute("empleado", empleado);
 		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);

@@ -6,12 +6,6 @@
 		<input type="text" name="cliente" placeholder="Nombre del cliente">
 <input type="date" name="fechaFin"
        value="2020-07-22"
-       min="2020-01-01" max="2020-12-31">	
-	<%-- <p>Selecciona empleados</p>
-	    <select class="form-control" name="employees[]" multiple>
-  			<c:forEach items="${empleados}" var="empleadoi">
-  				<option>${empleadoi.email}</option>
-  			</c:forEach>	
-		</select> --%>
+       min="2020-01-01" max="2020-12-31">
 	<button type="submit">Registrar proyecto</button>
 </form>

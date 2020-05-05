@@ -43,19 +43,15 @@ public class RegistrarHorasServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
-		Jefe jefe = (Jefe) req.getSession().getAttribute("jefe");
 
 		if(empleado.getProyecto() == null) {
 			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
  		}else {
  		String h = req.getParameter("horas");
-//		Jefe jefe = (Jefe) req.getSession().getAttribute("jefe");
-
-		String proyecto = req.getParameter("proyecto");
  		java.util.Date fecha = new Date();
  		List<Horas> horas = (List<Horas>)HorasDAOImplementation.getInstance().readAllEmpleado(empleado);
  		req.getSession().setAttribute("horas", horas);
-
+ 		//Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(empleado.getProyecto());
  		Horas hora = new Horas();
  		hora.setEmpleado(empleado);
  		hora.setProyecto(empleado.getProyecto());
@@ -66,13 +62,12 @@ public class RegistrarHorasServlet extends HttpServlet {
 		req.getSession().setAttribute("hora", hora);
 
  		List<Horas> lp = new ArrayList<Horas>();
-	 	lp.addAll((List<Horas>)req.getSession().getAttribute("horas"));
-
-// 		lp = (List<Horas>) HorasDAOImplementation.getInstance().readAllEmpleado(empleado.getNombre());
+	 	lp = (List<Horas>) HorasDAOImplementation.getInstance().readAllEmpleado(empleado);
  		lp.add(hora);
  		req.getSession().setAttribute("horas", lp);
 
  		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
+ 		
  		}
  	}
 
