@@ -59,15 +59,15 @@ public class GenerarPDF extends HttpServlet {
 				Class.forName ("org.h2.Driver");
 				cn = DriverManager.getConnection("jdbc:h2:~/isst-g10/AUTO_SERVER=TRUE", "sa", "sa");
 				stmt = cn.createStatement();
-				String sql = "select * from horas where proyecto='" + proyecto.getName() +"'";
+				String sql = "SELECT EMPLEADO_EMAIL, DATE, HORAS FROM HORAS WHERE PROYECTO='" + proyecto.getName() +"'";
 				log(sql);
 				
 				ResultSet rs = stmt.executeQuery(sql);
 				
 				while (rs.next()) {
-						tabla.addCell(rs.getString(4));
 						tabla.addCell(rs.getString(1));
 						tabla.addCell(rs.getString(2));
+						tabla.addCell(rs.getString(3));
 				}
 				rs.close();
 				
