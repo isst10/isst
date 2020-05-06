@@ -57,6 +57,13 @@
 </c:if>
 
 
+<table>
+<form action="GenerarPDF">
+	<button type="submit" name="generarpdf">Generar PDF</button>
+</form>
+</table>
+
+
 <form action="volverAJefe">
 	<button type="submit">Volver</button>
 </form>

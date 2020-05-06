@@ -64,5 +64,11 @@
 			<version>1.1.2</version>
 			<type>tld</type>
 		</dependency>
+
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.5.12</version>
+		</dependency>
 	</dependencies>
 </project>

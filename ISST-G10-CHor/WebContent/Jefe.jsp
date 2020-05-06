@@ -18,12 +18,12 @@
 			<div class="container flex--center-x"><div><h1 class="text--xxl">Bienvenido, ${jefe.nombre}</h1></div>
 			<div><%@ include file = "Logout.jsp" %></div>
 
-			<p><b>Nï¿½mero de proyectos activos: </b>${fn:length(jefe.proyectosJefe)}</p>
+			<p><b>Número de proyectos activos: </b>${fn:length(jefe.proyectosJefe)}</p>
 
 
 				<h2>Proyectos</h2><table class="items-table">
 				<tr>
-					<th style="width:45%">Titulaciï¿½n</th>
+					<th style="width:45%">Proyecto</th>
 					<th style="width:15%">Desde</th>
 					<th style="width:15%">Hasta</th>
 					<th style="width:20%">Finalizar</th>
@@ -115,11 +115,7 @@
 			<h2>Registrar un nuevo proyecto</h2>
 			<%@ include file = "FormCreaProyecto.jsp" %>
 
-
-
-
-
-
+</div>
 
 </div>
 </div>
