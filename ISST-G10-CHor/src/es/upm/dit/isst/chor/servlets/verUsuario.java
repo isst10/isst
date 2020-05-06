@@ -1,9 +1,6 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,16 +15,16 @@ import es.upm.dit.isst.chor.model.Jefe;
 import es.upm.dit.isst.chor.model.Proyecto;
 
 /**
- * Servlet implementation class SeleccionarProyectoEmpleado
+ * Servlet implementation class verUsuario
  */
-@WebServlet("/SeleccionarProyectoEmpleado")
-public class SeleccionarProyectoEmpleado extends HttpServlet {
+@WebServlet("/verUsuario")
+public class verUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SeleccionarProyectoEmpleado() {
+    public verUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,16 +32,24 @@ public class SeleccionarProyectoEmpleado extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
-		String name = req.getParameter("name");
-		//Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
-		empleado.setProyecto(name);
-		EmpleadoDAOImplementation.getInstance().update(empleado);
-		req.getSession().setAttribute("empleado", empleado);
-		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+		String email = req.getParameter("email");
+ 		Empleado empleado = EmpleadoDAOImplementation.getInstance().read(email);
+ 		String empleadopass = empleado.getPassword();
+ 		Jefe jefe = JefeDAOImplementation.getInstance().read(email);
+ 		String jefepass = jefe.getPassword();
+ 		
+ 		if(EmpleadoDAOImplementation.getInstance().buscarEmpleado(email)) {
+			EmpleadoDAOImplementation.getInstance().login(email, empleadopass);
+ 			req.getSession().setAttribute("empleado", empleado);
+			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+ 		}else if (JefeDAOImplementation.getInstance().buscarJefe(email)) {
+			JefeDAOImplementation.getInstance().login(email, jefepass);
+ 			req.getSession().setAttribute("jefe", jefe);
+ 			getServletContext().getRequestDispatcher("/jefe.jsp").forward(req,resp);
+ 		}else {
+ 			log("Fallo en el usuario");
+ 		}
 	}
 
 	/**

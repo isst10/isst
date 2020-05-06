@@ -6,9 +6,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 @Entity
+@Table
 public class Horas implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -16,7 +18,7 @@ public class Horas implements Serializable {
 	@Id
 	private Date date;
 	private String horas;
-	private Proyecto proyecto;
+	private String proyecto;
 	@ManyToOne
 	private Empleado empleado;
 
@@ -47,11 +49,11 @@ public class Horas implements Serializable {
 		this.empleado = empleado;
 	}
 
-	public Proyecto getProyecto() {
+	public String getProyecto() {
 		return proyecto;
 	}
 
-	public void setProyecto(Proyecto proyecto) {
+	public void setProyecto(String proyecto) {
 		this.proyecto = proyecto;
 	}
 
@@ -102,4 +104,5 @@ public class Horas implements Serializable {
 	public String toString() {
 		return "Horas [date=" + date + ", horas=" + horas + ", proyecto=" + proyecto + ", empleado=" + empleado + "]";
 	}
+
 }

@@ -11,6 +11,7 @@ public interface HorasDAO {
 	public void update(Horas empleado);
 	public void delete(Horas empleado);
 	public Collection<Horas> readAllEmpleado(Empleado empleado);
+	public Collection<Horas> filtra(String proyecto, Empleado empleado);
 	public Collection<Horas> readAllProyecto(String proyecto);
 	public Collection<Horas> readAllEmpresa(String empresa);
 
