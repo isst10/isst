@@ -31,12 +31,12 @@
 				<tr>
 					<td>${jefei.nombre}</td>
 					<td><form action="verUsuario">
-						<input type="hidden" name="name" value='${jefei.email}'>
+						<input type="hidden" name="email" value='${jefei.email}'>
 						<button type="submit">${jefei.email}</button>
 					</form></td>
 					<td>
 					<form action="EliminaUsuario" method="post">
-			     		 <input type=hidden name="name" value="${jefei.email}"  />
+			     		 <input type=hidden name="email" value="${jefei.email}"  />
 						 <input type="image" style="height:25px; width:25px;padding:0px;border:none;margin:0px;"  src="images/trash_icon.png" id="deleteproyecto"  />
 					</form>
 				</td>
@@ -54,13 +54,13 @@
 				<c:forEach items="${empleados}" var="empleadoi">
 				<tr>
 					<td><form action="verUsuario">
-						<input type="hidden" name="name" value='${empleadoi.email}'>
+						<input type="hidden" name="email" value='${empleadoi.email}'>
 						<button type="submit">${empleadoi.nombre}</button>
 					</form></td>
 					<td>${empleadoi.email}</td>
 					<td>
 					<form action="EliminaUsuario" method="post">
-			     		 <input type=hidden name="name" value="${empleadoi.email}"  />
+			     		 <input type=hidden name="email" value="${empleadoi.email}"  />
 						 <input type="image" style="height:25px; width:25px;padding:0px;border:none;margin:0px;"  src="images/trash_icon.png" id="deleteproyecto"  />
 					</form>
 					</td>
