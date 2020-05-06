@@ -31,8 +31,11 @@
 
 <h2>Registrar Horas</h2>
 <%@ include file = "FormRegistraHoras.jsp" %>
+<c:if test="${flag}">
+	<p>Se han registrado sus horas correctamente</p>
+</c:if>
 
-<h2>Salir de la aplicaciï¿½n</h2>
+<h2>Salir de la aplicación</h2>
 <%@ include file = "Logout.jsp" %>
 
 </body>
