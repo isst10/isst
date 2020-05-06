@@ -10,13 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.itextpdf.text.Document;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Text;
 
 import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Proyecto;
+import es.upm.dit.isst.chor.model.Horas;
+import es.upm.dit.isst.chor.dao.HorasDAOImplementation;
+
+
 
 /**
  * Servlet implementation class GenerarPDF
@@ -39,57 +45,30 @@ public class GenerarPDF extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Proyecto proyecto = (Proyecto) req.getSession().getAttribute("proyecto");
-
-		Document documento = new Document();
 		
-		try {
-			String ruta = System.getProperty("user.home");
-			PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Proyecto.pdf"));
-			documento.open();
+		String home = System.getProperty("user.home");
+		String desc = home + "/Downloads/Horas.pdf";
+		
+		PdfWriter writer = new PdfWriter(desc);
+		PdfDocument pdf = new PdfDocument(writer);
+		Document documento = new Document(pdf);
+		java.util.List<Horas> listHoras = (java.util.List<Horas>) HorasDAOImplementation.getInstance().readAllProyecto(proyecto.getName());
 
-			PdfPTable tabla = new PdfPTable(3);
-			tabla.addCell("Nombre");
-			tabla.addCell("Fecha");
-			tabla.addCell("Horas Registradas");
-			
-			Connection cn = null;
-			Statement stmt = null;
-			
-			try {
-				Class.forName ("org.h2.Driver");
-				cn = DriverManager.getConnection("jdbc:h2:~/isst-g10/AUTO_SERVER=TRUE", "sa", "sa");
-				stmt = cn.createStatement();
-				String sql = "select * from horas where proyecto='" + proyecto.getName() +"'";
-				log(sql);
-				
-				ResultSet rs = stmt.executeQuery(sql);
-				
-				while (rs.next()) {
-						tabla.addCell(rs.getString(4));
-						tabla.addCell(rs.getString(1));
-						tabla.addCell(rs.getString(2));
-				}
-				rs.close();
-				
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally { 
-		         // finally block used to close resources 
-		         try { 
-		            if(stmt!=null) stmt.close(); 
-		         } catch(SQLException se2) { 
-		         } // nothing we can do 
-		         try { 
-		            if(cn!=null) cn.close(); 
-		         } catch(SQLException se) { 
-		            se.printStackTrace(); 
-		         }
-			}
-		} catch (Exception e) {
-			documento.close();
+		Table tabla = new Table(3);
+		tabla.addHeaderCell("Nombre");
+		tabla.addHeaderCell("Fecha");
+		tabla.addHeaderCell("Horas Registradas");
+		
+		
+		for(Horas h : listHoras) {
+			tabla.addCell(h.getEmpleado().getNombre());
+			tabla.addCell(h.getDate().toString());
+			tabla.addCell(h.getHoras());
 		}
+	
+		documento.add(tabla);
+		documento.close();
+		
 		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
 
 	}
