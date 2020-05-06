@@ -1323,8 +1323,9 @@ h1, h2, h3, h4 {
 }
 
 h1, .text--xxl {
-	font-size: 2.0736em;
+	font-size: 2.8736em;
 	font-size: var(- -text-xxl)
+	color: #52A9CD;
 }
 
 h2, .text--xl {
@@ -1784,7 +1785,17 @@ keyframes icon-spin { 0%{
 	background: var(- -color-bg);
 	border: 2px solid hsl(240, 1%, 83%);
 	border: 2px solid var(- -color-contrast-low);
-	width: 100%
+	width: 20%
+}
+
+.form-control--xs {
+	padding: 0.5em 0.75em;
+	padding: var(- -space-xs) var(- -space-sm);
+	background: hsl(0, 0%, 100%);
+	background: var(- -color-bg);
+	border: 2px solid hsl(240, 1%, 83%);
+	border: 2px solid var(- -color-contrast-low);
+	width: 8%
 }
 
 .form-control:focus {
@@ -2064,7 +2075,7 @@ keyframes icon-spin { 0%{
 }
 
 body {
-	background: #e1c7a0;
+	background: #52A9CD;
 	background-repeat: repeat;
 	background-color: var(- -cd-color-1);
 	padding: 0px;
@@ -2073,7 +2084,7 @@ body {
 }
 
 h1 {
-	color: hsl(54, 42%, 95%);
+	color: #52A9CD;
 	color: var(- -cd-color-2);
 	font-size: 1.44em;
 	font-size: var(- -text-lg)
