@@ -88,6 +88,21 @@ public class HorasDAOImplementation implements HorasDAO {
 	}
 	@SuppressWarnings("unchecked")
 	@Override
+	public Collection<Horas> filtra(String proyecto, Empleado empleado) {
+		// TODO Auto-generated method stub
+		Session session = SessionFactoryService.get().openSession();
+		session.beginTransaction();
+		// operaciones
+		Query q = session.createQuery("select p from Horas p where p.proyecto = :proyecto and p.empleado = :empleado");
+		q.setParameter("empleado", empleado);
+		q.setParameter("proyecto", proyecto);
+		List<Horas> empleados = q.getResultList();
+		session.getTransaction().commit();
+		session.close();
+		return empleados;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
 	public Collection<Horas> readAllProyecto(String proyecto) {
 		// TODO Auto-generated method stub
 		Session session = SessionFactoryService.get().openSession();

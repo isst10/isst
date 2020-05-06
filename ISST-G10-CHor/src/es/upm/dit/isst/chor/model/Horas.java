@@ -6,9 +6,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 @Entity
+@Table
 public class Horas implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -16,10 +18,7 @@ public class Horas implements Serializable {
 	@Id
 	private Date date;
 	private String horas;
-	
-	
-	@ManyToOne
-	private Proyecto proyectoHoras;
+	private String proyecto;
 	@ManyToOne
 	private Empleado empleado;
 
@@ -50,14 +49,12 @@ public class Horas implements Serializable {
 		this.empleado = empleado;
 	}
 
-
-
-	public Proyecto getProyectoHoras() {
-		return proyectoHoras;
+	public String getProyecto() {
+		return proyecto;
 	}
 
-	public void setProyectoHoras(Proyecto proyectoHoras) {
-		this.proyectoHoras = proyectoHoras;
+	public void setProyecto(String proyecto) {
+		this.proyecto = proyecto;
 	}
 
 	@Override
@@ -67,7 +64,7 @@ public class Horas implements Serializable {
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((empleado == null) ? 0 : empleado.hashCode());
 		result = prime * result + ((horas == null) ? 0 : horas.hashCode());
-		result = prime * result + ((proyectoHoras == null) ? 0 : proyectoHoras.hashCode());
+		result = prime * result + ((proyecto == null) ? 0 : proyecto.hashCode());
 		return result;
 	}
 
@@ -95,17 +92,17 @@ public class Horas implements Serializable {
 				return false;
 		} else if (!horas.equals(other.horas))
 			return false;
-		if (proyectoHoras == null) {
-			if (other.proyectoHoras != null)
+		if (proyecto == null) {
+			if (other.proyecto != null)
 				return false;
-		} else if (!proyectoHoras.equals(other.proyectoHoras))
+		} else if (!proyecto.equals(other.proyecto))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Horas [date=" + date + ", horas=" + horas + ", proyectoHoras=" + proyectoHoras + ", empleado="
-				+ empleado + "]";
+		return "Horas [date=" + date + ", horas=" + horas + ", proyecto=" + proyecto + ", empleado=" + empleado + "]";
 	}
+
 }

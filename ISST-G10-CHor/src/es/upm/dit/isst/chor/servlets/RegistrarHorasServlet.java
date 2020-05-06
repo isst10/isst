@@ -10,16 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import es.upm.dit.isst.chor.dao.HorasDAOImplementation;
-import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Horas;
-import es.upm.dit.isst.chor.model.Jefe;
-
-
-import es.upm.dit.isst.chor.model.Jefe;
-import es.upm.dit.isst.chor.model.Proyecto;
 
 /**
  * Servlet implementation class RegistrarHorasServlet
@@ -44,21 +39,18 @@ public class RegistrarHorasServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
-		Jefe jefe = (Jefe) req.getSession().getAttribute("jefe");
+
 		if(empleado.getProyecto() == null) {
 			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
  		}else {
  		String h = req.getParameter("horas");
-//		Jefe jefe = (Jefe) req.getSession().getAttribute("jefe");
-
-		String proyecto = req.getParameter("proyecto");
  		java.util.Date fecha = new Date();
  		List<Horas> horas = (List<Horas>)HorasDAOImplementation.getInstance().readAllEmpleado(empleado);
  		req.getSession().setAttribute("horas", horas);
-
+ 		//Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(empleado.getProyecto());
  		Horas hora = new Horas();
  		hora.setEmpleado(empleado);
- 		hora.setProyectoHoras(empleado.getProyecto());
+ 		hora.setProyecto(empleado.getProyecto());
  		hora.setHoras(h);
  		hora.setDate(fecha);
 
@@ -66,12 +58,11 @@ public class RegistrarHorasServlet extends HttpServlet {
 		req.getSession().setAttribute("hora", hora);
 
  		List<Horas> lp = new ArrayList<Horas>();
-	 	lp.addAll((List<Horas>)req.getSession().getAttribute("horas"));
-
-// 		lp = (List<Horas>) HorasDAOImplementation.getInstance().readAllEmpleado(empleado.getNombre());
+	 	lp = (List<Horas>) HorasDAOImplementation.getInstance().readAllEmpleado(empleado);
  		lp.add(hora);
  		req.getSession().setAttribute("horas", lp);
-
+ 		boolean flag = true;
+ 		req.setAttribute("flag", flag);
  		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
  		}
  	}
@@ -82,24 +73,7 @@ public class RegistrarHorasServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		/*
-		 * Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
-		 * Jefe jefe = (Jefe) req.getSession().getAttribute("jefe");
-		 *
-		 * String proyecto = req.getParameter("proyecto"); String h =
-		 * req.getParameter("horas"); java.util.Date fecha = new Date();
-		 *
-		 * Horas hora = new Horas(); hora.setEmpleado(empleado.getNombre());
-		 * hora.setProyecto(proyecto); hora.setHoras(h); hora.setDate(fecha);
-		 *
-		 * HorasDAOImplementation.getInstance().create(hora); List<Horas> lp = new
-		 * ArrayList<Horas>(); lp = (List<Horas>)
-		 * HorasDAOImplementation.getInstance().readAllEmpleado(empleado.getNombre());
-		 * lp.add(hora); req.getSession().setAttribute("horas", lp);
-		 *
-		 * getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,
-		 * response);
-		 */
+
 	}
 
 }

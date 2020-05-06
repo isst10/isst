@@ -71,8 +71,8 @@ public class CreaProyecto extends HttpServlet {
     	String cliente = req.getParameter("cliente");
  		String fechaFin = req.getParameter("fechaFin");
  		java.util.Date fechaFinal = ParseFecha(fechaFin);
-    	//String employees[] = req.getParameterValues("employees[]");
  		java.util.Date fecha = new Date();
+
 
  		List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
  		req.getSession().setAttribute("proyectos", proyectos);
@@ -92,12 +92,6 @@ public class CreaProyecto extends HttpServlet {
  	 		lp.addAll((List<Proyecto>)req.getSession().getAttribute("proyectos"));
  	 		lp.add(proyecto);
  	 		req.getSession().setAttribute("proyectos", lp);
-			/*
-			 * for(int i=0; i<employees.length; i++) { Empleado
-			 * empleado=EmpleadoDAOImplementation.getInstance().read(employees[i]);
-			 * empleado.setProyecto(proyecto);
-			 * EmpleadoDAOImplementation.getInstance().update(empleado); }
-			 */
 
  		}else {
  			log("El proyecto ya existe");
