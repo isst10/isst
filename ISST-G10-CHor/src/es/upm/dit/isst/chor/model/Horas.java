@@ -16,10 +16,7 @@ public class Horas implements Serializable {
 	@Id
 	private Date date;
 	private String horas;
-	
-	
-	@ManyToOne
-	private Proyecto proyectoHoras;
+	private String proyecto;
 	@ManyToOne
 	private Empleado empleado;
 
@@ -50,14 +47,12 @@ public class Horas implements Serializable {
 		this.empleado = empleado;
 	}
 
-
-
-	public Proyecto getProyectoHoras() {
-		return proyectoHoras;
+	public String getProyecto() {
+		return proyecto;
 	}
 
-	public void setProyectoHoras(Proyecto proyectoHoras) {
-		this.proyectoHoras = proyectoHoras;
+	public void setProyecto(String proyecto) {
+		this.proyecto = proyecto;
 	}
 
 	@Override

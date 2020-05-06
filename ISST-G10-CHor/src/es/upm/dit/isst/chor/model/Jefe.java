@@ -88,6 +88,8 @@ public class Jefe implements Serializable{
 		return true;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Jefe [email=" + email + ", password=" + password + ", nombre=" + nombre + ", sueldo=" + sueldo

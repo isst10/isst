@@ -23,7 +23,7 @@ import es.upm.dit.isst.chor.model.Proyecto;
 @WebServlet("/SeleccionarProyectoEmpleado")
 public class SeleccionarProyectoEmpleado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,16 +37,14 @@ public class SeleccionarProyectoEmpleado extends HttpServlet {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
 		String name = req.getParameter("name");
 		Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
-		empleado.setEmail(empleado.getEmail());
-		  empleado.setProyecto(proyecto);
-		  EmpleadoDAOImplementation.getInstance().update(empleado);
-		  req.getSession().setAttribute("empleado", empleado);
-
-			getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+		empleado.setProyecto(name);
+		EmpleadoDAOImplementation.getInstance().update(empleado);
+		req.getSession().setAttribute("empleado", empleado);
+		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
 	}
 
 	/**
