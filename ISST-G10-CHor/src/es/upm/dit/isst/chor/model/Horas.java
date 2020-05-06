@@ -62,7 +62,7 @@ public class Horas implements Serializable {
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((empleado == null) ? 0 : empleado.hashCode());
 		result = prime * result + ((horas == null) ? 0 : horas.hashCode());
-		result = prime * result + ((proyectoHoras == null) ? 0 : proyectoHoras.hashCode());
+		result = prime * result + ((proyecto == null) ? 0 : proyecto.hashCode());
 		return result;
 	}
 
@@ -90,17 +90,17 @@ public class Horas implements Serializable {
 				return false;
 		} else if (!horas.equals(other.horas))
 			return false;
-		if (proyectoHoras == null) {
-			if (other.proyectoHoras != null)
+		if (proyecto == null) {
+			if (other.proyecto != null)
 				return false;
-		} else if (!proyectoHoras.equals(other.proyectoHoras))
+		} else if (!proyecto.equals(other.proyecto))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Horas [date=" + date + ", horas=" + horas + ", proyectoHoras=" + proyectoHoras + ", empleado="
-				+ empleado + "]";
+		return "Horas [date=" + date + ", horas=" + horas + ", proyecto=" + proyecto + ", empleado=" + empleado + "]";
 	}
+
 }
