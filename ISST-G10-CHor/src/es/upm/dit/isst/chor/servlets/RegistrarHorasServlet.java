@@ -10,15 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import es.upm.dit.isst.chor.dao.HorasDAOImplementation;
-import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Horas;
-import es.upm.dit.isst.chor.model.Jefe;
-
-import es.upm.dit.isst.chor.model.Jefe;
-import es.upm.dit.isst.chor.model.Proyecto;
 
 /**
  * Servlet implementation class RegistrarHorasServlet
@@ -65,9 +61,9 @@ public class RegistrarHorasServlet extends HttpServlet {
 	 	lp = (List<Horas>) HorasDAOImplementation.getInstance().readAllEmpleado(empleado);
  		lp.add(hora);
  		req.getSession().setAttribute("horas", lp);
-
+ 		boolean flag = true;
+ 		req.setAttribute("flag", flag);
  		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,response);
- 		
  		}
  	}
 

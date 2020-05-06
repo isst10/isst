@@ -15,23 +15,58 @@
 
 <p><b>Fecha de inicio: </b>${proyecto.fechaInicio}</p>
 <p><b>Fecha de Finalización: </b>${proyecto.fechaFin}</p>
-<h2>Extraer horas trabajadas por los empleados</h2>
-<!-- <form action="ExtraerHorasProyecto">
+<form action="ExtraerHorasProyecto">
 	<button type="submit">Ver horas dedicadas</button>
-</form> -->
+</form>
+
+<c:if test="${horasProyecto != null}">
+<table border="1">
+<tr>
+	<th>Empleado</th>
+	<th>Horas</th>
+	<th>proyecto</th>
+	<th>Fecha</th>
+	
+</tr>
+<c:forEach items="${horasProyecto}" var="horasi">
+<tr>
+	<td>${horasi.getEmpleado().getNombre()}</td>
+	<td>${horasi.horas}</td>
+	<td>${horasi.proyecto}</td>
+	<td>${horasi.date}</td>
+</tr>
+</c:forEach>
+
+<tr>
+<td><p>Filtrar por empleado</p></td>
+<td><form action="FiltraEmpleado">
+	<select class="form-control" name="name">
+  		<c:forEach items="${horasProyecto}" var="horasi">
+  				<option>${horasi.getEmpleado().getNombre()}</option>
+  		</c:forEach>
+	</select>
+	<button type="submit">Filtra</button>
+</form></td>
+<td><p>Exportar ("No pulsar aún sin hacer")</p></td>
+<td><form action="ExportarDatos">
+	<button type="submit">Exportar</button>
+</form></td>
+</tr>
+
+</table>
+</c:if>
 
 
+<form action="volverAJefe">
+	<button type="submit">Volver</button>
+</form>
 
-
-
-
-
-
-
-<input type="button"
+<!-- <input type="button"
 value="Volver"
 id="Back"
 name="Volver"
-onclick= "history.back()" />
+onclick= "history.back()" /> -->
+
+
 </body>
 </html>

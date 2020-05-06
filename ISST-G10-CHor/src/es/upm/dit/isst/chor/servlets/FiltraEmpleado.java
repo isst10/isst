@@ -10,23 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
-import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
-import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
+import es.upm.dit.isst.chor.dao.HorasDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
-import es.upm.dit.isst.chor.model.Jefe;
+import es.upm.dit.isst.chor.model.Horas;
 import es.upm.dit.isst.chor.model.Proyecto;
 
 /**
- * Servlet implementation class SeleccionarProyectoEmpleado
+ * Servlet implementation class FiltraEmpleado
  */
-@WebServlet("/SeleccionarProyectoEmpleado")
-public class SeleccionarProyectoEmpleado extends HttpServlet {
+@WebServlet("/FiltraEmpleado")
+public class FiltraEmpleado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SeleccionarProyectoEmpleado() {
+    public FiltraEmpleado() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,15 +33,15 @@ public class SeleccionarProyectoEmpleado extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
-		String name = req.getParameter("name");
-		//Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
-		empleado.setProyecto(name);
-		EmpleadoDAOImplementation.getInstance().update(empleado);
-		req.getSession().setAttribute("empleado", empleado);
-		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		Proyecto proyecto = (Proyecto) request.getSession().getAttribute("proyecto");
+		String name = proyecto.getName();
+		String empleado = request.getParameter("name");
+ 		Empleado empl =  EmpleadoDAOImplementation.getInstance().read(empleado);
+		List<Horas> horas = (List<Horas>) HorasDAOImplementation.getInstance().filtra(name,empl);
+		request.setAttribute("horasProyecto", horas);
+		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(request,response);
 	}
 
 	/**
