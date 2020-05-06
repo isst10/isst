@@ -77,6 +77,7 @@ public class Empleado implements Serializable{
 		return proyecto;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Empleado [email=" + email + ", password=" + password + ", nombre=" + nombre + ", sueldo=" + sueldo
@@ -107,12 +108,4 @@ public class Empleado implements Serializable{
 			return false;
 		return true;
 	}
-
-
-
-
-
-
-
-
 }

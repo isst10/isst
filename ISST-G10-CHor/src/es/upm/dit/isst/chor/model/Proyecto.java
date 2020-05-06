@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 public class Proyecto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String name;
 	public int nEmpleados;
@@ -22,11 +22,11 @@ public class Proyecto implements Serializable{
 	private Date fechaFin;
 	private String cliente;
 	private boolean terminado;
-	
-	@ManyToOne 
+
+	@ManyToOne
 	private Jefe jefe;
-	
-	
+
+
 	public Proyecto() {
 		super();
 	}
@@ -69,14 +69,14 @@ public class Proyecto implements Serializable{
 		this.fechaFin = fechaFin;
 	}
 
-	
 
-	public Jefe getJefe() { 
-		return jefe; 
+
+	public Jefe getJefe() {
+		return jefe;
 	}
-	  
+
 	public void setJefe(Jefe jefe) {
-		this.jefe = jefe; 
+		this.jefe = jefe;
 	}
 
 	public String getCliente() {
@@ -118,8 +118,8 @@ public class Proyecto implements Serializable{
 		return true;
 	}
 
-	
-	
-	 
-	
+
+
+
+
 }

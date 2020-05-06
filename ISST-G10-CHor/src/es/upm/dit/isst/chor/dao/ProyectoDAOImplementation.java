@@ -121,4 +121,6 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
+
 }
+

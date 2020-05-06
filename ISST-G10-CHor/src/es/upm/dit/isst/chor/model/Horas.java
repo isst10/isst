@@ -6,9 +6,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 @Entity
+@Table
 public class Horas implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -32,7 +34,6 @@ public class Horas implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
 	public String getHoras() {
 		return horas;
 	}
@@ -103,7 +104,5 @@ public class Horas implements Serializable {
 	public String toString() {
 		return "Horas [date=" + date + ", horas=" + horas + ", proyecto=" + proyecto + ", empleado=" + empleado + "]";
 	}
-
-
 
 }

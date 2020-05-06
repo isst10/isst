@@ -1,6 +1,7 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -22,7 +23,7 @@ import es.upm.dit.isst.chor.model.Proyecto;
 @WebServlet("/SeleccionarProyectoEmpleado")
 public class SeleccionarProyectoEmpleado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,8 +35,9 @@ public class SeleccionarProyectoEmpleado extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		Empleado empleado = (Empleado) req.getSession().getAttribute("empleado");
 		String name = req.getParameter("name");
 		//Proyecto proyecto = ProyectoDAOImplementation.getInstance().read(name);
