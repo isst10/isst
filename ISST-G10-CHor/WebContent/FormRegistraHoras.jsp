@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <form action="RegistrarHorasServlet">
 	<h3>Horas trabajadas</h3>
-	<select class="form-control" name="horas">
+	<select class="form-control--xs" name="horas">
   		<option>1</option>
   		<option>2</option>
   		<option>3</option>
