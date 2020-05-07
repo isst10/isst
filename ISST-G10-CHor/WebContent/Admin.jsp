@@ -16,9 +16,9 @@
 		<div class="container flex--center-x"><div><h1 class="text--xxl">ADMIN</h1>
 			<div><%@ include file = "Logout.jsp" %></div></div>
 
-			<p><b>Número de empleados activos: </b>${fn:length(empleados)}</p>
-			<p><b>Número de jefes activos: </b>${fn:length(jefes)}</p>
-			<p><b>Número de proyectos activos: </b>${fn:length(proyectos)}</p>
+			<p><b>Nï¿½mero de empleados activos: </b>${fn:length(empleados)}</p>
+			<p><b>Nï¿½mero de jefes activos: </b>${fn:length(jefes)}</p>
+			<p><b>Nï¿½mero de proyectos activos: </b>${fn:length(proyectos)}</p>
 
 				<h2>Jefes</h2>
 				<table class="items-table">
@@ -43,14 +43,14 @@
 				</tr>
 				</c:forEach>
 				</table>
-				
+
 				<h2>Empleados</h2>
 				<table class="items-table">
 				<tr>
 					<th style="width:45%">NOMBRE</th>
 					<th style="width:45%">EMAIL</th>
 					<th style="width:10%"></th>
-				</tr>				
+				</tr>
 				<c:forEach items="${empleados}" var="empleadoi">
 				<tr>
 					<td><form action="verUsuario">
@@ -67,8 +67,8 @@
 				</tr>
 				</c:forEach>
 				</table>
-				
-				
+
+
 				<h2>Proyectos</h2>
 				<table class="items-table">
 				<tr>
@@ -109,10 +109,10 @@
 				</tr>
 				</c:forEach>
 				</table>
-				
+
 				<h2>Registrar un nuevo jefe</h2>
 				<%@ include file = "FormCreaJefe.jsp" %>
-				
+
 				<h2>Registrar un nuevo empleado</h2>
 				<%@ include file = "FormCreaEmpleado.jsp" %>
 			</div>
