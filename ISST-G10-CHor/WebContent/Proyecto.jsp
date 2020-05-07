@@ -18,7 +18,7 @@
 			<h1 class="text--xxl">${proyecto.name}</h1>
 
 					<h2><b>Fecha de inicio: </b>${proyecto.fechaInicio}</h2>
-					<h2><b>Fecha de Finalizaciï¿½n: </b>${proyecto.fechaFin}</h2>
+					<h2><b>Fecha de Finalización: </b>${proyecto.fechaFin}</h2>
 					<form action="ExtraerHorasProyecto" >
 						<input style="height:45px; margin-top:5px;" type="submit" value="Ver horas registrdas"/>
 					</form>
@@ -61,16 +61,11 @@
 					</form>
 					</table>
 
-
-					<form action="volverAJefe">
-						<input style="height:45px; margin-top:5px;" type="submit" value="Volver"/>
-					</form>
-
-					<!-- <input type="button"
+					<input type="button"
 					value="Volver"
 					id="Back"
 					name="Volver"
-					onclick= "history.back()" /> -->
+					onclick= "history.back()" /> 
 
 
 </body>

@@ -30,10 +30,7 @@
 				<c:forEach items="${jefes}" var="jefei">
 				<tr>
 					<td>${jefei.nombre}</td>
-					<td><form action="verUsuario">
-						<input type="hidden" name="email" value='${jefei.email}'>
-						<button type="submit">${jefei.email}</button>
-					</form></td>
+					<td>${jefei.email}</td>
 					<td>
 					<form action="EliminaUsuario" method="post">
 			     		 <input type=hidden name="email" value="${jefei.email}"  />
@@ -53,10 +50,7 @@
 				</tr>
 				<c:forEach items="${empleados}" var="empleadoi">
 				<tr>
-					<td><form action="verUsuario">
-						<input type="hidden" name="email" value='${empleadoi.email}'>
-						<button type="submit">${empleadoi.nombre}</button>
-					</form></td>
+					<td>${empleadoi.nombre}</td>
 					<td>${empleadoi.email}</td>
 					<td>
 					<form action="EliminaUsuario" method="post">
