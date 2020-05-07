@@ -73,7 +73,8 @@ public class GenerarPDF extends HttpServlet {
 		String relativeWebPath = "/images/consulthour.jpg";
 		String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
 		Image imagen = Image.getInstance(absoluteDiskPath);
-
+		imagen.scalePercent(20, 10);
+		imagen.setAlignment(Element.ALIGN_CENTER);
 		documento.add(imagen);
 
 		java.util.List<Horas> listHoras = (java.util.List<Horas>) HorasDAOImplementation.getInstance()
@@ -89,7 +90,7 @@ public class GenerarPDF extends HttpServlet {
 			tabla.addCell(h.getDate().toString());
 			tabla.addCell(h.getHoras());
 		}
-
+		tabla.setSpacingBefore(50);
 		documento.add(tabla);
 
 		documento.close();

@@ -1,6 +1,65 @@
+body{
+	background-color: #52A9CD;
+}
 .container{
-	background-color: beige;
+	background-color: #ffffff;
 	border-radius:10px;
 	padding:25px;
 	margin-top:25px;
+}
+h1 {
+	color: #52A9CD;
+	color: var(- -cd-color-2);
+	font-size: 1.44em;
+	font-size: var(- -text-lg)
+	font: ;
+}
+h1, .text--xxl {
+	font-size: 2.8736em;
+	font-size: var(- -text-xxl)
+	color: #52A9CD;
+}
+h2 {
+	color: #52A9CD;
+	color: var(- -cd-color-2);
+	font-size: 1.44em;
+	font-size: var(- -text-lg)
+	
+}
+.form-div{
+	background-color: #ffffff;
+	border-radius: 5px;
+	padding:100px;
+	width: 50%;
+	margin: auto;
+	margin-top: 50px;
+	text-align: center;
+}
+
+#login-form input[type="submit"],
+#registro-form input[type="submit"]{
+	width: 30%;
+	height: 40px;
+	background: #52A9CD;
+	color: #ffffff;
+	border: 2px solid #ffffff;
+	border-radius:4px;
+	cursor: pointer;
+	font-weight:bold;
+}
+#login-form input[type="text"], 
+#login-form input[type="password"],
+#registro-form input[type="text"], 
+#registro-form input[type="email"],
+#registro-form input[type="password"]{
+	padding: 12px 20px;
+	border: 2px solid grey;
+	border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom:5px;
+    width:90%;
+}
+#login-form hr, #registro-form hr{
+	margin-bottom: 20px;
+	width:90%;
 }
