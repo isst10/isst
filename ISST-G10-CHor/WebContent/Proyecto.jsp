@@ -33,7 +33,7 @@
 	<td>${horasi.getEmpleado().getNombre()}</td>
 	<td>${horasi.horas}</td>
 	<td>${horasi.proyecto}</td>
-	<td>${horasi.date}</td>
+	<td>${horasi.date.getDay()}</td>
 </tr>
 </c:forEach>
 
@@ -68,15 +68,12 @@
 </table>
 
 
-<form action="volverAJefe">
-	<button type="submit">Volver</button>
-</form>
 
-<!-- <input type="button"
+<input type="button"
 value="Volver"
 id="Back"
 name="Volver"
-onclick= "history.back()" /> -->
+onclick= "history.back()" /> 
 
 
 </body>
