@@ -26,7 +26,9 @@
 					<form action="SeleccionarProyectoEmpleado">
 						<select class="form-control" name="name">
 					  		<c:forEach items="${proyectos}" var="proyectoi">
+					  							<c:if test="${proyectoi.terminado == false}">
 					  				<option>${proyectoi.name}</option>
+												</c:if>
 					  		</c:forEach>
 						</select>
 						<button type="submit">Asigna proyecto</button>
