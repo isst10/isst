@@ -16,9 +16,9 @@
 		<div class="container flex--center-x"><div><h1 class="text--xxl">ADMIN</h1>
 			<div><%@ include file = "Logout.jsp" %></div></div>
 
-			<p><b>Nï¿½mero de empleados activos: </b>${fn:length(empleados)}</p>
-			<p><b>Nï¿½mero de jefes activos: </b>${fn:length(jefes)}</p>
-			<p><b>Nï¿½mero de proyectos activos: </b>${fn:length(proyectos)}</p>
+			<p><b>Número de empleados activos: </b>${fn:length(empleados)}</p>
+			<p><b>Número de jefes activos: </b>${fn:length(jefes)}</p>
+			<p><b>Número de proyectos activos: </b>${fn:length(proyectos)}</p>
 
 				<h2>Jefes</h2>
 				<table class="items-table">
