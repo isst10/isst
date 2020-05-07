@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -36,87 +37,123 @@ import es.upm.dit.isst.chor.model.Proyecto;
 import es.upm.dit.isst.chor.model.Horas;
 import es.upm.dit.isst.chor.dao.HorasDAOImplementation;
 
-
-
 /**
  * Servlet implementation class GenerarPDF
  */
 @WebServlet("/GenerarPDF")
 public class GenerarPDF extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final ImageType JPEG = null;
-
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GenerarPDF() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	// private static final ImageType JPEG = null;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GenerarPDF() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Proyecto proyecto = (Proyecto) req.getSession().getAttribute("proyecto");
+		try {
+			
 
 		String home = System.getProperty("user.home");
 		Document documento = new Document();
-		 Image imagen = null;
-		try {
-			imagen = Image.getInstance("C:\\Users\\Miguel\\Documents\\GitHub\\isst\\ISST-G10-CHor\\WebContent\\images\\consulthour.jpg");
-		} catch (BadElementException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		imagen.scalePercent(20, 10);
-		imagen.setAlignment(Element.ALIGN_CENTER);
-		// PdfDocument pdf = new PdfDocument();
-		try {
-			PdfWriter.getInstance(documento, new FileOutputStream("Horas.pdf"));
-		} catch (FileNotFoundException | DocumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 
-		java.util.List<Horas> listHoras = (java.util.List<Horas>) HorasDAOImplementation.getInstance().readAllProyecto(proyecto.getName());
+		PdfWriter.getInstance(documento, new FileOutputStream(home + "/Desktop/InformeProyecto_" + proyecto.getName() + ".pdf"));
+
+		documento.open();
+		String relativeWebPath = "/images/consulthour.jpg";
+		String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
+		Image imagen = Image.getInstance(absoluteDiskPath);
+
+		documento.add(imagen);
+
+		java.util.List<Horas> listHoras = (java.util.List<Horas>) HorasDAOImplementation.getInstance()
+				.readAllProyecto(proyecto.getName());
 
 		PdfPTable tabla = new PdfPTable(3);
 		tabla.addCell("Nombre");
 		tabla.addCell("Fecha");
 		tabla.addCell("Horas Registradas");
 
-
-		for(Horas h : listHoras) {
+		for (Horas h : listHoras) {
 			tabla.addCell(h.getEmpleado().getNombre());
 			tabla.addCell(h.getDate().toString());
 			tabla.addCell(h.getHoras());
 		}
-		tabla.setSpacingBefore(50);
-		//	ImageData imagen = new ImageData("images/consulthour.jpg", JPEG);
-			// com.itextpdf.layout.element.Image imagenN = new com.itextpdf.layout.element.Image(imagen);
 
-		documento.open();
-		try {
-			documento.add(imagen);
-			documento.add(tabla);
+		documento.add(tabla);
 
+		documento.close();
+		
 		} catch (DocumentException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		documento.close();
 
-		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
+		getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req, resp);
 
+		/*
+		 * 
+		 * 
+		 * 
+		 * 
+		 * Image imagen = null; try { imagen = Image.getInstance(
+		 * "C:\\Users\\Miguel\\Documents\\GitHub\\isst\\ISST-G10-CHor\\WebContent\\images\\consulthour.jpg"
+		 * ); } catch (BadElementException | IOException e) { // TODO Auto-generated
+		 * catch block e.printStackTrace(); } imagen.scalePercent(20, 10);
+		 * imagen.setAlignment(Element.ALIGN_CENTER);
+		 * 
+		 * // PdfDocument pdf = new PdfDocument(); try {
+		 * PdfWriter.getInstance(documento, new FileOutputStream(home +
+		 * "/Desktop/InformeProyecto_" + proyecto.getName() + ".pdf")); } catch
+		 * (FileNotFoundException | DocumentException e) { // TODO Auto-generated catch
+		 * block e.printStackTrace(); }
+		 * 
+		 * 
+		 * java.util.List<Horas> listHoras = (java.util.List<Horas>)
+		 * HorasDAOImplementation.getInstance().readAllProyecto(proyecto.getName());
+		 * 
+		 * PdfPTable tabla = new PdfPTable(3); tabla.addCell("Nombre");
+		 * tabla.addCell("Fecha"); tabla.addCell("Horas Registradas");
+		 * 
+		 * 
+		 * for(Horas h : listHoras) { tabla.addCell(h.getEmpleado().getNombre());
+		 * tabla.addCell(h.getDate().toString()); tabla.addCell(h.getHoras()); }
+		 * tabla.setSpacingBefore(50);
+		 * 
+		 * documento.open();
+		 * 
+		 * try { Image imagen = Image.getInstance("images/consulthour.jpg");
+		 * 
+		 * // com.itextpdf.layout.element.Image imagenN = new
+		 * com.itextpdf.layout.element.Image(imagen);
+		 * 
+		 * documento.add(imagen); documento.add(tabla);
+		 * 
+		 * } catch (DocumentException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } catch (IOException e1) { // TODO Auto-generated catch
+		 * block e1.printStackTrace(); } documento.close();
+		 * 
+		 * getServletContext().getRequestDispatcher("/Proyecto.jsp").forward(req,resp);
+		 */
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
