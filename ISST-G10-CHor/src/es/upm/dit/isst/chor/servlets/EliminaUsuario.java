@@ -10,9 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.isst.chor.dao.EmpleadoDAOImplementation;
+import es.upm.dit.isst.chor.dao.HorasDAOImplementation;
 import es.upm.dit.isst.chor.dao.JefeDAOImplementation;
+import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
+import es.upm.dit.isst.chor.model.Horas;
 import es.upm.dit.isst.chor.model.Jefe;
+import es.upm.dit.isst.chor.model.Proyecto;
 
 /**
  * Servlet implementation class EliminaUsuario
@@ -36,15 +40,24 @@ public class EliminaUsuario extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
  		String email = req.getParameter("email");
- 		Empleado empleado = EmpleadoDAOImplementation.getInstance().read(email);
- 		Jefe jefe = JefeDAOImplementation.getInstance().read(email);
+ 		log(email);
  		
  		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email)) {
+ 	 		Empleado empleado = EmpleadoDAOImplementation.getInstance().read(email);
+ 	 		List<Horas> horas = (List<Horas>) HorasDAOImplementation.getInstance().readAllEmpleado(empleado);
+ 	 		for (Horas h : horas) {
+ 	 			HorasDAOImplementation.getInstance().delete(h);
+ 	 		}
  	     	EmpleadoDAOImplementation.getInstance().delete(empleado);
  	    	List<Empleado> empleados = (List<Empleado>) EmpleadoDAOImplementation.getInstance().readAll();
  			req.getSession().setAttribute("empleados", empleados);
 
  		} else if (JefeDAOImplementation.getInstance().buscarJefe(email)) {
+ 	 		Jefe jefe = JefeDAOImplementation.getInstance().read(email);
+ 	 		List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAllJefe(jefe);
+ 	 		for (Proyecto p : proyectos) {
+ 	 	 			ProyectoDAOImplementation.getInstance().delete(p);
+ 	 		}
  	     	JefeDAOImplementation.getInstance().delete(jefe);
  	    	List<Jefe> jefes = (List<Jefe>) JefeDAOImplementation.getInstance().readAll();
  			req.getSession().setAttribute("jefes", jefes);

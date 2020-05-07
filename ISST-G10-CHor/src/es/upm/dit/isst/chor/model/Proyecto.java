@@ -17,7 +17,6 @@ public class Proyecto implements Serializable{
 
 	@Id
 	private String name;
-	public int nEmpleados;
 	private Date fechaInicio;
 	private Date fechaFin;
 	private String cliente;
@@ -47,9 +46,7 @@ public class Proyecto implements Serializable{
 		this.name = name;
 	}
 
-	public int getnEmpleados() {
-		return nEmpleados;
-	}
+
 
 
 
@@ -89,8 +86,8 @@ public class Proyecto implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Proyecto [name=" + name + ", nEmpleados=" + nEmpleados + ", fechaInicio=" + fechaInicio + ", fechaFin="
-				+ fechaFin + ", cliente=" + cliente + ", terminado=" + terminado + ", jefe=" + jefe + "]";
+		return "Proyecto [name=" + name + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", cliente="
+				+ cliente + ", terminado=" + terminado + ", jefe=" + jefe + "]";
 	}
 
 	@Override

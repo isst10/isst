@@ -36,11 +36,8 @@
 				<td>
 					<form action="VerProyecto">
 						<input type="hidden" name="name" value='${proyectoi.name}'>
-						<button type="submit">Ver</button>
+						<button type="submit">${proyectoi.name}</button>
 					</form>
-					<span>${proyectoi.name}
-					</span>
-					</a>
 				</td>
 				<td>
 					<jsp:useBean id="formDateInicio" class="java.util.Date"/>
@@ -81,11 +78,8 @@
 				<td>
 					<form action="VerProyecto">
 						<input type="hidden" name="name" value='${proyectoi.name}'>
-						<button type="submit">Ver</button>
+						<button type="submit">${proyectoi.name}</button>
 					</form>
-					<span>${proyectoi.name}
-					</span>
-					</a>
 				</td>
 				<td>
 					<jsp:useBean id="formDateInicio2" class="java.util.Date"/>

@@ -9,7 +9,7 @@ public interface HorasDAO {
 	public void create(Horas empleado);
 	public Horas read(String empleado);
 	public void update(Horas empleado);
-	public void delete(Horas empleado);
+	public void delete(Horas horas);
 	public Collection<Horas> readAllEmpleado(Empleado empleado);
 	public Collection<Horas> filtra(String proyecto, Empleado empleado);
 	public Collection<Horas> readAllProyecto(String proyecto);

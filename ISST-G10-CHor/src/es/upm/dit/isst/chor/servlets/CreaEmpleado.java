@@ -1,6 +1,7 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -17,7 +18,6 @@ import es.upm.dit.isst.chor.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.chor.model.Empleado;
 import es.upm.dit.isst.chor.model.Horas;
 import es.upm.dit.isst.chor.model.Proyecto;
-
 
 
 /**
@@ -46,9 +46,7 @@ public class CreaEmpleado extends HttpServlet {
 		req.getSession().setAttribute("empleados", empleados);
 		List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
 		req.getSession().setAttribute("proyectos", proyectos);
-
-
-
+		
  		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
  			log("Usuario ya existente");
  			getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
@@ -68,7 +66,7 @@ public class CreaEmpleado extends HttpServlet {
  	           req.getSession().getAttribute("empleados"));
  	 		lp.add(empleado);
  	 		req.getSession().setAttribute("empleados", lp);
- 	 		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+ 	 		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
  		}
  	}
 
