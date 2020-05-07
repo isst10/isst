@@ -66,7 +66,7 @@ public class CreaJefe extends HttpServlet {
  	           req.getSession().getAttribute("jefes"));
  	 		lp.add (jefe);
  	 		req.getSession().setAttribute("jefes", lp);
- 	 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
+ 	 		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
  		}
  	}
 

@@ -55,11 +55,15 @@
 
 </table>
 </c:if>
-
+<script>
+	function usuarioRegistrado(){
+		alert("Introduce tus credenciales");
+	}
+</script>
 
 <table>
 <form action="GenerarPDF">
-	<button type="submit" name="generarpdf">Generar PDF</button>
+	<button type="submit" name="generarpdf" onCLick ="return usuarioRegistrado()">Generar PDF</button>
 </form>
 </table>
 

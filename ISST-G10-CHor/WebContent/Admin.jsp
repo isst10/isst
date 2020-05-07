@@ -109,12 +109,6 @@
 				</tr>
 				</c:forEach>
 				</table>
-
-				<h2>Registrar un nuevo jefe</h2>
-				<%@ include file = "FormCreaJefe.jsp" %>
-
-				<h2>Registrar un nuevo empleado</h2>
-				<%@ include file = "FormCreaEmpleado.jsp" %>
 			</div>
 		</div>
 	</div>
