@@ -7,6 +7,9 @@ import javax.persistence.Query;
 
 import org.hibernate.Session;
 
+import es.upm.dit.isst.chor.model.Empleado;
+import es.upm.dit.isst.chor.model.Horas;
+import es.upm.dit.isst.chor.model.Jefe;
 import es.upm.dit.isst.chor.model.Proyecto;
 
 public class ProyectoDAOImplementation implements ProyectoDAO {
@@ -120,6 +123,21 @@ public class ProyectoDAOImplementation implements ProyectoDAO {
 		session.delete(proyecto);
 		session.getTransaction().commit();
 		session.close();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Proyecto> readAllJefe(Jefe jefe) {
+		// TODO Auto-generated method stub
+		Session session = SessionFactoryService.get().openSession();
+		session.beginTransaction();
+		// operaciones
+		Query q = session.createQuery("select p from Proyecto p where p.jefe = :jefe");
+		q.setParameter("jefe", jefe);
+		List<Proyecto> proyectos = q.getResultList();
+		session.getTransaction().commit();
+		session.close();
+		return proyectos;
 	}
 
 }
