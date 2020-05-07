@@ -62,12 +62,12 @@ public class HorasDAOImplementation implements HorasDAO {
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public void delete(Horas empleado) {
+	public void delete(Horas horas) {
 		// TODO Auto-generated method stub
 		Session session = SessionFactoryService.get().openSession();
 		session.beginTransaction();
 		// operaciones
-		session.delete(empleado);
+		session.delete(horas);
 		session.getTransaction().commit();
 		session.close();
 

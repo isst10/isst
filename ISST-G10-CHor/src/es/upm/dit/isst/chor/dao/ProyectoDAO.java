@@ -2,6 +2,7 @@ package es.upm.dit.isst.chor.dao;
 
 import java.util.Collection;
 
+import es.upm.dit.isst.chor.model.Jefe;
 import es.upm.dit.isst.chor.model.Proyecto;
 
 public interface ProyectoDAO {
@@ -12,5 +13,6 @@ public interface ProyectoDAO {
 	public Collection<Proyecto> readAll();
 	public Proyecto login(String name);
 	public boolean buscarProyecto(String p);
+	public Collection<Proyecto> readAllJefe(Jefe jefe);
 
 }
