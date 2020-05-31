@@ -1,6 +1,7 @@
 package es.upm.dit.isst.chor.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -47,8 +48,6 @@ public class CreaEmpleado extends HttpServlet {
 		List<Proyecto> proyectos = (List<Proyecto>) ProyectoDAOImplementation.getInstance().readAll();
 		req.getSession().setAttribute("proyectos", proyectos);
 
-
-
  		if (EmpleadoDAOImplementation.getInstance().buscarEmpleado(email) || JefeDAOImplementation.getInstance().buscarJefe(email)) {
  			log("Usuario ya existente");
  			getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
@@ -68,8 +67,7 @@ public class CreaEmpleado extends HttpServlet {
  	           req.getSession().getAttribute("empleados"));
  	 		lp.add(empleado);
  	 		req.getSession().setAttribute("empleados", lp);
- 	 		boolean flag = true;
- 	 		req.setAttribute("flag", flag);
+
  	 		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
  		}
  	}

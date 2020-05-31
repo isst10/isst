@@ -66,8 +66,7 @@ public class CreaJefe extends HttpServlet {
  	           req.getSession().getAttribute("jefes"));
  	 		lp.add (jefe);
  	 		req.getSession().setAttribute("jefes", lp);
- 	 		boolean flag = true;
- 	 		req.setAttribute("flag", flag);
+
  	 		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
  		}
  	}

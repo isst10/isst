@@ -17,7 +17,6 @@ public class Jefe implements Serializable{
 	private String email;
 	private String password;
 	private String nombre;
-	private double sueldo;
 	
 	@OneToMany(mappedBy = "jefe", fetch = FetchType.EAGER)
 	private Collection<Proyecto> proyectosJefe;
@@ -54,20 +53,17 @@ public class Jefe implements Serializable{
 		this.nombre = nombre;
 	}
 
-	public double getSueldo() {
-		return sueldo;
-	}
-
-	public void setSueldo(double sueldo) {
-		this.sueldo = sueldo;
-	}
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((proyectosJefe == null) ? 0 : proyectosJefe.hashCode());
+
 		return result;
 	}
 
@@ -85,15 +81,31 @@ public class Jefe implements Serializable{
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (proyectosJefe == null) {
+			if (other.proyectosJefe != null)
+				return false;
+		} else if (!proyectosJefe.equals(other.proyectosJefe))
+			return false;
+
 		return true;
 	}
 
-	
-
 	@Override
 	public String toString() {
-		return "Jefe [email=" + email + ", password=" + password + ", nombre=" + nombre + ", sueldo=" + sueldo
-				+ ", proyectosJefe=" + proyectosJefe + "]";
+		return "Jefe [email=" + email + ", password=" + password + ", nombre=" + nombre + ", proyectosJefe="
+				+ proyectosJefe + "]";
+
 	}
 
 	public Collection<Proyecto> getProyectosJefe() {

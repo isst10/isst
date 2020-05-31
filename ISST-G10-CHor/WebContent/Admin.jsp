@@ -16,9 +16,9 @@
 		<div class="container flex--center-x"><div><h1 class="text--xxl">ADMIN</h1>
 			<div><%@ include file = "Logout.jsp" %></div></div>
 
-			<p><b>Nï¿½mero de empleados activos: </b>${fn:length(empleados)}</p>
-			<p><b>Nï¿½mero de jefes activos: </b>${fn:length(jefes)}</p>
-			<p><b>Nï¿½mero de proyectos activos: </b>${fn:length(proyectos)}</p>
+			<p><b>Número de empleados activos: </b>${fn:length(empleados)}</p>
+			<p><b>Número de jefes activos: </b>${fn:length(jefes)}</p>
+			<p><b>Número de proyectos activos: </b>${fn:length(proyectos)}</p>
 
 				<h2>Jefes</h2>
 				<table class="items-table">
@@ -30,10 +30,7 @@
 				<c:forEach items="${jefes}" var="jefei">
 				<tr>
 					<td>${jefei.nombre}</td>
-					<td><form action="verUsuario">
-						<input type="hidden" name="email" value='${jefei.email}'>
-						<button type="submit">${jefei.email}</button>
-					</form></td>
+					<td>${jefei.email}</td>
 					<td>
 					<form action="EliminaUsuario" method="post">
 			     		 <input type=hidden name="email" value="${jefei.email}"  />
@@ -53,10 +50,7 @@
 				</tr>
 				<c:forEach items="${empleados}" var="empleadoi">
 				<tr>
-					<td><form action="verUsuario">
-						<input type="hidden" name="email" value='${empleadoi.email}'>
-						<button type="submit">${empleadoi.nombre}</button>
-					</form></td>
+					<td>${empleadoi.nombre}</td>
 					<td>${empleadoi.email}</td>
 					<td>
 					<form action="EliminaUsuario" method="post">
@@ -67,7 +61,6 @@
 				</tr>
 				</c:forEach>
 				</table>
-
 
 				<h2>Proyectos</h2>
 				<table class="items-table">
@@ -110,11 +103,6 @@
 				</c:forEach>
 				</table>
 
-				<h2>Registrar un nuevo jefe</h2>
-				<%@ include file = "FormCreaJefe.jsp" %>
-
-				<h2>Registrar un nuevo empleado</h2>
-				<%@ include file = "FormCreaEmpleado.jsp" %>
 			</div>
 		</div>
 	</div>

@@ -19,7 +19,7 @@ public class Empleado implements Serializable{
 	private String email;
 	private String password;
 	private String nombre;
-	private double sueldo;
+
 	private String proyecto;
 
 	@OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER)
@@ -65,23 +65,19 @@ public class Empleado implements Serializable{
 		this.nombre = nombre;
 	}
 
-	public double getSueldo() {
-		return sueldo;
-	}
 
-	public void setSueldo(double sueldo) {
-		this.sueldo = sueldo;
-	}
 
 	public String getProyecto() {
 		return proyecto;
 	}
 
 
+
 	@Override
 	public String toString() {
-		return "Empleado [email=" + email + ", password=" + password + ", nombre=" + nombre + ", sueldo=" + sueldo
-				+ ", proyecto=" + proyecto + ", horas=" + horas + "]";
+		return "Empleado [email=" + email + ", password=" + password + ", nombre=" + nombre + ", proyecto=" + proyecto
+				+ ", horas=" + horas + "]";
+
 	}
 
 	@Override
@@ -89,6 +85,12 @@ public class Empleado implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+
+		result = prime * result + ((horas == null) ? 0 : horas.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((proyecto == null) ? 0 : proyecto.hashCode());
+
 		return result;
 	}
 
@@ -105,6 +107,26 @@ public class Empleado implements Serializable{
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
+			return false;
+		if (horas == null) {
+			if (other.horas != null)
+				return false;
+		} else if (!horas.equals(other.horas))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (proyecto == null) {
+			if (other.proyecto != null)
+				return false;
+		} else if (!proyecto.equals(other.proyecto))
 			return false;
 		return true;
 	}
