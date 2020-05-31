@@ -57,6 +57,8 @@ public class LoginServlet extends HttpServlet {
     		req.getSession().setAttribute("jefe", jefe);
     		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
     	} else {
+    		boolean flag=false;
+    		req.setAttribute("flag", flag);
     		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
     	}
     }

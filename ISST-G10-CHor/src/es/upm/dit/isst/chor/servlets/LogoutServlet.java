@@ -34,6 +34,8 @@ public class LogoutServlet extends HttpServlet {
 		req.getSession().removeAttribute("jefes");
 		req.getSession().removeAttribute("proyectos");
 		req.getSession().removeAttribute("proyecto");
+		boolean flag = false;
+		req.setAttribute("flag", flag);
               req.getSession().invalidate();
 		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
 	}

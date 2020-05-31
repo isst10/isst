@@ -68,7 +68,9 @@ public class CreaEmpleado extends HttpServlet {
  	           req.getSession().getAttribute("empleados"));
  	 		lp.add(empleado);
  	 		req.getSession().setAttribute("empleados", lp);
- 	 		getServletContext().getRequestDispatcher("/Empleado.jsp").forward(req,resp);
+ 	 		boolean flag = true;
+ 	 		req.setAttribute("flag", flag);
+ 	 		getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
  		}
  	}
 

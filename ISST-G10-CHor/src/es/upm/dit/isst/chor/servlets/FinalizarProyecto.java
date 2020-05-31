@@ -50,7 +50,7 @@ public class FinalizarProyecto extends HttpServlet {
  			JefeDAOImplementation.getInstance().update(jefe);
  			req.getSession().setAttribute("jefe", jefe);
  		} else {
- 			log("El proyecto ya estï¿½ finalizado");
+ 			log("El proyecto ya está finalizado");
  		}
 		getServletContext().getRequestDispatcher("/Jefe.jsp").forward(req,resp);
 
